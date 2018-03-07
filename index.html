@@ -4,13 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="style.css">      
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
     <script src="main.js"></script>
     <title>Music Festival</title>    
 </head>
 <body>
-   <header></header>
-   <div></div>
+   <header>
+
+   </header>
+   <div id="search">
+       <div class="drop-down">
+           <select name="genre" id="genre">
+               <option value="electronic">Electronic</option>
+               <option value="thing2">Option 2</option>
+               <option value="country">Country Music</option>
+           </select>
+           <button class="search-events">Search</button>
+       </div>
+    </div>
+   <div id="container">
+    <div class="left-col"></div>
+    <div class="right-col">
+        <div class="event-info"></div>
+        <div class="video"></div>
+    </div>
+   </div>
 
 </body>
 </html>
