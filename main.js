@@ -117,7 +117,6 @@ function getArtistFromEvents() {
 function getArtistImages (){
     for(var i=0; i<artistInfo.length; i++){
         var artistImgArray = [];
-
         for(var x=0; x<artistInfo[i].length; x++){
             var artistUrl = artistInfo[i][x].images[0].url;
             artistImgArray.push(artistUrl);
