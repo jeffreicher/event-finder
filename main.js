@@ -23,16 +23,13 @@ function initializeApp(){
 }
 
 /***************************************************************************************************
-<<<<<<< HEAD
  * addClickHandlerstoElements
  * @params {undefined}
  * @returns  {undefined}
- *
  */
 function addClickHandlersToElements(){
-
+    $('.search-events').on('click', getDataFromTicketMaster);
 }
-
 function flickrImages(){
     // var flickrImages = {
     //     [img src =
@@ -74,15 +71,12 @@ var response_dummy =
                 }
             ]
         }
-    }
+    };
 /* addClickHandlerstoElements
 * @params {undefined} 
 * @returns  {undefined}
 *     
 */
-function addClickHandlersToElements(){     
-   $('.search-events').on('click', getDataFromTicketMaster);   
-}
 
 function getDataFromTicketMaster () {
     var keyword = $('#genre')[0];
