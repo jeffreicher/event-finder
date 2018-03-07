@@ -11,7 +11,7 @@ var hiphop_array = [];
 // var keyword ='electronic';
 var artistInfo = [];
 var artistImg = [];
-
+var concertVenues = [];
 /***************************************************************************************************
  * initializeApp
  * @params {undefined} none
@@ -109,6 +109,8 @@ function getArtistFromEvents() {
     for(var i=0; i<hiphop_array.length; i++){
         var attraction = hiphop_array[i]._embedded.attractions;
         artistInfo.push(attraction);
+        var venue = hiphop_array[i]._embedded.venues[0].name;
+        concertVenues.push(venue);
         }
         getArtistImages();
 }
