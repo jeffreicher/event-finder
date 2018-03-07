@@ -11,7 +11,7 @@ var hiphop_array = [];
 // var keyword ='electronic';
 var artistInfo = [];
 var artistImg = [];
-
+var concertVenues = [];
 /***************************************************************************************************
  * initializeApp
  * @params {undefined} none
@@ -108,6 +108,8 @@ function getArtistFromEvents() {
     for(var i=0; i<hiphop_array.length; i++){
         var attraction = hiphop_array[i]._embedded.attractions;
         artistInfo.push(attraction);
+        var venue = hiphop_array[i]._embedded.venues[0].name;
+        concertVenues.push(venue);
         }
         getArtistImages();
 }
@@ -115,6 +117,7 @@ function getArtistFromEvents() {
 function getArtistImages (){
     for(var i=0; i<artistInfo.length; i++){
         var artistImgArray = [];
+
         for(var x=0; x<artistInfo[i].length; x++){
             var artistUrl = artistInfo[i][x].images[0].url;
             artistImgArray.push(artistUrl);
