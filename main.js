@@ -8,7 +8,7 @@ $(document).ready(initializeApp);
  * @type {Array}
  */
 var hiphop_array = [];
-var keyword ='electronic';
+// var keyword ='electronic';
 var artistInfo = [];
 var artistImg = [];
 
@@ -20,7 +20,6 @@ var artistImg = [];
 */
 function initializeApp(){
     addClickHandlersToElements();
-     getDataFromTicketMaster(keyword);
 }
 
 /***************************************************************************************************
@@ -30,18 +29,23 @@ function initializeApp(){
 *     
 */
 function addClickHandlersToElements(){     
-   
+   $('.search-events').on('click', getDataFromTicketMaster);   
 }
 
-function getDataFromTicketMaster (keyword) {
+function getDataFromTicketMaster () {
+    var keyword = $('#genre')[0];
+    keyword = keyword.options[keyword.selectedIndex].value;
+    console.log(keyword);
+
     $.ajax({
         type: "GET",
         url: "https://app.ticketmaster.com/discovery/v2/events?apikey=tBBObsl2YtXpvAceOW6DOKwRtZpd8bxd&keyword="+keyword+"&countryCode=US&stateCode=Ca",
         dataType: "text",
-        success: function (json) {
-            json = JSON.parse(json);
-            for(var i =0; i < json._embedded.events.length; i++){
-                var fesivalObjects = json._embedded.events[i];
+        success: function (json_data) {
+            var data = JSON.parse(json_data);
+            console.log(data);
+            for(var i =0; i < data._embedded.events.length; i++){
+                var fesivalObjects = data._embedded.events[i];
                 hiphop_array.push(fesivalObjects);
             }
             getArtistFromEvents();
@@ -64,10 +68,10 @@ function getArtistFromEvents() {
 
 function getArtistImages (){
     for(var x=0; x<artistInfo.length; x++){
-        for()
-            var img = [];
-                artistInfo[x][0].images[0].url;
-            artistImg.push(img);
-        // console.log(x)
+        // for()
+        //     var img = [];
+        //         artistInfo[x][0].images[0].url;
+        //     artistImg.push(img);
+        // // console.log(x)
         }
 }
