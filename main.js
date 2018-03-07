@@ -31,6 +31,7 @@ function addClickHandlersToElements(){
     $('.search-events').on('click', getDataFromTicketMaster);
 }
 function flickrImages(){
+
     // var flickrImages = {
     //     [img src =
     // } ]}
@@ -121,4 +122,9 @@ function getArtistImages (){
             }
         artistImg.push(artistImgArray);
         }
+}
+
+function renderEventLists(){
+    //debugger;
+    
 }
