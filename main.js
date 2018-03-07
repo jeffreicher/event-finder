@@ -63,11 +63,12 @@ function getArtistFromEvents() {
 }
 
 function getArtistImages (){
-    for(var x=0; x<artistInfo.length; x++){
-        for()
-            var img = [];
-                artistInfo[x][0].images[0].url;
-            artistImg.push(img);
-        // console.log(x)
+    for(var i=0; i<artistInfo.length; i++){
+        var artistImgArray = [];
+        for(var x=0; x<artistInfo[i].length; x++){
+            var artistUrl = artistInfo[i][x].images[0].url;
+            artistImgArray.push(artistUrl);
+            }
+        artistImg.push(artistImgArray);
         }
 }
