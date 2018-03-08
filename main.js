@@ -29,7 +29,7 @@ var ticketObject = {
  */
 function initializeApp() {
     addClickHandlersToElements();
-    loadVideo();
+    // loadVideo();
     // artistPictureDynamicCreation();
 }
 
@@ -216,12 +216,12 @@ function getArtistFromEvents() {
 }
 
 
-function loadVideo() {
+function loadVideo(name) {
     $.ajax({
         dataType: 'json',
         data: {
             api_key: 'IkLZGbSrRC',
-            q: artistName + ' live set',
+            q: name + ' live set',
             maxResults: 5,
             type: 'video'
         },
@@ -294,8 +294,10 @@ function updateEventsLists(events_array) {
             "data-event": events_array[i].id,
             on: { 
                 click:function() {
+                    debugger;
                     var eventId = $(this).attr('data-event');
                     sendDataToOtherSections(eventId,this);
+                    loadVideo(name[0].innerHTML);
                 },          
             }
         });
@@ -343,7 +345,7 @@ function onYouTubeIframeAPIReady() {
         width: '530',
         videoId: videoIdArray[0],
         playerVars: {
-            'autoplay': 1,
+            // 'autoplay': 1,
             'start': 1
             // 'playlist': 'Q8sa_3oHYEc, YnwsMEabmSo, MOpcEayO1Yw', how do I make this populate from videoArray?
         }
@@ -370,6 +372,7 @@ function sendDataToOtherSections(eventId,object) {
                 $(".venue").append("Location: " + events_array[i].location);
                 $(".date").append("Date: " + events_array[i].date);
                 $(".tickets").append("Ticket-Price: " + events_array[i].ticketPrice);
+                loadVideo(events_array[i].name);
             }
         }
         // var venueInfoObject = object;
