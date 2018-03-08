@@ -12,6 +12,7 @@ var events_array1 = [];
 var artistInfo = [];
 var artistImg = [];
 var concertVenues = [];
+var venueIdList = [];
 
 var ticketPrice = [];
 var preformerNames =[];
@@ -306,6 +307,8 @@ function getArtistFromEvents() {
         artistInfo.push(attraction);
         var venue = events_array1[i]._embedded.venues[0].name;
         concertVenues.push(venue);
+        var venueId = events_array1[i]._embedded.venues[0].id;
+        venueIdList.push(venueId);
         }
         getArtistImages();
 }
