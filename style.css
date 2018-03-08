@@ -130,10 +130,10 @@ thead > tr > th{
 }
 
 .event-info > div {
-    height: 15%;
     width: 100%;
     border: 2px black solid;
     margin: 3% 0;
+    padding: 8px;
 }
 
 .hidden {

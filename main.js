@@ -350,12 +350,27 @@ function onYouTubeIframeAPIReady() {
     });
 }
 function sendDataToOtherSections(eventId,object) {
+    $("#img-1").empty();
+    $("#img-2").empty();
+    $("#img-3").empty();
+    $("#img-4").empty();
     $(".artists").empty();
     $(".venue").empty();
     $(".date").empty();
     $(".tickets").empty();
     for (var i = 0; i < events_array.length; i++) {
             if(eventId === events_array[i].id) {
+                debugger;
+                for(var i=1; i<artistImg[i].length; i++){
+                    $("<div>",{
+                       class: 'secondScreenBottomContainer',
+                        id: "img-"+i,
+                    });
+                }
+                $("#img-1").append($("<img>").attr('src', artistImg[i][0]).css('width', '100px'));
+                $("#img-2").append($("<img>").attr('src', artistImg[i][1]).css('width', '100px'));
+                $("#img-3").append($("<img>").attr('src', artistImg[i][2]).css('width', '100px'));
+                $("#img-4").append($("<img>").attr('src', artistImg[i][3]).css('width', '100px'));
                 $(".artists").append("Name: " + events_array[i].name);
                 $(".venue").append("Location: " + events_array[i].location);
                 $(".date").append("Date: " + events_array[i].date);
