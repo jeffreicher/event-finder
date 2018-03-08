@@ -94,6 +94,7 @@ header{
     height: 50%;
     background: #5A5959;
     box-sizing: border-box;
+    flex-direction: column;
 }
 .video{
     display: flex;
@@ -106,3 +107,9 @@ header{
     box-sizing: border-box;
 }
 
+.event-info > div {
+    height: 15%;
+    width: 100%;
+    border: 2px black solid;
+    margin: 3% 0;
+}
