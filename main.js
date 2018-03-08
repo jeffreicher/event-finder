@@ -249,42 +249,6 @@ function flickrLoop() {
 };
 
 
-function getDataFromTicketMaster() {
-    var keyword = $('#genre')[0];
-    keyword = keyword.options[keyword.selectedIndex].value;
-    console.log(keyword);
-    $.ajax({
-        type: "GET",
-        url: "https://app.ticketmaster.com/discovery/v2/events?apikey=tBBObsl2YtXpvAceOW6DOKwRtZpd8bxd&keyword=" + keyword + "&countryCode=US&stateCode=Ca",
-        dataType: "text",
-        success: function (json_data) {
-            var data = JSON.parse(json_data);
-            console.log(data);
-            for (var i = 0; i < data._embedded.events.length-1; i++) {
-                var fesivalObjects = data._embedded.events[i];
-                events_array1.push(fesivalObjects);
-                var data_object = {
-                    img: data._embedded.events[i].images[0].url,
-                    name: data._embedded.events[i].name,
-                    location: data._embedded.events[i]._embedded.venues[0].name,
-                    date: data._embedded.events[i].dates.start.dateTime,
-                    id:data._embedded.events[i].id,
-                    ticketPrice: data._embedded.events[i].priceRanges[0].max
-                  };
-                    events_array.push(data_object);
-                //   events_array.push(data_object);
-                  updateEventsLists(data_object);                  
-            }
-            // Parse the response.
-            // Do other things.
-            getArtistFromEvents();
-        },
-        error: function (xhr, status, err) {
-            // This time, we do not end up here!
-        }
-    });
-};
-
 function populateEventInformation(data_object) {
     //after button pressed, the data from the event that was pressed will be pulled into this function to be populated onto the DOM.
 };
@@ -337,6 +301,10 @@ function loadVideo() {
         }
     });
 }
+function getDataFromTicketMaster() {
+    var keyword = $('#genre')[0];
+    keyword = keyword.options[keyword.selectedIndex].value;
+    console.log(keyword);
 
 function updateEventsLists(data_object) {
     var get_img = data_object.img;
@@ -350,21 +318,62 @@ function updateEventsLists(data_object) {
       onclick: ''
     })
 }
-
-    // var tr_head =  $('<tr>');        
-    // var th = $('<th>');
-    // var tbody = $('<tbody>').addClass('table-content');
-    // var thead = $('<thead>');
-    // var table = $('<table>').addClass('events-lists');
-
-      // img.append(img_tag);
-      // tr.append(img, name, location, date);
-      // $('tbody').append(tr);
+    $.ajax({
+        type: "GET",
+        url: "https://app.ticketmaster.com/discovery/v2/events?apikey=tBBObsl2YtXpvAceOW6DOKwRtZpd8bxd&keyword=" + keyword + "&countryCode=US&stateCode=Ca",
+        dataType: "text",
+        success: function (json_data) {
+            var data = JSON.parse(json_data);
+            console.log(data);
+            for (var i = 0; i < data._embedded.events.length; i++) {
+                var fesivalObjects = data._embedded.events[i];
+                events_array1.push(fesivalObjects);
+                var data_object = {
+                    img: data._embedded.events[i].images[0].url,
+                    name: data._embedded.events[i].name,
+                    location: data._embedded.events[i]._embedded.venues[0].name,
+                    date: data._embedded.events[i].dates.start.dateTime,
+                    id:data._embedded.events[i].id                
+                  };
+                  events_array.push(data_object);                  
+                 
+            }
+           
+            updateEventsLists(events_array);
+           // getArtistFromEvents();
+            // Parse the response.
+            // Do other things.
+            getArtistFromEvents();
+        },
+        error: function (xhr, status, err) {
+            // This time, we do not end up here!
+        }
+    });
+};
+function updateEventsLists(events_array) {
+    var tbody = $('<tbody>').addClass('table-content');
+    var table = $('<table>').addClass('events-lists');
+    for (var i = 0; i < events_array.length; i++) {
+        var get_img = events_array[i].img;
+        var img_tag = $('<img>').attr('src', get_img).css('width', '100px');
+        var img = $('<td>');
+        var name = $('<td>').text(events_array[i].name);
+        var location = $('<td>').text(events_array[i].location);
+        var date = $('<td>').text(events_array[i].date);
+        var tr = $('<tr>');
+        img.append(img_tag);
+        tr.append(img, name, location, date);
+        // var tr_head =  $('<tr>');        
+        // var th = $('<th>');
+        //  var thead = $('<thead>');
+        tbody.append(tr);
+    }
+}
+    table.append(tbody);
+    $('.left-col').prepend(table);
+    //$('tbody').append(tr);
     //   tr_head.append(th); 
-    //   thead.append(tr_head);      
-    //   tbody.append(tr);
-    //   table.append()     
-      
+    //   thead.append(tr_head);   
 
 
 // function getPriceFromConcert() {
@@ -379,29 +388,29 @@ function updateEventsLists(data_object) {
 // }
 
 //Loads IFrame Player API asynchronously
-function createPlayer() {
-    var tag = document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-}
+    function createPlayer() {
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    }
 
 //Function creates an <iframe> & Youtube player after API code downloads
-function onYouTubeIframeAPIReady() {
-    //debugger;
-    videoPlayer = new YT.Player('player', {
-        height: '345',
-        width: '530',
-        videoId: videoIdArray[0],
-        playerVars: {
-            'autoplay': 1,
-            'start': 1
-            // 'playlist': 'Q8sa_3oHYEc, YnwsMEabmSo, MOpcEayO1Yw', how do I make this populate from videoArray?
-        }
-    });
-}
+    function onYouTubeIframeAPIReady() {
+        //debugger;
+        videoPlayer = new YT.Player('player', {
+            height: '345',
+            width: '530',
+            videoId: videoIdArray[0],
+            playerVars: {
+                'autoplay': 1,
+                'start': 1
+                // 'playlist': 'Q8sa_3oHYEc, YnwsMEabmSo, MOpcEayO1Yw', how do I make this populate from videoArray?
+            }
+        });
+    }
 
-function sendDataToOtherSections(data_object) {
-    var name = $('.artists').text(data_object.name);
-    //how to make tr a clickable button that will send data to the other areas in web page?
-}
+    function sendDataToOtherSections(data_object) {
+        var name = $('.artists').text(data_object.name);
+        //how to make tr a clickable button that will send data to the other areas in web page?
+    }
