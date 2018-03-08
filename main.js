@@ -12,6 +12,8 @@ var hiphop_array = [];
 var artistInfo = [];
 var artistImg = [];
 var concertVenues = [];
+var videoIdArray = [];
+var videoPlayer;
 /***************************************************************************************************
  * initializeApp
  * @params {undefined} none
@@ -20,6 +22,8 @@ var concertVenues = [];
  */
 function initializeApp(){
     addClickHandlersToElements();
+    createPlayer();
+    loadVideo();  
 }
 
 /***************************************************************************************************
