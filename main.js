@@ -12,6 +12,8 @@ var hiphop_array = [];
 var artistInfo = [];
 var artistImg = [];
 var concertVenues = [];
+var ticketPrice = [];
+var preformerNames =[];
 /***************************************************************************************************
  * initializeApp
  * @params {undefined} none
@@ -20,6 +22,8 @@ var concertVenues = [];
  */
 function initializeApp(){
     addClickHandlersToElements();
+    // artistPictureDynamicCreation();
+
 }
 
 /***************************************************************************************************
@@ -30,6 +34,13 @@ function initializeApp(){
 function addClickHandlersToElements(){
     $('.search-events').on('click', getDataFromTicketMaster);
 }
+// function artistPictureDynamicCreation() {
+//     for(var i = 0; i<artistImg[1].length; i++){
+//         var container = $(".left-bottom-col-3");
+//         var imgContainer = $("<div>").append(artistImg[i][i]);
+//         imgContainer.appendTo(container);
+//     }
+// }
 function flickrImages(){
     // var flickrImages = {
     //     [img src =
@@ -110,10 +121,11 @@ function getArtistFromEvents() {
         artistInfo.push(attraction);
         var venue = hiphop_array[i]._embedded.venues[0].name;
         concertVenues.push(venue);
+        var names = hiphop_array[i]._embedded.attractions[0].name;
+        preformerNames.push(names)
         }
-        getArtistImages();
+    getArtistImages();
 }
-
 function getArtistImages (){
     for(var i=0; i<artistInfo.length; i++){
         var artistImgArray = [];
@@ -123,4 +135,16 @@ function getArtistImages (){
             }
         artistImg.push(artistImgArray);
         }
+        // getPriceFromConcert()
 }
+
+// function getPriceFromConcert() {
+//     for(var x=0; x<hiphop_array.length; x++){
+//         var priceArray = [];
+//         var minPrice = hiphop_array[x].priceRanges;
+//         var maxPrice = hiphop_array[x].priceRanges;
+//         priceArray.push(minPrice,maxPrice);
+//         ticketPrice.push(priceArray);
+//     }
+//     getArtistImages();
+// }
