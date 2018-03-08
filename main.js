@@ -41,6 +41,9 @@ function initializeApp() {
  */
 function addClickHandlersToElements() {
     $('.search-events').on('click', getDataFromTicketMaster);
+    $('.secondScreen').addClass('hidden');
+    $('.backButton').on('click', backButtonActions);
+    
     // $('.row').on('click', sendDataToOtherSections);
 }
 
@@ -457,6 +460,7 @@ function sendDataToOtherSections(eventId,object) {
     $(".venue").empty();
     $(".date").empty();
     $(".tickets").empty();
+
     // $("#player").empty();
     for (var i = 0; i < events_array.length; i++) {
             if(eventId === events_array[i].id) {      
@@ -469,6 +473,9 @@ function sendDataToOtherSections(eventId,object) {
                 $(".venue").append("Location: " + events_array[i].location);
                 $(".date").append("Date: " + events_array[i].date);
                 $(".tickets").append("Ticket-Price: " + events_array[i].ticketPrice);
+                $('.secondScreen').removeClass('hidden');
+                $('.firstScreen').addClass('hidden');
+                $('tbody, tr').addClass('hidden'); 
                 flickrLoop(events_array[i].location);
                 loadVideo(events_array[i].name);
             }
@@ -484,4 +491,9 @@ function sendDataToOtherSections(eventId,object) {
 
     // console.log(this)
     //how to make tr a clickable button that will send data to the other areas in web page?
+function backButtonActions() {
+    $('.secondHeader').empty();
+    $('.secondScreen').addClass('hidden');
+    $('tbody, tr').removeClass('hidden');
 
+}
