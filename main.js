@@ -261,7 +261,7 @@ function getDataFromTicketMaster() {
                     location: data._embedded.events[i]._embedded.venues[0].name,
                     date: data._embedded.events[i].dates.start.dateTime,
                     id:data._embedded.events[i].id,
-                    ticketPrice: data._embedded.events[i].priceRanges[0].max
+                   // ticketPrice: data._embedded.events[i].priceRanges[0].max
 
                   };
                   events_array.push(data_object);                  
