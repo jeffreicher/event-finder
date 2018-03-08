@@ -322,12 +322,11 @@ function getDataFromTicketMaster() {
                   };
                   events_array.push(data_object);                  
                  
-            }
-           
+            }           
             updateEventsLists(events_array);
-           // getArtistFromEvents();
-            // Parse the response.
-            // Do other things.
+        
+        // Parse the response.
+        // Do other things.
             getArtistFromEvents();
         },
         error: function (xhr, status, err) {
@@ -335,14 +334,11 @@ function getDataFromTicketMaster() {
         }
     });
 };
-function updateEventsLists(events_array) {
-       
-
-    
+function updateEventsLists(events_array) {     
 
     var tbody = $('<tbody>').addClass('table-content');   
     var table = $('<table>').addClass('events-lists');  
-  //debugger;
+ 
     for(var i=0; i<events_array.length; i++){
         var get_img = events_array[i].img;
         var img_tag = $('<img>').attr('src', get_img).css('width', '100px');
@@ -353,20 +349,20 @@ function updateEventsLists(events_array) {
         var tr =  $('<tr>');
         img.append(img_tag);   
         tr.append(img, name, location, date);
-        // var tr_head =  $('<tr>');        
-      // var th = $('<th>');
-      //  var thead = $('<thead>');
+
+        var th_empty =  $('<th>');  
+        var th_event =  $('<th>').text('Event'); 
+        var th_location =  $('<th>').text('Location');  
+        var th_date =  $('<th>').text('Date');     
+        var tr_th = $('<tr>');
+        var thead = $('<thead>');
+        tr_th.append(th_empty, th_event, th_location, th_date);
+        thead.append(tr_th);
         tbody.append(tr);
-    }    
-    
-       table.append(tbody);
-      $('.left-col').prepend(table);
-    //$('tbody').append(tr);  
-    //   tr_head.append(th); 
-    //   thead.append(tr_head);   
-     
-       
-      
+    }        
+       table.append(thead, tbody);
+      $('.left-col').prepend(table);   
+                  
 }
 
 // function getPriceFromConcert() {
