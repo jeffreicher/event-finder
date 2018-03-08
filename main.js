@@ -261,8 +261,7 @@ function getDataFromTicketMaster() {
                     location: data._embedded.events[i]._embedded.venues[0].name,
                     date: data._embedded.events[i].dates.start.dateTime,
                     id:data._embedded.events[i].id,
-                    ticketPrice: data._embedded.events[i].priceRanges[0].max
-
+                    // ticketPrice: data._embedded.events[i].priceRanges[0].max
                   };
                   events_array.push(data_object);                  
                  
@@ -297,7 +296,6 @@ function updateEventsLists(events_array) {
                     debugger;
                     var eventId = $(this).attr('data-event');
                     sendDataToOtherSections(eventId,this);
-                    loadVideo(name[0].innerHTML);
                 },          
             }
         });
@@ -361,17 +359,19 @@ function sendDataToOtherSections(eventId,object) {
     $(".venue").empty();
     $(".date").empty();
     $(".tickets").empty();
+    // $("#player").empty();
     for (var i = 0; i < events_array.length; i++) {
-            if(eventId === events_array[i].id) {
-                var artistName = events_array[i].name;
-                $("#img-1").append($("<img>").attr('src', artistImg[i][0]).css('width', '100px'));
-                $("#img-2").append($("<img>").attr('src', artistImg[i][1]).css('width', '100px'));
-                $("#img-3").append($("<img>").attr('src', artistImg[i][2]).css('width', '100px'));
-                $("#img-4").append($("<img>").attr('src', artistImg[i][3]).css('width', '100px'));
+            if(eventId === events_array[i].id) {      
+                $(".secondHeader").append(events_array[i].name).addClass('secondHeader');       
+                $("#img-1").append($("<img>").attr('src', artistImg[i][0]).addClass('artistImages'));
+                $("#img-2").append($("<img>").attr('src', artistImg[i][1]).addClass('artistImages'));
+                $("#img-3").append($("<img>").attr('src', artistImg[i][2]).addClass('artistImages'));
+                $("#img-4").append($("<img>").attr('src', artistImg[i][3]).addClass('artistImages'));
                 $(".artists").append("Name: " + events_array[i].name);
                 $(".venue").append("Location: " + events_array[i].location);
                 $(".date").append("Date: " + events_array[i].date);
                 $(".tickets").append("Ticket-Price: " + events_array[i].ticketPrice);
+                debugger;
                 loadVideo(events_array[i].name);
             }
         }
