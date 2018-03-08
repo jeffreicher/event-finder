@@ -238,6 +238,10 @@ function getDataFromTicketMaster() {
     });
 }
 
+function populateEventInformation(data_object) {
+    //after button pressed, the data from the event that was pressed will be pulled into this function to be populated onto the DOM.
+}
+
 function getArtistImages () {
     for (var i = 0; i < artistInfo.length; i++) {
         var artistImgArray = [];
