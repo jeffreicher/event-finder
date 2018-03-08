@@ -282,16 +282,10 @@ function getDataFromTicketMaster() {
             // This time, we do not end up here!
         }
     });
-}
+};
 
-function getArtistFromEvents() {
-    for (var i = 0; i < hiphop_array.length; i++) {
-        var attraction = hiphop_array[i]._embedded.attractions;
-        artistInfo.push(attraction);
-        var venue = hiphop_array[i]._embedded.venues[0].name;
-        concertVenues.push(venue);
-    }
-    getArtistImages();
+function populateEventInformation(data_object) {
+    //after button pressed, the data from the event that was pressed will be pulled into this function to be populated onto the DOM.
 };
 
 
