@@ -252,6 +252,7 @@ function getDataFromTicketMaster() {
             for (var i = 0; i < data._embedded.events.length; i++) {
                 var fesivalObjects = data._embedded.events[i];
                 events_array1.push(fesivalObjects);
+                debugger;
                 data_object = {
                     img: data._embedded.events[i].images[0].url,
                     img2: data._embedded.events[i].images[1].url,
@@ -259,9 +260,9 @@ function getDataFromTicketMaster() {
                     img4: data._embedded.events[i].images[3].url,
                     name: data._embedded.events[i].name,
                     location: data._embedded.events[i]._embedded.venues[0].name,
-                    date: data._embedded.events[i].dates.start.dateTime,
+                    date: data._embedded.events[i].dates.start.localDate,
                     id:data._embedded.events[i].id,
-                    ticketPrice: data._embedded.events[i].priceRanges[0].max
+                    // ticketPrice: data._embedded.events[i].priceRanges[0].max
 
                   };
                   events_array.push(data_object);                  
@@ -297,7 +298,7 @@ function updateEventsLists(events_array) {
                     debugger;
                     var eventId = $(this).attr('data-event');
                     sendDataToOtherSections(eventId,this);
-                    loadVideo(name[0].innerHTML);
+                    loadVideo();
                 },          
             }
         });
