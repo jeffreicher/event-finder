@@ -8,6 +8,7 @@ $(document).ready(initializeApp);
  * @type {Array}
  */
 var events_array = [];
+var events_array1 = [];
 var artistInfo = [];
 var artistImg = [];
 var concertVenues = [];
@@ -37,13 +38,13 @@ function addClickHandlersToElements() {
     $('.search-events').on('click', getDataFromTicketMaster);
 }
 
-// function artistPictureDynamicCreation() {
-//     for(var i = 0; i<artistImg[1].length; i++){
-//         var container = $(".left-bottom-col-3");
-//         var imgContainer = $("<div>").append(artistImg[i][i]);
-//         imgContainer.appendTo(container);
-//     }
-// }
+function artistPictureDynamicCreation() {
+    for(var i = 0; i<artistImg[1].length; i++){
+        var container = $(".left-bottom-col-3");
+        var imgContainer = $("<div>").append(artistImg[i][i]);
+        imgContainer.appendTo(container);
+    }
+}
 function flickrImages(){
 
     // var flickrImages = {
@@ -206,7 +207,7 @@ function getDataFromTicketMaster() {
             console.log(data);
             for (var i = 0; i < data._embedded.events.length; i++) {
                 var fesivalObjects = data._embedded.events[i];
-                //events_array.push(fesivalObjects);
+                events_array1.push(fesivalObjects);
                 var data_object = {
                     img: data._embedded.events[i].images[0].url,
                     name: data._embedded.events[i].name,
@@ -220,7 +221,7 @@ function getDataFromTicketMaster() {
            // getArtistFromEvents();
             // Parse the response.
             // Do other things.
-            
+            getArtistFromEvents();
         },
         error: function (xhr, status, err) {
             // This time, we do not end up here!
@@ -228,25 +229,6 @@ function getDataFromTicketMaster() {
     });
 }
 
-function getArtistFromEvents() {
-    for (var i = 0; i < hiphop_array.length; i++) {
-        var attraction = hiphop_array[i]._embedded.attractions;
-        artistInfo.push(attraction);
-        var venue = hiphop_array[i]._embedded.venues[0].name;
-        concertVenues.push(venue);
-    }
-    getArtistImages();
-}
-
-function getArtistImages() {
-    for (var i = 0; i < artistInfo.length; i++) {
-        var artistImgArray = [];
-
-        var names = hiphop_array[i]._embedded.attractions[0].name;
-        preformerNames.push(names)
-        }
-    getArtistImages();
-}
 
 function getArtistImages () {
     for (var i = 0; i < artistInfo.length; i++) {
@@ -260,15 +242,15 @@ function getArtistImages () {
 }
     // getPriceFromConcert()
 
-// function getArtistFromEvents() {
-//     for(var i=0; i<events_array.length; i++){
-//         var attraction = events_array[i]._embedded.attractions;
-//         artistInfo.push(attraction);
-//         var venue = events_array[i]._embedded.venues[0].name;
-//         concertVenues.push(venue);
-//         }
-//         getArtistImages();
-// }
+function getArtistFromEvents() {
+    for(var i=0; i<events_array1.length; i++){
+        var attraction = events_array1[i]._embedded.attractions;
+        artistInfo.push(attraction);
+        var venue = events_array1[i]._embedded.venues[0].name;
+        concertVenues.push(venue);
+        }
+        getArtistImages();
+}
 
 function loadVideo() {
     $.ajax({
@@ -294,7 +276,6 @@ function loadVideo() {
 }
 
 function updateEventsLists(data_object) {
-    console.log(data_object);
     //debugger;
     var get_img = data_object.img;
     var img_tag = $('<img>').attr('src', get_img).css('width', '100px');
