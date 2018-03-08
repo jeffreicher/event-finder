@@ -12,7 +12,7 @@ var events_array1 = [];
 var artistInfo = [];
 var artistImg = [];
 var concertVenues = [];
-
+var data_object;
 var ticketPrice = [];
 var preformerNames =[];
 var videoIdArray = [];
@@ -262,7 +262,7 @@ function getDataFromTicketMaster() {
             for (var i = 0; i < data._embedded.events.length-1; i++) {
                 var fesivalObjects = data._embedded.events[i];
                 events_array1.push(fesivalObjects);
-                var data_object = {
+                 data_object = {
                     img: data._embedded.events[i].images[0].url,
                     name: data._embedded.events[i].name,
                     location: data._embedded.events[i]._embedded.venues[0].name,
