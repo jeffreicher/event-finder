@@ -17,6 +17,7 @@ var ticketPrice = [];
 var preformerNames =[];
 var videoIdArray = [];
 var videoPlayer;
+var artistName;
 var ticketObject = {
   ticketPrice: [],
 };
@@ -220,7 +221,7 @@ function loadVideo() {
         dataType: 'json',
         data: {
             api_key: 'IkLZGbSrRC',
-            q: 'drake live set',
+            q: artistName + ' live set',
             maxResults: 5,
             type: 'video'
         },
@@ -294,7 +295,7 @@ function updateEventsLists(events_array) {
             on: { 
                 click:function() {
                     var eventId = $(this).attr('data-event');
-                    sendDataToOtherSections(eventId);
+                    sendDataToOtherSections(eventId,this);
                 },          
             }
         });
@@ -337,7 +338,6 @@ function createPlayer() {
 
 //Function creates an <iframe> & Youtube player after API code downloads
 function onYouTubeIframeAPIReady() {
-    //debugger;
     videoPlayer = new YT.Player('player', {
         height: '345',
         width: '530',
@@ -350,6 +350,7 @@ function onYouTubeIframeAPIReady() {
     });
 }
 function sendDataToOtherSections(eventId,object) {
+    console.log(object);
     $("#img-1").empty();
     $("#img-2").empty();
     $("#img-3").empty();
@@ -360,7 +361,7 @@ function sendDataToOtherSections(eventId,object) {
     $(".tickets").empty();
     for (var i = 0; i < events_array.length; i++) {
             if(eventId === events_array[i].id) {
-                debugger;
+                var artistName = events_array[i].name;
                 $("#img-1").append($("<img>").attr('src', artistImg[i][0]).css('width', '100px'));
                 $("#img-2").append($("<img>").attr('src', artistImg[i][1]).css('width', '100px'));
                 $("#img-3").append($("<img>").attr('src', artistImg[i][2]).css('width', '100px'));
@@ -371,7 +372,6 @@ function sendDataToOtherSections(eventId,object) {
                 $(".tickets").append("Ticket-Price: " + events_array[i].ticketPrice);
             }
         }
-        console.log(object);
         // var venueInfoObject = object;
         // var sideBarObject = {
         // name: object.name,
