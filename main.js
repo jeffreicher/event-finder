@@ -361,12 +361,6 @@ function sendDataToOtherSections(eventId,object) {
     for (var i = 0; i < events_array.length; i++) {
             if(eventId === events_array[i].id) {
                 debugger;
-                for(var i=1; i<artistImg[i].length; i++){
-                    $("<div>",{
-                       class: 'secondScreenBottomContainer',
-                        id: "img-"+i,
-                    });
-                }
                 $("#img-1").append($("<img>").attr('src', artistImg[i][0]).css('width', '100px'));
                 $("#img-2").append($("<img>").attr('src', artistImg[i][1]).css('width', '100px'));
                 $("#img-3").append($("<img>").attr('src', artistImg[i][2]).css('width', '100px'));
