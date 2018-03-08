@@ -131,13 +131,18 @@ select#genre {
     height: 100%;
     border: 2px black solid;
 }
+.secondHeader {
+    height: 13%;
+    width: 100%;
+    border: 2px black solid;
+}
 .secondScreenTopContainer{
     border-radius: 5%;
-    width: 75%;
+    width: 55%;
     height: 50%;
     border: 2px solid black;
-    margin: auto;
-    margin-top: 7%;    
+    margin: auto;   
+    margin-top: 1%;
 }
 .bottomContainer {
     height: 100%;
@@ -149,9 +154,7 @@ select#genre {
     flex-direction: column;
     width: 30%;
     height: 30%;
-    border: 2px solid black;
-    margin: 2.5% .5%;
-
+    margin: 2% .5%;
 }
 .right-col{
     display: inline-block;
@@ -208,4 +211,15 @@ thead > tr > th{
 
 .hidden {
     display: none;
+}
+
+.artistImages {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+}
+
+.secondHeader {
+    text-align: center;
+    font-size: 5em;
 }
