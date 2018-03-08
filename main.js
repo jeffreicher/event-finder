@@ -150,13 +150,13 @@ function updateEventsLists(data_object){
     var name = $('<td>').text(data_object.name);
     var location = $('<td>').text(data_object.location);
     var date = $('<td>').text(data_object.date);       
-    var tr =  $('<tr>');  
-    
+    var tr =  $('<tr>');      
     
       img.append(img_tag);   
       tr.append(img, name, location, date);           
-      $('tbody').append(tr);   
+      $('tbody').append(tr);  
 
+      
 }
 
 
@@ -194,7 +194,7 @@ function createPlayer() {
 //Function creates an <iframe> & Youtube player after API code downloads
 
 function onYouTubeIframeAPIReady() {
-    debugger;
+    //debugger;
     videoPlayer = new YT.Player('player', {
         height: '345',
         width: '530',
