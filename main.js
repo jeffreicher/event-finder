@@ -272,8 +272,7 @@ function getDataFromTicketMaster() {
                     ticketPrice: data._embedded.events[i].priceRanges[0].max
                   };
                     events_array.push(data_object);
-                //   events_array.push(data_object);
-                  updateEventsLists(data_object);                  
+                  updateEventsLists(data_object);
             }
             // Parse the response.
             // Do other things.
@@ -373,12 +372,11 @@ function updateEventsLists(data_object) {
                   };
                   events_array.push(data_object);                  
                  
-            }
-           
+            }           
             updateEventsLists(events_array);
-           // getArtistFromEvents();
-            // Parse the response.
-            // Do other things.
+        
+        // Parse the response.
+        // Do other things.
             getArtistFromEvents();
         },
         error: function (xhr, status, err) {
@@ -406,18 +404,20 @@ function updateEventsLists(events_array) {
         });
         img.append(img_tag);
         tr.append(img, name, location, date);
-        // var tr_head =  $('<tr>');        
-        // var th = $('<th>');
-        //  var thead = $('<thead>');
+        var th_empty =  $('<th>');  
+        var th_event =  $('<th>').text('Event'); 
+        var th_location =  $('<th>').text('Location');  
+        var th_date =  $('<th>').text('Date');     
+        var tr_th = $('<tr>');
+        var thead = $('<thead>');
+        tr_th.append(th_empty, th_event, th_location, th_date);
+        thead.append(tr_th);
         tbody.append(tr);
-    }
-    table.append(tbody);
-    $('.left-col').prepend(table);
+    }        
+       table.append(thead, tbody);
+      $('.left-col').prepend(table);   
+                  
 }
-
-    //$('tbody').append(tr);
-    //   tr_head.append(th); 
-    //   thead.append(tr_head);   
 
 
 // function getPriceFromConcert() {
