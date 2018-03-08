@@ -253,11 +253,15 @@ function getDataFromTicketMaster() {
                 events_array1.push(fesivalObjects);
                 data_object = {
                     img: data._embedded.events[i].images[0].url,
+                    img2: data._embedded.events[i].images[1].url,
+                    img3: data._embedded.events[i].images[2].url,
+                    img4: data._embedded.events[i].images[3].url,
                     name: data._embedded.events[i].name,
                     location: data._embedded.events[i]._embedded.venues[0].name,
                     date: data._embedded.events[i].dates.start.dateTime,
                     id:data._embedded.events[i].id,
-                    ticketPrice: data._embedded.events[i].priceRanges[0].max              
+                    ticketPrice: data._embedded.events[i].priceRanges[0].max
+
                   };
                   events_array.push(data_object);                  
                  
@@ -309,8 +313,8 @@ function updateEventsLists(events_array) {
     }        
        table.append(thead, tbody);
       $('.left-col').prepend(table);   
-                  
-};
+
+}
 
 // function getPriceFromConcert() {
 //     for(var x=0; x<hiphop_array.length; x++){
@@ -345,15 +349,29 @@ function onYouTubeIframeAPIReady() {
         }
     });
 }
-
-function sendDataToOtherSections(event_Id) {
-    console.log(event_Id);
-    var sideBarObject = {
-        name: data_object.name,
-        location: data_object.location,
-
-    };
+function sendDataToOtherSections(eventId,object) {
+    $(".artists").empty();
+    $(".venue").empty();
+    $(".date").empty();
+    $(".tickets").empty();
+    for (var i = 0; i < events_array.length; i++) {
+            if(eventId === events_array[i].id) {
+                $(".artists").append("Name: " + events_array[i].name);
+                $(".venue").append("Location: " + events_array[i].location);
+                $(".date").append("Date: " + events_array[i].date);
+                $(".tickets").append("Ticket-Price: " + events_array[i].ticketPrice);
+            }
+        }
+        console.log(object);
+        // var venueInfoObject = object;
+        // var sideBarObject = {
+        // name: object.name,
+        // location: data_object.location,
+        //
+        // };
+    }
     // var name = $('.artists').text(data_object.name);
-    // console.log(this);
+
+    // console.log(this)
     //how to make tr a clickable button that will send data to the other areas in web page?
-}
+

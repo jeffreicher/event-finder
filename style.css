@@ -55,7 +55,7 @@ header{
     box-sizing: border-box; 
 }
 .secondScreen{
-    display: none;
+    /* display: none; */
     position: absolute;
     width: 62.5%;
     height: 100%;
