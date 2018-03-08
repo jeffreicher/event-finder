@@ -4,6 +4,8 @@
     box-sizing: border-box; 
 }
 
+
+
 body{
     height: 100vh;
     /* width: 100vw; */
@@ -123,7 +125,6 @@ select#genre {
     margin-top: 20px;
 }
 .secondScreen{
-    /* display: none; */
     top: 0;
     position: absolute;
     width: 62.5%;

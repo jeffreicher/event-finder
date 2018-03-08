@@ -1,3 +1,4 @@
+
 /**
  * Listen for the document to load and initialize the application
  */
@@ -53,19 +54,23 @@ function artistPictureDynamicCreation() {
         imgContainer.appendTo(container);
     }
 }
-function flickrImages(){
+
+function flickrImages() {
     var flickr_pic = $('<img>');
     //https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
-    var img_src = "https://farm" + response_dummy.photos.photo[0].farm + ".staticflickr.com/" +   response_dummy.photos.photo[0].server + "/" + response_dummy.photos.photo[0].id +"_" + response_dummy.photos.photo[0].secret + ".jpg";
+    var img_src = "https://farm" + venueImages.photos.photo[0].farm + ".staticflickr.com/" + venueImages.photos.photo[0].server + "/" + venueImages.photos.photo[0].id + "_" + venueImages.photos.photo[0].secret + ".jpg";
     flickr_pic.attr("src", img_src);
 }
-function flickrLoop() {
+
+
+function flickrLoop(venueLocation) {
     var venueImages =
         {
             "photos": {
                 "photo": [
+                    // Hollywood Palladium
                     {
-                        "id": "27020496362",
+                        "id": "27020496362", //"KovZpZAEAlaA"
                         "owner": "94467141@N00",
                         "secret": "32cb198536",
                         "server": "7070",
@@ -75,8 +80,9 @@ function flickrLoop() {
                         "isfriend": 0,
                         "isfamily": 0
                     },
+                    // Bill Graham Civic Auditorium
                     {
-                        "id": "30479561483",
+                        "id": "30479561483", // "KovZpaKope"
                         "owner": "141233868@N02",
                         "secret": "31493d3001",
                         "server": "5715",
@@ -86,8 +92,9 @@ function flickrLoop() {
                         "isfriend": 0,
                         "isfamily": 0
                     },
+                    // City National Civic
                     {
-                        "id": "22592033217",
+                        "id": "22592033217", //"KovZpZAJk71A"
                         "owner": "58112562@N00",
                         "secret": "9700cbbcc0",
                         "server": "5689",
@@ -97,8 +104,9 @@ function flickrLoop() {
                         "isfriend": 0,
                         "isfamily": 0
                     },
+                    // Greek Theatre
                     {
-                        "id": "35489133763",
+                        "id": "35489133763", // "KovZpZAFadlA"
                         "owner": "7948216@N05",
                         "secret": "9c28d0e767",
                         "server": "4303",
@@ -108,8 +116,9 @@ function flickrLoop() {
                         "isfriend": 0,
                         "isfamily": 0
                     },
+                    // Fox Theater
                     {
-                        "id": "31142080295",
+                        "id": "31142080295", // "KovZpaKoXe"
                         "owner": "34457978@N00",
                         "secret": "5b455ec238",
                         "server": "5764",
@@ -119,8 +128,9 @@ function flickrLoop() {
                         "isfriend": 0,
                         "isfamily": 0
                     },
+                    // Mezzanine
                     {
-                        "id": "4484999982",
+                        "id": "4484999982", // "KovZpZA1enFA"
                         "owner": "49005895@N08",
                         "secret": "98681bd752",
                         "server": "4008",
@@ -130,8 +140,9 @@ function flickrLoop() {
                         "isfriend": 0,
                         "isfamily": 0
                     },
+                    // House of Blues Anaheim
                     {
-                        "id": "8040060204",
+                        "id": "8040060204", //"KovZpZAEA67A"
                         "owner": "72756218@N04",
                         "secret": "78bca717da",
                         "server": "8179",
@@ -141,8 +152,9 @@ function flickrLoop() {
                         "isfriend": 0,
                         "isfamily": 0
                     },
+                    // Teragram Ballroom
                     {
-                        "id": "30043253042",
+                        "id": "30043253042", // "KovZpZAEvnFA"
                         "owner": "8263900@N06",
                         "secret": "402dc7f3bd",
                         "server": "5518",
@@ -152,8 +164,10 @@ function flickrLoop() {
                         "isfriend": 0,
                         "isfamily": 0
                     },
+
+                    // The Observatory
                     {
-                        "id": "22927627330",
+                        "id": "22927627330", // "Z6r9jZ6eAe"
                         "owner": "12694516@N04",
                         "secret": "b0f524cb25",
                         "server": "5739",
@@ -163,8 +177,9 @@ function flickrLoop() {
                         "isfriend": 0,
                         "isfamily": 0
                     },
+                    // Mattress Firm Amphitheatre
                     {
-                        "id": "37522480132",
+                        "id": "37522480132", //"KovZpa2WZe"
                         "owner": "157274368@N08",
                         "secret": "57b78471b3",
                         "server": "4456",
@@ -174,22 +189,57 @@ function flickrLoop() {
                         "isfriend": 0,
                         "isfamily": 0
                     },
-
+                    // Hollywood Pantages Theater
+                    {
+                        "id": "31084523390", // "KovZpZAEeFaA"
+                        "owner": "42029827@N00",
+                        "secret": "0a5431123d",
+                        "server": "5597",
+                        "farm": 6,
+                        "title": "Hollywood Pantages Theatre",
+                        "ispublic": 1,
+                        "isfriend": 0,
+                        "isfamily": 0
+                    },
                 ]
             }
 
         };
 
-    for(var i = 0; i < venueImages.photos.photo.length; i++){
-        console.log(venueImages.photos.photo[i]);
-        var img_src = "https://farm" + venueImages.photos.photo[i].farm + ".staticflickr.com/" + venueImages.photos.photo[i].server + "/" + venueImages.photos.photo[i].id + "_" + venueImages.photos.photo[i].secret + ".jpg";
-        // flickr_pic.attr("src", img_src);
-       var one_image= $('<img>').attr("src", img_src);
-        $("#venues").append(one_image);
+    var refList = {
+        "Mattress Firm Amphitheatre": "37522480132",
+        "The Observatory": "22927627330",
+        "Teragram Ballroom": "30043253042",
+        "KovZpZAEA67A": "8040060204",
+        "KovZpZA1enFA": "4484999982",
+        "Fox Theater": "31142080295",
+        "KovZpZAFadlA": "35489133763",
+        "KovZpZAJk71A": "22592033217",
+        "Bill Graham Civic Auditorium": "30479561483",
+        "Hollywood Palladium": "27020496362",
+        "Hollywood Pantages Theater": "31084523390"
     }
+
+    var locationId = refList[venueLocation];
+
+    for(var i = 0; i < venueImages.photos.photo.length; i++){
+        if(venueImages.photos.photo[i].id === locationId){
+            displayImage(venueImages.photos.photo[i]);
+            alert(venueImages.photos.photo[i].id);
+        }
+    };
+
+// flickr_pic.attr("src", img_src);
 };
 
-
+function displayImage(venueImage){
+    var img_src = "https://farm" + venueImage.farm + ".staticflickr.com/" + venueImage.server + "/" + venueImage.id + "_" + venueImage.secret + ".jpg";
+    console.log(img_src);
+    var one_image= $('<img>').attr("src", img_src);
+    $('.secondScreenTopContainer').empty().append(one_image);
+    $('.firstScreen').css('display', 'none');
+    $('.secondScreen').css('display', 'block');
+};
 
 function populateEventInformation(data_object) {
     //after button pressed, the data from the event that was pressed will be pulled into this function to be populated onto the DOM.
@@ -316,7 +366,7 @@ function updateEventsLists(events_array) {
         tbody.append(tr);
     }        
        table.append(thead, tbody);
-      $('.left-col').prepend(table);   
+      $('.firstScreen').prepend(table);
 
 }
 
@@ -378,6 +428,7 @@ function sendDataToOtherSections(eventId,object) {
                 $('.secondScreen').removeClass('hidden');
                 $('.firstScreen').addClass('hidden');
                 $('tbody, tr').addClass('hidden'); 
+                flickrLoop(events_array[i].location);
                 loadVideo(events_array[i].name);
             }
         }
