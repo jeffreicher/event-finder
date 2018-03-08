@@ -25,7 +25,7 @@ var videoPlayer;
  */
 function initializeApp() {
     addClickHandlersToElements();
-    // loadVideo();
+    loadVideo();
     // artistPictureDynamicCreation();
 }
 
