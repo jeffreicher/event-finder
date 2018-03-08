@@ -17,6 +17,9 @@ var ticketPrice = [];
 var preformerNames =[];
 var videoIdArray = [];
 var videoPlayer;
+var ticketObject = {
+  ticketPrice: [],
+};
 /***************************************************************************************************
  * initializeApp
  * @params {undefined} none
@@ -46,10 +49,6 @@ function artistPictureDynamicCreation() {
     }
 }
 function flickrImages(){
-
-    // var flickrImages = {
-    //     [img src =
-    // } ]}
     var flickr_pic = $('<img>');
     //https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
     var img_src = "https://farm" + response_dummy.photos.photo[0].farm + ".staticflickr.com/" +   response_dummy.photos.photo[0].server + "/" + response_dummy.photos.photo[0].id +"_" + response_dummy.photos.photo[0].secret + ".jpg";
@@ -252,7 +251,6 @@ function getDataFromTicketMaster() {
     var keyword = $('#genre')[0];
     keyword = keyword.options[keyword.selectedIndex].value;
     console.log(keyword);
-
     $.ajax({
         type: "GET",
         url: "https://app.ticketmaster.com/discovery/v2/events?apikey=tBBObsl2YtXpvAceOW6DOKwRtZpd8bxd&keyword=" + keyword + "&countryCode=US&stateCode=Ca",
@@ -260,7 +258,7 @@ function getDataFromTicketMaster() {
         success: function (json_data) {
             var data = JSON.parse(json_data);
             console.log(data);
-            for (var i = 0; i < data._embedded.events.length; i++) {
+            for (var i = 0; i < data._embedded.events.length-1; i++) {
                 var fesivalObjects = data._embedded.events[i];
                 events_array1.push(fesivalObjects);
                 var data_object = {
@@ -268,12 +266,13 @@ function getDataFromTicketMaster() {
                     name: data._embedded.events[i].name,
                     location: data._embedded.events[i]._embedded.venues[0].name,
                     date: data._embedded.events[i].dates.start.dateTime,
-                    id:data._embedded.events[i].id                
+                    id:data._embedded.events[i].id,
+                    ticketPrice: data._embedded.events[i].priceRanges[0].max
                   };
+                    events_array.push(data_object);
                 //   events_array.push(data_object);
                   updateEventsLists(data_object);
             }
-           // getArtistFromEvents();
             // Parse the response.
             // Do other things.
             getArtistFromEvents();
@@ -311,6 +310,7 @@ function getArtistFromEvents() {
         getArtistImages();
 }
 
+
 function loadVideo() {
     $.ajax({
         dataType: 'json',
@@ -335,7 +335,6 @@ function loadVideo() {
 }
 
 function updateEventsLists(data_object) {
-
     var get_img = data_object.img;
     var img_tag = $('<img>').attr('src', get_img).css('width', '100px');
     var img = $('<td>');
