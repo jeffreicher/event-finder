@@ -17,6 +17,9 @@ var ticketPrice = [];
 var preformerNames =[];
 var videoIdArray = [];
 var videoPlayer;
+var ticketObject = {
+  ticketPrice: [],
+};
 /***************************************************************************************************
  * initializeApp
  * @params {undefined} none
@@ -46,10 +49,6 @@ function artistPictureDynamicCreation() {
     }
 }
 function flickrImages(){
-
-    // var flickrImages = {
-    //     [img src =
-    // } ]}
     var flickr_pic = $('<img>');
     //https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
     var img_src = "https://farm" + response_dummy.photos.photo[0].farm + ".staticflickr.com/" +   response_dummy.photos.photo[0].server + "/" + response_dummy.photos.photo[0].id +"_" + response_dummy.photos.photo[0].secret + ".jpg";
@@ -123,8 +122,8 @@ function flickrLoop() {
             "photos": {
                 "photo": [
                     // Hollywood Palladium
-                    {
-                        "id": "27020496362",
+                     {
+                        "id": "27020496362", //"KovZpZAEAlaA"
                         "owner": "94467141@N00",
                         "secret": "32cb198536",
                         "server": "7070",
@@ -134,9 +133,9 @@ function flickrLoop() {
                         "isfriend": 0,
                         "isfamily": 0
                     },
-                    // Bill Graham Civic Auditorium
+                    Bill Graham Civic Auditorium
                     {
-                        "id": "30479561483",
+                        "id": "30479561483", // "KovZpaKope"
                         "owner": "141233868@N02",
                         "secret": "31493d3001",
                         "server": "5715",
@@ -147,8 +146,8 @@ function flickrLoop() {
                         "isfamily": 0
                     },
                     // City National Civic
-                    {
-                        "id": "22592033217",
+                     {
+                        "id": "22592033217", //"KovZpZAJk71A"
                         "owner": "58112562@N00",
                         "secret": "9700cbbcc0",
                         "server": "5689",
@@ -159,8 +158,8 @@ function flickrLoop() {
                         "isfamily": 0
                     },
                     // Greek Theatre
-                    {
-                        "id": "35489133763",
+                      {
+                        "id": "35489133763", // "KovZpZAFadlA"
                         "owner": "7948216@N05",
                         "secret": "9c28d0e767",
                         "server": "4303",
@@ -172,7 +171,7 @@ function flickrLoop() {
                     },
                     // Fox Theater
                     {
-                        "id": "31142080295",
+                        "id": "31142080295", // "KovZpaKoXe"
                         "owner": "34457978@N00",
                         "secret": "5b455ec238",
                         "server": "5764",
@@ -183,8 +182,8 @@ function flickrLoop() {
                         "isfamily": 0
                     },
                     // Mezzanine
-                    {
-                        "id": "4484999982",
+                 {
+                        "id": "4484999982", // "KovZpZA1enFA"
                         "owner": "49005895@N08",
                         "secret": "98681bd752",
                         "server": "4008",
@@ -196,7 +195,7 @@ function flickrLoop() {
                     },
                     // House of Blues Anaheim
                     {
-                        "id": "8040060204",
+                        "id": "8040060204", //"KovZpZAEA67A"
                         "owner": "72756218@N04",
                         "secret": "78bca717da",
                         "server": "8179",
@@ -208,7 +207,7 @@ function flickrLoop() {
                     },
                     // Teragram Ballroom
                     {
-                        "id": "30043253042",
+                        "id": "30043253042", // "KovZpZAEvnFA"
                         "owner": "8263900@N06",
                         "secret": "402dc7f3bd",
                         "server": "5518",
@@ -220,8 +219,8 @@ function flickrLoop() {
                     },
 
                     // The Observatory
-                    {
-                        "id": "22927627330",
+                   {
+                        "id": "22927627330", // "Z6r9jZ6eAe"
                         "owner": "12694516@N04",
                         "secret": "b0f524cb25",
                         "server": "5739",
@@ -232,8 +231,8 @@ function flickrLoop() {
                         "isfamily": 0
                     },
                     // Mattress Firm Amphitheatre
-                    {
-                        "id": "37522480132",
+                  {
+                        "id": "37522480132", //"KovZpa2WZe"
                         "owner": "157274368@N08",
                         "secret": "57b78471b3",
                         "server": "4456",
@@ -249,8 +248,26 @@ function flickrLoop() {
 
         };
 
+    var refList = {
+        "KovZpa2WZe": "37522480132",
+        "Z6r9jZ6eAe": "22927627330",
+        "KovZpZAEvnFA": "30043253042",
+        "KovZpZAEA67A": "8040060204",
+        "KovZpZA1enFA": "4484999982",
+        "KovZpaKoXe": "31142080295",
+        "KovZpZAFadlA": "35489133763",
+        "KovZpZAJk71A": "22592033217",
+        "KovZpaKope": "30479561483",
+        "KovZpZAEAlaA": "27020496362",
+    }
+
+    function
+
+    };
     for(var i = 0; i < venueImages.photos.photo.length; i++){
-        console.log(venueImages.photos.photo[i]);
+        console.log(venueImages.photos.photo[i].id);
+        console.log(refList[venueImages.photos.photo[i].id]);
+
         var img_src = "https://farm" + venueImages.photos.photo[i].farm + ".staticflickr.com/" + venueImages.photos.photo[i].server + "/" + venueImages.photos.photo[i].id + "_" + venueImages.photos.photo[i].secret + ".jpg";
         // flickr_pic.attr("src", img_src);
        var one_image= $('<img>').attr("src", img_src);
@@ -263,7 +280,6 @@ function getDataFromTicketMaster() {
     var keyword = $('#genre')[0];
     keyword = keyword.options[keyword.selectedIndex].value;
     console.log(keyword);
-
     $.ajax({
         type: "GET",
         url: "https://app.ticketmaster.com/discovery/v2/events?apikey=tBBObsl2YtXpvAceOW6DOKwRtZpd8bxd&keyword=" + keyword + "&countryCode=US&stateCode=Ca",
@@ -271,7 +287,7 @@ function getDataFromTicketMaster() {
         success: function (json_data) {
             var data = JSON.parse(json_data);
             console.log(data);
-            for (var i = 0; i < data._embedded.events.length; i++) {
+            for (var i = 0; i < data._embedded.events.length-1; i++) {
                 var fesivalObjects = data._embedded.events[i];
                 events_array1.push(fesivalObjects);
                 var data_object = {
@@ -279,12 +295,13 @@ function getDataFromTicketMaster() {
                     name: data._embedded.events[i].name,
                     location: data._embedded.events[i]._embedded.venues[0].name,
                     date: data._embedded.events[i].dates.start.dateTime,
-                    id:data._embedded.events[i].id                
+                    id:data._embedded.events[i].id,
+                    ticketPrice: data._embedded.events[i].priceRanges[0].max
                   };
+                    events_array.push(data_object);
                 //   events_array.push(data_object);
                   updateEventsLists(data_object);
             }
-           // getArtistFromEvents();
             // Parse the response.
             // Do other things.
             getArtistFromEvents();
@@ -322,6 +339,7 @@ function getArtistFromEvents() {
         getArtistImages();
 }
 
+
 function loadVideo() {
     $.ajax({
         dataType: 'json',
@@ -346,19 +364,28 @@ function loadVideo() {
 }
 
 function updateEventsLists(data_object) {
-
     var get_img = data_object.img;
     var img_tag = $('<img>').attr('src', get_img).css('width', '100px');
     var img = $('<td>');
     var name = $('<td>').text(data_object.name);
     var location = $('<td>').text(data_object.location);
-    var date = $('<td>').text(data_object.date);
-    var tr = $('<tr>');
+    var date = $('<td>').text(data_object.date);  
+    var tr =  $('<tr>');     
 
+    // var tr_head =  $('<tr>');        
+    // var th = $('<th>');
+    // var tbody = $('<tbody>').addClass('table-content');
+    // var thead = $('<thead>');
+    // var table = $('<table>').addClass('events-lists');
 
-    img.append(img_tag);
-    tr.append(img, name, location, date);
-    $('tbody').append(tr);
+      img.append(img_tag);   
+      tr.append(img, name, location, date);
+      $('tbody').append(tr);  
+    //   tr_head.append(th); 
+    //   thead.append(tr_head);      
+    //   tbody.append(tr);
+    //   table.append()     
+      
 }
 
 // function getPriceFromConcert() {
@@ -382,6 +409,7 @@ function createPlayer() {
 
 //Function creates an <iframe> & Youtube player after API code downloads
 function onYouTubeIframeAPIReady() {
+    //debugger;
     videoPlayer = new YT.Player('player', {
         height: '345',
         width: '530',
