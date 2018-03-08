@@ -28,7 +28,7 @@ var ticketObject = {
  */
 function initializeApp() {
     addClickHandlersToElements();
-    loadVideo();  
+    loadVideo();
     // artistPictureDynamicCreation();
 }
 
@@ -197,20 +197,17 @@ function flickrLoop() {
 
 
 function getDataFromTicketMaster() {
-    debugger;
     var keyword = $('#genre')[0];
     keyword = keyword.options[keyword.selectedIndex].value;
     console.log(keyword);
-
     $.ajax({
         type: "GET",
         url: "https://app.ticketmaster.com/discovery/v2/events?apikey=tBBObsl2YtXpvAceOW6DOKwRtZpd8bxd&keyword=" + keyword + "&countryCode=US&stateCode=Ca",
         dataType: "text",
         success: function (json_data) {
-            debugger;
             var data = JSON.parse(json_data);
             console.log(data);
-            for (var i = 0; i < data._embedded.events.length; i++) {
+            for (var i = 0; i < data._embedded.events.length-1; i++) {
                 var fesivalObjects = data._embedded.events[i];
                 events_array1.push(fesivalObjects);
                 var data_object = {
@@ -220,14 +217,11 @@ function getDataFromTicketMaster() {
                     date: data._embedded.events[i].dates.start.dateTime,
                     id:data._embedded.events[i].id,
                     ticketPrice: data._embedded.events[i].priceRanges[0].max
-                    // ticket:
                   };
-                ticketObject.ticketPrice = ticketPrice;
+                    events_array.push(data_object);
                 //   events_array.push(data_object);
                   updateEventsLists(data_object);
-                  getTicketPrices(data_object);
             }
-           // getArtistFromEvents();
             // Parse the response.
             // Do other things.
             getArtistFromEvents();
@@ -252,7 +246,7 @@ function getArtistImages () {
         artistImg.push(artistImgArray);
     }
 }
-    // getPriceFromConcert()
+
 
 function getArtistFromEvents() {
     for(var i=0; i<events_array1.length; i++){
@@ -289,7 +283,6 @@ function loadVideo() {
 }
 
 function updateEventsLists(data_object) {
-    //debugger;
     var get_img = data_object.img;
     var img_tag = $('<img>').attr('src', get_img).css('width', '100px');
     var img = $('<td>');
