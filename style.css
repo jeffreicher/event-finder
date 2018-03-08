@@ -18,12 +18,25 @@ header{
     background: url('./images/home-bg.jpg') no-repeat center center;
     background-size: cover;
     text-align: center;
+    position: relative;
+    
+}
+header .logo{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 6em;
+    color: #fff;
+    /* font-family: 'Lobster', cursive; */
+    font-weight: 700;
+    text-shadow: 2px 2px #093a5f;   
 }
 
 #search{
     position: relative;
     width: 100%;
-    height: 10%;
+    height: 14%;
     text-align: center;
 }
 .drop-down {
@@ -41,9 +54,7 @@ select#genre {
     -webkit-padding-end: 20px;
     -webkit-padding-start: 2px;
     -webkit-user-select: none;
-    background-image: -webkit-linear-gradient(bottom, rgb(44,160,202) 0%, rgb(62,184,229) 100%);
-    box-shadow: inset 0px 1px 0px #2ab7ec, 0px 5px 0px 0px #156785, 0px 10px 5px #999;
-    -webkit-box-shadow: inset 0px 1px 0px #2ab7ec, 0px 5px 0px 0px #156785, 0px 10px 5px #999;
+    background-image: -webkit-linear-gradient(bottom, rgb(44,160,202) 0%, rgb(62,184,229) 100%);    
     background-position: 97% center;
     background-repeat: no-repeat;
     border-top-left-radius: 5px;
@@ -51,28 +62,25 @@ select#genre {
     color: #fff;
     font-size: inherit;
     overflow: hidden;
-    padding: 10px 9px;
+    padding: 11px 9px;
     text-overflow: ellipsis;
     white-space: nowrap;
-    width: 80%;
-    background-color: #3bb3e0;
+    width: 80%;  
     border: none;
+    background-color: #3bb3e0;
  }
  button.search-events {
     background-color: #2561b4;
     background-image: -webkit-linear-gradient(bottom, rgb(10,94,125) 0%, rgb(14,139,184) 100%);
-    box-shadow: inset 0px 1px 0px #2ab7ec, 0px 5px 0px 0px #032b3a, 0px 10px 5px #999;
     color: #fff;
     text-shadow: 1px 1px 0px #07526e;
     border-right: solid 1px #07526e;
-    -webkit-box-shadow: inset 0px 1px 0px #2ab7ec, 0px 5px 0px 0px #032b3a, 0px 10px 5px #999;
     -webkit-border-top-right-radius: 5px;
     -webkit-border-bottom-right-radius: 5px;
-    padding: 11px 24px;
-    margin: 0;
-    position: absolute;
+    padding: 11px 25px;
     border: none;
     font-size: inherit;
+    background-position: 97% center;
 }
 
 #container{
