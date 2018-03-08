@@ -17,6 +17,7 @@ var ticketPrice = [];
 var preformerNames =[];
 var videoIdArray = [];
 var videoPlayer;
+var artistName;
 var ticketObject = {
   ticketPrice: [],
 };
@@ -28,7 +29,7 @@ var ticketObject = {
  */
 function initializeApp() {
     addClickHandlersToElements();
-    loadVideo();
+    // loadVideo();
     // artistPictureDynamicCreation();
 }
 
@@ -55,68 +56,6 @@ function flickrImages(){
     var img_src = "https://farm" + response_dummy.photos.photo[0].farm + ".staticflickr.com/" +   response_dummy.photos.photo[0].server + "/" + response_dummy.photos.photo[0].id +"_" + response_dummy.photos.photo[0].secret + ".jpg";
     flickr_pic.attr("src", img_src);
 }
-// var response_dummy =
-//     {
-//         "photos": {
-//             "page": 1,
-//             "pages": 749,
-//             "perpage": 100,
-//             "total": "74856",
-//             "photo": [
-//                 {
-//                     "id": "38798911820",
-//                     "owner": "150350703@N05",
-//                     "secret": "64482bf2ff",
-//                     "server": "4701",
-//                     "farm": 5,
-//                     "title": "A Master Guide to Collectives – For All Types of Denver Creatives",
-//                     "ispublic": 1,
-//                     "isfriend": 0,
-//                     "isfamily": 0
-//                 },
-//                 {
-//                     "id": "25734785827",
-//                     "owner": "31140271@N06",
-//                     "secret": "d26b5191dd",
-//                     "server": "4671",
-//                     "farm": 5,
-//                     "title": "Close Counters",
-//                     "ispublic": 1,
-//                     "isfriend": 0,
-//                     "isfamily": 0
-//                 }
-//             ]
-//         }
-//     };
-/* addClickHandlerstoElements
-* @params {undefined} 
-* @returns  {undefined}
-*     
-*/
-
-// function flickrImages() {
-//     var venue = "hollywood palladium venue outside";
-//     var search_url = 'https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=555bbd6b607a0ffb10da03124b8906b6&format=json&nojsoncallback=1&text=' + venue;
-//
-//     $.ajax({
-//         dataType: 'json',
-//         method: 'get',
-//         url: search_url,
-//         data: {
-//             'api_key': '555bbd6b607a0ffb10da03124b8906b6'
-//         },
-//         success: function (response) {
-//
-//             error: function (response) {
-//                 console.log(response);
-//             }
-//         });
-//
-//     //https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
-//
-//
-// }
-
 function flickrLoop() {
     var venueImages =
         {
@@ -277,12 +216,12 @@ function getArtistFromEvents() {
 }
 
 
-function loadVideo() {
+function loadVideo(name) {
     $.ajax({
         dataType: 'json',
         data: {
             api_key: 'IkLZGbSrRC',
-            q: 'drake live set',
+            q: name + ' live set',
             maxResults: 5,
             type: 'video'
         },
@@ -303,7 +242,6 @@ function getDataFromTicketMaster() {
     var keyword = $('#genre')[0];
     keyword = keyword.options[keyword.selectedIndex].value;
     console.log(keyword);
-
     $.ajax({
         type: "GET",
         url: "https://app.ticketmaster.com/discovery/v2/events?apikey=tBBObsl2YtXpvAceOW6DOKwRtZpd8bxd&keyword=" + keyword + "&countryCode=US&stateCode=Ca",
@@ -316,11 +254,15 @@ function getDataFromTicketMaster() {
                 events_array1.push(fesivalObjects);
                 data_object = {
                     img: data._embedded.events[i].images[0].url,
+                    img2: data._embedded.events[i].images[1].url,
+                    img3: data._embedded.events[i].images[2].url,
+                    img4: data._embedded.events[i].images[3].url,
                     name: data._embedded.events[i].name,
                     location: data._embedded.events[i]._embedded.venues[0].name,
                     date: data._embedded.events[i].dates.start.dateTime,
                     id:data._embedded.events[i].id,
-                    ticketPrice: data._embedded.events[i].priceRanges[0].max              
+                    ticketPrice: data._embedded.events[i].priceRanges[0].max
+
                   };
                   events_array.push(data_object);                  
                  
@@ -349,9 +291,13 @@ function updateEventsLists(events_array) {
         var date = $('<td>').text(events_array[i].date);  
         var tr =  $('<tr>', {
             class:'row',
+            "data-event": events_array[i].id,
             on: { 
                 click:function() {
-                    sendDataToOtherSections();
+                    debugger;
+                    var eventId = $(this).attr('data-event');
+                    sendDataToOtherSections(eventId,this);
+                    loadVideo(name[0].innerHTML);
                 },          
             }
         });
@@ -370,7 +316,7 @@ function updateEventsLists(events_array) {
     }        
        table.append(thead, tbody);
       $('.left-col').prepend(table);   
-                  
+
 }
 
 // function getPriceFromConcert() {
@@ -394,21 +340,50 @@ function createPlayer() {
 
 //Function creates an <iframe> & Youtube player after API code downloads
 function onYouTubeIframeAPIReady() {
-    //debugger;
     videoPlayer = new YT.Player('player', {
         height: '345',
         width: '530',
         videoId: videoIdArray[0],
         playerVars: {
-            'autoplay': 1,
+            // 'autoplay': 1,
             'start': 1
             // 'playlist': 'Q8sa_3oHYEc, YnwsMEabmSo, MOpcEayO1Yw', how do I make this populate from videoArray?
         }
     });
 }
-
-function sendDataToOtherSections(data_object) {
+function sendDataToOtherSections(eventId,object) {
+    console.log(object);
+    $("#img-1").empty();
+    $("#img-2").empty();
+    $("#img-3").empty();
+    $("#img-4").empty();
+    $(".artists").empty();
+    $(".venue").empty();
+    $(".date").empty();
+    $(".tickets").empty();
+    for (var i = 0; i < events_array.length; i++) {
+            if(eventId === events_array[i].id) {
+                var artistName = events_array[i].name;
+                $("#img-1").append($("<img>").attr('src', artistImg[i][0]).css('width', '100px'));
+                $("#img-2").append($("<img>").attr('src', artistImg[i][1]).css('width', '100px'));
+                $("#img-3").append($("<img>").attr('src', artistImg[i][2]).css('width', '100px'));
+                $("#img-4").append($("<img>").attr('src', artistImg[i][3]).css('width', '100px'));
+                $(".artists").append("Name: " + events_array[i].name);
+                $(".venue").append("Location: " + events_array[i].location);
+                $(".date").append("Date: " + events_array[i].date);
+                $(".tickets").append("Ticket-Price: " + events_array[i].ticketPrice);
+                loadVideo(events_array[i].name);
+            }
+        }
+        // var venueInfoObject = object;
+        // var sideBarObject = {
+        // name: object.name,
+        // location: data_object.location,
+        //
+        // };
+    }
     // var name = $('.artists').text(data_object.name);
-    console.log('clicked');
+
+    // console.log(this)
     //how to make tr a clickable button that will send data to the other areas in web page?
-}
+

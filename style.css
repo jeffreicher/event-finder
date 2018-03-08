@@ -115,7 +115,7 @@ select#genre {
     margin-top: 20px;
 }
 .secondScreen{
-    display: none;
+    /* display: none; */
     position: absolute;
     width: 62.5%;
     height: 100%;
@@ -190,10 +190,10 @@ thead > tr > th{
 }
 
 .event-info > div {
-    height: 15%;
     width: 100%;
     border: #ccc 1px solid;
     margin: 3% 0;
+    padding: 8px;
 }
 
 .hidden {
