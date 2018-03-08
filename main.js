@@ -122,6 +122,7 @@ function flickrLoop() {
         {
             "photos": {
                 "photo": [
+                    // Hollywood Palladium
                     {
                         "id": "27020496362",
                         "owner": "94467141@N00",
@@ -133,6 +134,7 @@ function flickrLoop() {
                         "isfriend": 0,
                         "isfamily": 0
                     },
+                    // Bill Graham Civic Auditorium
                     {
                         "id": "30479561483",
                         "owner": "141233868@N02",
@@ -144,6 +146,7 @@ function flickrLoop() {
                         "isfriend": 0,
                         "isfamily": 0
                     },
+                    // City National Civic
                     {
                         "id": "22592033217",
                         "owner": "58112562@N00",
@@ -155,6 +158,7 @@ function flickrLoop() {
                         "isfriend": 0,
                         "isfamily": 0
                     },
+                    // Greek Theatre
                     {
                         "id": "35489133763",
                         "owner": "7948216@N05",
@@ -166,6 +170,7 @@ function flickrLoop() {
                         "isfriend": 0,
                         "isfamily": 0
                     },
+                    // Fox Theater
                     {
                         "id": "31142080295",
                         "owner": "34457978@N00",
@@ -177,6 +182,7 @@ function flickrLoop() {
                         "isfriend": 0,
                         "isfamily": 0
                     },
+                    // Mezzanine
                     {
                         "id": "4484999982",
                         "owner": "49005895@N08",
@@ -188,6 +194,7 @@ function flickrLoop() {
                         "isfriend": 0,
                         "isfamily": 0
                     },
+                    // House of Blues Anaheim
                     {
                         "id": "8040060204",
                         "owner": "72756218@N04",
@@ -199,6 +206,7 @@ function flickrLoop() {
                         "isfriend": 0,
                         "isfamily": 0
                     },
+                    // Teragram Ballroom
                     {
                         "id": "30043253042",
                         "owner": "8263900@N06",
@@ -210,6 +218,8 @@ function flickrLoop() {
                         "isfriend": 0,
                         "isfamily": 0
                     },
+
+                    // The Observatory
                     {
                         "id": "22927627330",
                         "owner": "12694516@N04",
@@ -221,6 +231,7 @@ function flickrLoop() {
                         "isfriend": 0,
                         "isfamily": 0
                     },
+                    // Mattress Firm Amphitheatre
                     {
                         "id": "37522480132",
                         "owner": "157274368@N08",
