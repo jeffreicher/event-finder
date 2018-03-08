@@ -17,6 +17,9 @@ var ticketPrice = [];
 var preformerNames =[];
 var videoIdArray = [];
 var videoPlayer;
+var ticketObject = {
+  ticketPrice: [],
+};
 /***************************************************************************************************
  * initializeApp
  * @params {undefined} none
@@ -194,6 +197,7 @@ function flickrLoop() {
 
 
 function getDataFromTicketMaster() {
+    debugger;
     var keyword = $('#genre')[0];
     keyword = keyword.options[keyword.selectedIndex].value;
     console.log(keyword);
@@ -203,6 +207,7 @@ function getDataFromTicketMaster() {
         url: "https://app.ticketmaster.com/discovery/v2/events?apikey=tBBObsl2YtXpvAceOW6DOKwRtZpd8bxd&keyword=" + keyword + "&countryCode=US&stateCode=Ca",
         dataType: "text",
         success: function (json_data) {
+            debugger;
             var data = JSON.parse(json_data);
             console.log(data);
             for (var i = 0; i < data._embedded.events.length; i++) {
@@ -213,10 +218,14 @@ function getDataFromTicketMaster() {
                     name: data._embedded.events[i].name,
                     location: data._embedded.events[i]._embedded.venues[0].name,
                     date: data._embedded.events[i].dates.start.dateTime,
-                    id:data._embedded.events[i].id                
+                    id:data._embedded.events[i].id,
+                    ticketPrice: data._embedded.events[i].priceRanges[0].max
+                    // ticket:
                   };
+                ticketObject.ticketPrice = ticketPrice;
                 //   events_array.push(data_object);
                   updateEventsLists(data_object);
+                  getTicketPrices(data_object);
             }
            // getArtistFromEvents();
             // Parse the response.
@@ -228,7 +237,6 @@ function getDataFromTicketMaster() {
         }
     });
 }
-
 
 function getArtistImages () {
     for (var i = 0; i < artistInfo.length; i++) {
@@ -251,6 +259,7 @@ function getArtistFromEvents() {
         }
         getArtistImages();
 }
+
 
 function loadVideo() {
     $.ajax({
