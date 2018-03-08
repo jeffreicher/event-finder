@@ -4,11 +4,10 @@
 $(document).ready(initializeApp);
 
 /***********************
- * hiphop_array - global array to hold hiphop info objects
+ * events_array - global array to hold hiphop info objects
  * @type {Array}
  */
-var hiphop_array = [];
-// var keyword ='electronic';
+var events_array = [];
 var artistInfo = [];
 var artistImg = [];
 var concertVenues = [];
@@ -93,11 +92,22 @@ function getDataFromTicketMaster () {
             console.log(data);
             for(var i =0; i < data._embedded.events.length; i++){
                 var fesivalObjects = data._embedded.events[i];
-                hiphop_array.push(fesivalObjects);
+                //events_array.push(fesivalObjects);
+
+                var data_object = {
+                    img: data._embedded.events[i].images[0].url,
+                    name: data._embedded.events[i].name,
+                    location: data._embedded.events[i]._embedded.venues[0].name,
+                    date: data._embedded.events[i].dates.start.dateTime,
+                    id:data._embedded.events[i].id                
+                  } 
+                //   events_array.push(data_object);
+                  updateEventsLists(data_object);
             }
-            getArtistFromEvents();
+           // getArtistFromEvents();
             // Parse the response.
             // Do other things.
+            
         },
         error: function (xhr, status, err) {
             // This time, we do not end up here!
@@ -105,28 +115,42 @@ function getDataFromTicketMaster () {
     });
 }
 
-function getArtistFromEvents() {
-    for(var i=0; i<hiphop_array.length; i++){
-        var attraction = hiphop_array[i]._embedded.attractions;
-        artistInfo.push(attraction);
-        var venue = hiphop_array[i]._embedded.venues[0].name;
-        concertVenues.push(venue);
-        }
-        getArtistImages();
-}
+// function getArtistFromEvents() {
+//     for(var i=0; i<events_array.length; i++){
+//         var attraction = events_array[i]._embedded.attractions;
+//         artistInfo.push(attraction);
+//         var venue = events_array[i]._embedded.venues[0].name;
+//         concertVenues.push(venue);
+//         }
+//         getArtistImages();
+// }
 
-function getArtistImages (){
-    for(var i=0; i<artistInfo.length; i++){
-        var artistImgArray = [];
-        for(var x=0; x<artistInfo[i].length; x++){
-            var artistUrl = artistInfo[i][x].images[0].url;
-            artistImgArray.push(artistUrl);
-            }
-        artistImg.push(artistImgArray);
-        }
-}
+// function getArtistImages (){
+//     for(var i=0; i<artistInfo.length; i++){
+//         var artistImgArray = [];
+//         for(var x=0; x<artistInfo[i].length; x++){
+//             var artistUrl = artistInfo[i][x].images[0].url;
+//             artistImgArray.push(artistUrl);
+//             }
+//         artistImg.push(artistImgArray);
+//         }
+// }
 
-function renderEventLists(){
+
+function updateEventsLists(data_object){
+    console.log(data_object);
     //debugger;
+    var get_img = data_object.img;
+    var img_tag = $('<img>').attr('src', get_img).css('width','100px');
+    var img = $('<td>');
+    var name = $('<td>').text(data_object.name);
+    var location = $('<td>').text(data_object.location);
+    var date = $('<td>').text(data_object.date);       
+    var tr =  $('<tr>');  
     
+    
+      img.append(img_tag);   
+      tr.append(img, name, location, date);           
+      $('tbody').append(tr);   
+
 }

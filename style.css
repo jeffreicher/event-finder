@@ -60,6 +60,12 @@ header{
     background: #fff;
     box-sizing: border-box; 
 }
+.events-lists {
+    width: 100%;
+}
+.table-content > tr {
+    text-align: center;
+}
 .event-info{
     display: flex;
     position: relative;
