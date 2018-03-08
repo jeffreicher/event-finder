@@ -56,7 +56,7 @@ header{
 .secondScreen{
     display: none;
     position: absolute;
-    width: 63%;
+    width: 62.5%;
     height: 100%;
     border: 2px black solid;
 }

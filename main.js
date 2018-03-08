@@ -39,6 +39,7 @@ function initializeApp() {
  */
 function addClickHandlersToElements() {
     $('.search-events').on('click', getDataFromTicketMaster);
+    $('.tr').on('click', sendDataToOtherSections);
 }
 
 function artistPictureDynamicCreation() {
@@ -271,7 +272,7 @@ function getDataFromTicketMaster() {
                   };
                     events_array.push(data_object);
                 //   events_array.push(data_object);
-                  updateEventsLists(data_object);
+                  updateEventsLists(data_object);                  
             }
             // Parse the response.
             // Do other things.
@@ -393,3 +394,7 @@ function onYouTubeIframeAPIReady() {
     });
 }
 
+function sendDataToOtherSections(data_object) {
+    var name = $('.artists').text(data_object.name);
+    //how to make tr a clickable button that will send data to the other areas in web page?
+}
