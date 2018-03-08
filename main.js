@@ -316,6 +316,9 @@ function getDataFromTicketMaster() {
                 events_array1.push(fesivalObjects);
                 data_object = {
                     img: data._embedded.events[i].images[0].url,
+                    img2: data._embedded.events[i].images[1].url,
+                    img3: data._embedded.events[i].images[2].url,
+                    img4: data._embedded.events[i].images[3].url,
                     name: data._embedded.events[i].name,
                     location: data._embedded.events[i]._embedded.venues[0].name,
                     date: data._embedded.events[i].dates.start.dateTime,
@@ -349,9 +352,11 @@ function updateEventsLists(events_array) {
         var date = $('<td>').text(events_array[i].date);  
         var tr =  $('<tr>', {
             class:'row',
+            "data-event": events_array[i].id,
             on: { 
                 click:function() {
-                    sendDataToOtherSections();
+                    var eventId = $(this).attr('data-event');
+                    sendDataToOtherSections(eventId);
                 },          
             }
         });
@@ -372,7 +377,6 @@ function updateEventsLists(events_array) {
       $('.left-col').prepend(table);   
                   
 }
-hello
 
 // function getPriceFromConcert() {
 //     for(var x=0; x<hiphop_array.length; x++){
@@ -408,8 +412,14 @@ function onYouTubeIframeAPIReady() {
     });
 }
 
-function sendDataToOtherSections(data_object) {
+function sendDataToOtherSections(eventId) {
+    for (var i = 0; i < events_array.length; i++) {
+            if(eventId === events_array[i].id) {
+                $(".artists").append(events_array[i].img)
+            }
+        }
+    }
     // var name = $('.artists').text(data_object.name);
-    console.log('clicked');
+
+    // console.log(this)
     //how to make tr a clickable button that will send data to the other areas in web page?
-}
