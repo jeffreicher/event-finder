@@ -26,8 +26,6 @@ function initializeApp() {
     addClickHandlersToElements();
     loadVideo();  
     // artistPictureDynamicCreation();
-    createPlayer();
-    loadVideo();
 }
 
 /***************************************************************************************************
@@ -323,28 +321,6 @@ function updateEventsLists(data_object) {
 //     getArtistImages();
 // }
 
-function loadVideo() {
-    $.ajax({
-        dataType: 'json',
-        data: {
-            api_key: 'IkLZGbSrRC',
-            q: 'drake live set',
-            maxResults: 5,
-            type: 'video'
-        },
-        method: 'POST',
-        url: 'https://s-apis.learningfuze.com/hackathon/youtube/search.php',
-        success: function (response) {
-            if (response.success) {
-                console.log('success', response);
-                for (var i = 0; i < response.video.length; i++) {
-                    videoIdArray.push(response.video[i].id);
-                }
-            }
-        }
-    })
-}
-
 //Loads IFrame Player API asynchronously
 function createPlayer() {
     var tag = document.createElement('script');
@@ -353,11 +329,8 @@ function createPlayer() {
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 }
 
-
 //Function creates an <iframe> & Youtube player after API code downloads
-
 function onYouTubeIframeAPIReady() {
-    debugger;
     videoPlayer = new YT.Player('player', {
         height: '345',
         width: '530',
