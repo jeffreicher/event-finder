@@ -40,7 +40,7 @@ function initializeApp() {
  */
 function addClickHandlersToElements() {
     $('.search-events').on('click', getDataFromTicketMaster);
-    $('.tr').on('click', sendDataToOtherSections);
+    // $('.row').on('click', sendDataToOtherSections);
 }
 
 function artistPictureDynamicCreation() {
@@ -364,7 +364,7 @@ function updateEventsLists(data_object) {
             for (var i = 0; i < data._embedded.events.length; i++) {
                 var fesivalObjects = data._embedded.events[i];
                 events_array1.push(fesivalObjects);
-                var data_object = {
+                data_object = {
                     img: data._embedded.events[i].images[0].url,
                     name: data._embedded.events[i].name,
                     location: data._embedded.events[i]._embedded.venues[0].name,
@@ -387,16 +387,23 @@ function updateEventsLists(data_object) {
     });
 };
 function updateEventsLists(events_array) {
-    var tbody = $('<tbody>').addClass('table-content');
-    var table = $('<table>').addClass('events-lists');
-    for (var i = 0; i < events_array.length; i++) {
+    var tbody = $('<tbody>').addClass('table-content');   
+    var table = $('<table>').addClass('events-lists');  
+    for(var i=0; i<events_array.length; i++){
         var get_img = events_array[i].img;
         var img_tag = $('<img>').attr('src', get_img).css('width', '100px');
         var img = $('<td>');
         var name = $('<td>').text(events_array[i].name);
         var location = $('<td>').text(events_array[i].location);
-        var date = $('<td>').text(events_array[i].date);
-        var tr = $('<tr>');
+        var date = $('<td>').text(events_array[i].date);  
+        var tr =  $('<tr>', {
+            class:'row',
+            on: { 
+                click:function() {
+                    sendDataToOtherSections();
+                },          
+            }
+        });
         img.append(img_tag);
         tr.append(img, name, location, date);
         // var tr_head =  $('<tr>');        
@@ -447,7 +454,8 @@ function updateEventsLists(events_array) {
         });
     }
 
-    function sendDataToOtherSections(data_object) {
-        var name = $('.artists').text(data_object.name);
-        //how to make tr a clickable button that will send data to the other areas in web page?
-    }
+function sendDataToOtherSections(data_object) {
+    // var name = $('.artists').text(data_object.name);
+    console.log('clicked');
+    //how to make tr a clickable button that will send data to the other areas in web page?
+}
