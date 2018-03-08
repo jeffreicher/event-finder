@@ -39,7 +39,7 @@ function initializeApp() {
  * @returns  {undefined}
  */
 function addClickHandlersToElements() {
-    $('.search-events').on('click', getDataFromTicketMaster);
+    $('.search-events').on('click', $(".table-content").empty(),getDataFromTicketMaster);
     // $('.row').on('click', sendDataToOtherSections);
 }
 
@@ -252,7 +252,6 @@ function getDataFromTicketMaster() {
             for (var i = 0; i < data._embedded.events.length; i++) {
                 var fesivalObjects = data._embedded.events[i];
                 events_array1.push(fesivalObjects);
-                debugger;
                 data_object = {
                     img: data._embedded.events[i].images[0].url,
                     img2: data._embedded.events[i].images[1].url,
@@ -295,10 +294,10 @@ function updateEventsLists(events_array) {
             "data-event": events_array[i].id,
             on: { 
                 click:function() {
-                    debugger;
+                    // $("#player").remove();
                     var eventId = $(this).attr('data-event');
                     sendDataToOtherSections(eventId,this);
-                    loadVideo();
+                    loadVideo(name);
                 },          
             }
         });
@@ -333,6 +332,7 @@ function updateEventsLists(events_array) {
 
 //Loads IFrame Player API asynchronously
 function createPlayer() {
+    debugger;
     var tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
     var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -358,7 +358,7 @@ function sendDataToOtherSections(eventId,object) {
     $("#img-2").empty();
     $("#img-3").empty();
     $("#img-4").empty();
-    $(".artists").empty();
+    $(".name").empty();
     $(".venue").empty();
     $(".date").empty();
     $(".tickets").empty();
@@ -369,7 +369,7 @@ function sendDataToOtherSections(eventId,object) {
                 $("#img-2").append($("<img>").attr('src', artistImg[i][1]).css('width', '100px'));
                 $("#img-3").append($("<img>").attr('src', artistImg[i][2]).css('width', '100px'));
                 $("#img-4").append($("<img>").attr('src', artistImg[i][3]).css('width', '100px'));
-                $(".artists").append("Name: " + events_array[i].name);
+                $(".name").append("Name: " + events_array[i].name);
                 $(".venue").append("Location: " + events_array[i].location);
                 $(".date").append("Date: " + events_array[i].date);
                 $(".tickets").append("Ticket-Price: " + events_array[i].ticketPrice);
