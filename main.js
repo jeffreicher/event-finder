@@ -372,6 +372,7 @@ function updateEventsLists(events_array) {
       $('.left-col').prepend(table);   
                   
 }
+hello
 
 // function getPriceFromConcert() {
 //     for(var x=0; x<hiphop_array.length; x++){
