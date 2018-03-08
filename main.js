@@ -49,48 +49,44 @@ function artistPictureDynamicCreation() {
     }
 }
 function flickrImages(){
-
-    // var flickrImages = {
-    //     [img src =
-    // } ]}
     var flickr_pic = $('<img>');
     //https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
     var img_src = "https://farm" + response_dummy.photos.photo[0].farm + ".staticflickr.com/" +   response_dummy.photos.photo[0].server + "/" + response_dummy.photos.photo[0].id +"_" + response_dummy.photos.photo[0].secret + ".jpg";
     flickr_pic.attr("src", img_src);
 }
-var response_dummy =
-    {
-        "photos": {
-            "page": 1,
-            "pages": 749,
-            "perpage": 100,
-            "total": "74856",
-            "photo": [
-                {
-                    "id": "38798911820",
-                    "owner": "150350703@N05",
-                    "secret": "64482bf2ff",
-                    "server": "4701",
-                    "farm": 5,
-                    "title": "A Master Guide to Collectives – For All Types of Denver Creatives",
-                    "ispublic": 1,
-                    "isfriend": 0,
-                    "isfamily": 0
-                },
-                {
-                    "id": "25734785827",
-                    "owner": "31140271@N06",
-                    "secret": "d26b5191dd",
-                    "server": "4671",
-                    "farm": 5,
-                    "title": "Close Counters",
-                    "ispublic": 1,
-                    "isfriend": 0,
-                    "isfamily": 0
-                }
-            ]
-        }
-    };
+// var response_dummy =
+//     {
+//         "photos": {
+//             "page": 1,
+//             "pages": 749,
+//             "perpage": 100,
+//             "total": "74856",
+//             "photo": [
+//                 {
+//                     "id": "38798911820",
+//                     "owner": "150350703@N05",
+//                     "secret": "64482bf2ff",
+//                     "server": "4701",
+//                     "farm": 5,
+//                     "title": "A Master Guide to Collectives – For All Types of Denver Creatives",
+//                     "ispublic": 1,
+//                     "isfriend": 0,
+//                     "isfamily": 0
+//                 },
+//                 {
+//                     "id": "25734785827",
+//                     "owner": "31140271@N06",
+//                     "secret": "d26b5191dd",
+//                     "server": "4671",
+//                     "farm": 5,
+//                     "title": "Close Counters",
+//                     "ispublic": 1,
+//                     "isfriend": 0,
+//                     "isfamily": 0
+//                 }
+//             ]
+//         }
+//     };
 /* addClickHandlerstoElements
 * @params {undefined} 
 * @returns  {undefined}
@@ -137,12 +133,12 @@ function flickrLoop() {
                         "isfamily": 0
                     },
                     {
-                        "id": "30198250325",
-                        "owner": "100899330@N03",
-                        "secret": "a09725a645",
-                        "server": "5562",
+                        "id": "30479561483",
+                        "owner": "141233868@N02",
+                        "secret": "31493d3001",
+                        "server": "5715",
                         "farm": 6,
-                        "title": "Pre-Show",
+                        "title": "Bill Graham Civic Auditorium",
                         "ispublic": 1,
                         "isfriend": 0,
                         "isfamily": 0
@@ -179,7 +175,62 @@ function flickrLoop() {
                         "ispublic": 1,
                         "isfriend": 0,
                         "isfamily": 0
-                    }
+                    },
+                    {
+                        "id": "4484999982",
+                        "owner": "49005895@N08",
+                        "secret": "98681bd752",
+                        "server": "4008",
+                        "farm": 5,
+                        "title": "Mezzanine Private Event Venue San Francisco",
+                        "ispublic": 1,
+                        "isfriend": 0,
+                        "isfamily": 0
+                    },
+                    {
+                        "id": "8040060204",
+                        "owner": "72756218@N04",
+                        "secret": "78bca717da",
+                        "server": "8179",
+                        "farm": 9,
+                        "title": "House of Blues Anaheim",
+                        "ispublic": 1,
+                        "isfriend": 0,
+                        "isfamily": 0
+                    },
+                    {
+                        "id": "30043253042",
+                        "owner": "8263900@N06",
+                        "secret": "402dc7f3bd",
+                        "server": "5518",
+                        "farm": 6,
+                        "title": "Okkervil River @ Teragram Ballroom, LA 10-04-2016 28",
+                        "ispublic": 1,
+                        "isfriend": 0,
+                        "isfamily": 0
+                    },
+                    {
+                        "id": "22927627330",
+                        "owner": "12694516@N04",
+                        "secret": "b0f524cb25",
+                        "server": "5739",
+                        "farm": 6,
+                        "title": "Broncho plays their final show of their US tour at the Observatory Orange County on Saturaday Nov 21st, 2015. Skinny Puppy, The Shelters, Pearl Charles and others also played the venue this evening.",
+                        "ispublic": 1,
+                        "isfriend": 0,
+                        "isfamily": 0
+                    },
+                    {
+                        "id": "37522480132",
+                        "owner": "157274368@N08",
+                        "secret": "57b78471b3",
+                        "server": "4456",
+                        "farm": 5,
+                        "title": "DEPECHE MODE",
+                        "ispublic": 1,
+                        "isfriend": 0,
+                        "isfamily": 0
+                    },
 
                 ]
             }
@@ -230,11 +281,12 @@ function getDataFromTicketMaster() {
             // This time, we do not end up here!
         }
     });
-}
+};
 
 function populateEventInformation(data_object) {
     //after button pressed, the data from the event that was pressed will be pulled into this function to be populated onto the DOM.
-}
+};
+
 
 function getArtistImages () {
     for (var i = 0; i < artistInfo.length; i++) {
@@ -288,13 +340,23 @@ function updateEventsLists(data_object) {
     var img = $('<td>');
     var name = $('<td>').text(data_object.name);
     var location = $('<td>').text(data_object.location);
-    var date = $('<td>').text(data_object.date);
-    var tr = $('<tr>');
+    var date = $('<td>').text(data_object.date);  
+    var tr =  $('<tr>');     
 
+    // var tr_head =  $('<tr>');        
+    // var th = $('<th>');
+    // var tbody = $('<tbody>').addClass('table-content');
+    // var thead = $('<thead>');
+    // var table = $('<table>').addClass('events-lists');
 
-    img.append(img_tag);
-    tr.append(img, name, location, date);
-    $('tbody').append(tr);
+      img.append(img_tag);   
+      tr.append(img, name, location, date);
+      $('tbody').append(tr);  
+    //   tr_head.append(th); 
+    //   thead.append(tr_head);      
+    //   tbody.append(tr);
+    //   table.append()     
+      
 }
 
 // function getPriceFromConcert() {
@@ -318,13 +380,14 @@ function createPlayer() {
 
 //Function creates an <iframe> & Youtube player after API code downloads
 function onYouTubeIframeAPIReady() {
+    //debugger;
     videoPlayer = new YT.Player('player', {
         height: '345',
         width: '530',
         videoId: videoIdArray[0],
         playerVars: {
             'autoplay': 1,
-            'start': 1,
+            'start': 1
             // 'playlist': 'Q8sa_3oHYEc, YnwsMEabmSo, MOpcEayO1Yw', how do I make this populate from videoArray?
         }
     });
