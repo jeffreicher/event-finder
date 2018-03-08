@@ -124,13 +124,14 @@ select#genre {
 }
 .secondScreen{
     /* display: none; */
+    top: 0;
     position: absolute;
     width: 62.5%;
     height: 100%;
     border: 2px black solid;
 }
 .secondHeader {
-    height: 13%;
+    height: 8%;
     width: 100%;
     border: 2px black solid;
 }
@@ -219,5 +220,5 @@ thead > tr > th{
 
 .secondHeader {
     text-align: center;
-    font-size: 5em;
+    font-size: 2em;
 }
