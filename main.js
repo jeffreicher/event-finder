@@ -229,6 +229,10 @@ function getDataFromTicketMaster() {
     });
 }
 
+function populateEventInformation(data_object) {
+    //after button pressed, the data from the event that was pressed will be pulled into this function to be populated onto the DOM.
+}
+
 function getArtistFromEvents() {
     for (var i = 0; i < hiphop_array.length; i++) {
         var attraction = hiphop_array[i]._embedded.attractions;
