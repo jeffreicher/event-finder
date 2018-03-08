@@ -24,7 +24,7 @@ var videoPlayer;
  */
 function initializeApp() {
     addClickHandlersToElements();
-    loadVideo();  
+    // loadVideo();
     // artistPictureDynamicCreation();
 }
 
@@ -54,39 +54,39 @@ function flickrImages(){
     var img_src = "https://farm" + response_dummy.photos.photo[0].farm + ".staticflickr.com/" +   response_dummy.photos.photo[0].server + "/" + response_dummy.photos.photo[0].id +"_" + response_dummy.photos.photo[0].secret + ".jpg";
     flickr_pic.attr("src", img_src);
 }
-var response_dummy =
-    {
-        "photos": {
-            "page": 1,
-            "pages": 749,
-            "perpage": 100,
-            "total": "74856",
-            "photo": [
-                {
-                    "id": "38798911820",
-                    "owner": "150350703@N05",
-                    "secret": "64482bf2ff",
-                    "server": "4701",
-                    "farm": 5,
-                    "title": "A Master Guide to Collectives – For All Types of Denver Creatives",
-                    "ispublic": 1,
-                    "isfriend": 0,
-                    "isfamily": 0
-                },
-                {
-                    "id": "25734785827",
-                    "owner": "31140271@N06",
-                    "secret": "d26b5191dd",
-                    "server": "4671",
-                    "farm": 5,
-                    "title": "Close Counters",
-                    "ispublic": 1,
-                    "isfriend": 0,
-                    "isfamily": 0
-                }
-            ]
-        }
-    };
+// var response_dummy =
+//     {
+//         "photos": {
+//             "page": 1,
+//             "pages": 749,
+//             "perpage": 100,
+//             "total": "74856",
+//             "photo": [
+//                 {
+//                     "id": "38798911820",
+//                     "owner": "150350703@N05",
+//                     "secret": "64482bf2ff",
+//                     "server": "4701",
+//                     "farm": 5,
+//                     "title": "A Master Guide to Collectives – For All Types of Denver Creatives",
+//                     "ispublic": 1,
+//                     "isfriend": 0,
+//                     "isfamily": 0
+//                 },
+//                 {
+//                     "id": "25734785827",
+//                     "owner": "31140271@N06",
+//                     "secret": "d26b5191dd",
+//                     "server": "4671",
+//                     "farm": 5,
+//                     "title": "Close Counters",
+//                     "ispublic": 1,
+//                     "isfriend": 0,
+//                     "isfamily": 0
+//                 }
+//             ]
+//         }
+//     };
 /* addClickHandlerstoElements
 * @params {undefined} 
 * @returns  {undefined}
@@ -133,12 +133,12 @@ function flickrLoop() {
                         "isfamily": 0
                     },
                     {
-                        "id": "30198250325",
-                        "owner": "100899330@N03",
-                        "secret": "a09725a645",
-                        "server": "5562",
+                        "id": "30479561483",
+                        "owner": "141233868@N02",
+                        "secret": "31493d3001",
+                        "server": "5715",
                         "farm": 6,
-                        "title": "Pre-Show",
+                        "title": "Bill Graham Civic Auditorium",
                         "ispublic": 1,
                         "isfriend": 0,
                         "isfamily": 0
@@ -239,15 +239,15 @@ function getArtistFromEvents() {
     getArtistImages();
 }
 
-function getArtistImages() {
-    for (var i = 0; i < artistInfo.length; i++) {
-        var artistImgArray = [];
-
-        var names = hiphop_array[i]._embedded.attractions[0].name;
-        preformerNames.push(names)
-        }
-    getArtistImages();
-}
+// function getArtistImages() {
+//     for (var i = 0; i < artistInfo.length; i++) {
+//         var artistImgArray = [];
+//
+//         var names = hiphop_array[i]._embedded.attractions[0].name;
+//         preformerNames.push(names)
+//         }
+//     getArtistImages();
+// }
 
 function getArtistImages () {
     for (var i = 0; i < artistInfo.length; i++) {
@@ -296,7 +296,6 @@ function loadVideo() {
 
 function updateEventsLists(data_object) {
     console.log(data_object);
-    //debugger;
     var get_img = data_object.img;
     var img_tag = $('<img>').attr('src', get_img).css('width', '100px');
     var img = $('<td>');
@@ -338,7 +337,7 @@ function onYouTubeIframeAPIReady() {
         videoId: videoIdArray[0],
         playerVars: {
             'autoplay': 1,
-            'start': 1,
+            'start': 1
             // 'playlist': 'Q8sa_3oHYEc, YnwsMEabmSo, MOpcEayO1Yw', how do I make this populate from videoArray?
         }
     });
