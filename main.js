@@ -18,6 +18,7 @@ var ticketPrice = [];
 var preformerNames =[];
 var videoIdArray = [];
 var videoPlayer;
+var artistName;
 var ticketObject = {
   ticketPrice: [],
 };
@@ -265,12 +266,12 @@ function getArtistFromEvents() {
 }
 
 
-function loadVideo() {
+function loadVideo(name) {
     $.ajax({
         dataType: 'json',
         data: {
             api_key: 'IkLZGbSrRC',
-            q: 'drake live set',
+            q: name + ' live set',
             maxResults: 5,
             type: 'video'
         },
@@ -310,7 +311,7 @@ function getDataFromTicketMaster() {
                     location: data._embedded.events[i]._embedded.venues[0].name,
                     date: data._embedded.events[i].dates.start.dateTime,
                     id:data._embedded.events[i].id,
-                    ticketPrice: data._embedded.events[i].priceRanges[0].max
+                    // ticketPrice: data._embedded.events[i].priceRanges[0].max
 
                   };
                   events_array.push(data_object);                  
@@ -343,8 +344,10 @@ function updateEventsLists(events_array) {
             "data-event": events_array[i].id,
             on: { 
                 click:function() {
+                    debugger;
                     var eventId = $(this).attr('data-event');
-                    sendDataToOtherSections(eventId);
+                    sendDataToOtherSections(eventId,this);
+                    loadVideo(name[0].innerHTML);
                 },          
             }
         });
@@ -387,33 +390,42 @@ function createPlayer() {
 
 //Function creates an <iframe> & Youtube player after API code downloads
 function onYouTubeIframeAPIReady() {
-    //debugger;
     videoPlayer = new YT.Player('player', {
         height: '345',
         width: '530',
         videoId: videoIdArray[0],
         playerVars: {
-            'autoplay': 1,
+            // 'autoplay': 1,
             'start': 1
             // 'playlist': 'Q8sa_3oHYEc, YnwsMEabmSo, MOpcEayO1Yw', how do I make this populate from videoArray?
         }
     });
 }
 function sendDataToOtherSections(eventId,object) {
+    console.log(object);
+    $("#img-1").empty();
+    $("#img-2").empty();
+    $("#img-3").empty();
+    $("#img-4").empty();
     $(".artists").empty();
     $(".venue").empty();
     $(".date").empty();
     $(".tickets").empty();
     for (var i = 0; i < events_array.length; i++) {
             if(eventId === events_array[i].id) {
+                var artistName = events_array[i].name;
+                $("#img-1").append($("<img>").attr('src', artistImg[i][0]).css('width', '100px'));
+                $("#img-2").append($("<img>").attr('src', artistImg[i][1]).css('width', '100px'));
+                $("#img-3").append($("<img>").attr('src', artistImg[i][2]).css('width', '100px'));
+                $("#img-4").append($("<img>").attr('src', artistImg[i][3]).css('width', '100px'));
                 $(".artists").append("Name: " + events_array[i].name);
                 $(".venue").append("Location: " + events_array[i].location);
                 $(".date").append("Date: " + events_array[i].date);
                 $(".tickets").append("Ticket-Price: " + events_array[i].ticketPrice);
                 flickrLoop(events_array[i].location);
+                loadVideo(events_array[i].name);
             }
         }
-        console.log(object);
         // var venueInfoObject = object;
         // var sideBarObject = {
         // name: object.name,
