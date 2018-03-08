@@ -22,7 +22,6 @@ var videoPlayer;
  */
 function initializeApp(){
     addClickHandlersToElements();
-    createPlayer();
     loadVideo();  
 }
 
@@ -146,7 +145,8 @@ function loadVideo() {
                 console.log('success', response);
                 for ( var i = 0; i < response.video.length; i++) {
                     videoIdArray.push(response.video[i].id);
-                }                
+                }     
+                createPlayer();           
             }
         }
     })
@@ -162,7 +162,6 @@ function createPlayer() {
 
 
 //Function creates an <iframe> & Youtube player after API code downloads
-
 function onYouTubeIframeAPIReady() {
     debugger;
     videoPlayer = new YT.Player('player', {
@@ -175,4 +174,12 @@ function onYouTubeIframeAPIReady() {
             // 'playlist': 'Q8sa_3oHYEc, YnwsMEabmSo, MOpcEayO1Yw', how do I make this populate from videoArray?
         }
     });
+}
+
+function successCallback(result) {
+    console.log("It succedded with " + result);
+}
+
+function failureCallback(error) {
+    console.log("It failed with " + error);
 }
