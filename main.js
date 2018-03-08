@@ -11,6 +11,8 @@ var events_array = [];
 var artistInfo = [];
 var artistImg = [];
 var concertVenues = [];
+var videoIdArray = [];
+var videoPlayer;
 /***************************************************************************************************
  * initializeApp
  * @params {undefined} none
@@ -19,6 +21,8 @@ var concertVenues = [];
  */
 function initializeApp(){
     addClickHandlersToElements();
+    createPlayer();
+    loadVideo();  
 }
 
 /***************************************************************************************************
@@ -153,4 +157,52 @@ function updateEventsLists(data_object){
       tr.append(img, name, location, date);           
       $('tbody').append(tr);   
 
+}
+
+
+function loadVideo() {
+    $.ajax({
+        dataType: 'json',
+        data: {
+            api_key: 'IkLZGbSrRC',
+            q: 'drake live set',
+            maxResults: 5,
+            type: 'video'
+        },
+        method: 'POST',
+        url: 'https://s-apis.learningfuze.com/hackathon/youtube/search.php',
+        success: function(response){
+            if(response.success){
+                console.log('success', response);
+                for ( var i = 0; i < response.video.length; i++) {
+                    videoIdArray.push(response.video[i].id);
+                }                
+            }
+        }
+    })
+};
+
+    //Loads IFrame Player API asynchronously
+function createPlayer() {
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+}
+
+
+//Function creates an <iframe> & Youtube player after API code downloads
+
+function onYouTubeIframeAPIReady() {
+    debugger;
+    videoPlayer = new YT.Player('player', {
+        height: '345',
+        width: '530',
+        videoId: videoIdArray[0],
+        playerVars: { 
+            'autoplay': 1,
+            'start': 1,
+            // 'playlist': 'Q8sa_3oHYEc, YnwsMEabmSo, MOpcEayO1Yw', how do I make this populate from videoArray?
+        }
+    });
 }
