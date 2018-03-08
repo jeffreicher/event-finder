@@ -348,7 +348,7 @@ function updateEventsLists(data_object) {
     var img = $('<td>');
     var name = $('<td>').text(data_object.name);
     var location = $('<td>').text(data_object.location);
-    var date = $('<td>').text(data_object.date);  
+    var date = $('<td>').text(data_object.date);
     var tr =  $('<tr>',{
       class: 'row',
       onclick: ''
