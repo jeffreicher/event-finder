@@ -345,7 +345,11 @@ function updateEventsLists(data_object) {
     var name = $('<td>').text(data_object.name);
     var location = $('<td>').text(data_object.location);
     var date = $('<td>').text(data_object.date);  
-    var tr =  $('<tr>');     
+    var tr =  $('<tr>',{
+      class: 'row',
+      onclick: ''
+    })
+}
 
     // var tr_head =  $('<tr>');        
     // var th = $('<th>');
@@ -353,15 +357,15 @@ function updateEventsLists(data_object) {
     // var thead = $('<thead>');
     // var table = $('<table>').addClass('events-lists');
 
-      img.append(img_tag);   
-      tr.append(img, name, location, date);
-      $('tbody').append(tr);  
+      // img.append(img_tag);
+      // tr.append(img, name, location, date);
+      // $('tbody').append(tr);
     //   tr_head.append(th); 
     //   thead.append(tr_head);      
     //   tbody.append(tr);
     //   table.append()     
       
-}
+
 
 // function getPriceFromConcert() {
 //     for(var x=0; x<hiphop_array.length; x++){
