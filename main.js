@@ -17,6 +17,9 @@ var ticketPrice = [];
 var preformerNames =[];
 var videoIdArray = [];
 var videoPlayer;
+var ticketObject = {
+  ticketPrice: [],
+};
 /***************************************************************************************************
  * initializeApp
  * @params {undefined} none
@@ -36,6 +39,7 @@ function initializeApp() {
  */
 function addClickHandlersToElements() {
     $('.search-events').on('click', getDataFromTicketMaster);
+    $('.tr').on('click', sendDataToOtherSections);
 }
 
 function artistPictureDynamicCreation() {
@@ -46,10 +50,6 @@ function artistPictureDynamicCreation() {
     }
 }
 function flickrImages(){
-
-    // var flickrImages = {
-    //     [img src =
-    // } ]}
     var flickr_pic = $('<img>');
     //https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
     var img_src = "https://farm" + response_dummy.photos.photo[0].farm + ".staticflickr.com/" +   response_dummy.photos.photo[0].server + "/" + response_dummy.photos.photo[0].id +"_" + response_dummy.photos.photo[0].secret + ".jpg";
@@ -248,8 +248,6 @@ function flickrLoop() {
 };
 
 
-
-
 function populateEventInformation(data_object) {
     //after button pressed, the data from the event that was pressed will be pulled into this function to be populated onto the DOM.
 };
@@ -276,6 +274,7 @@ function getArtistFromEvents() {
         }
         getArtistImages();
 }
+
 
 function loadVideo() {
     $.ajax({
@@ -404,3 +403,7 @@ function onYouTubeIframeAPIReady() {
     });
 }
 
+function sendDataToOtherSections(data_object) {
+    var name = $('.artists').text(data_object.name);
+    //how to make tr a clickable button that will send data to the other areas in web page?
+}
