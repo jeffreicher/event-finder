@@ -11,6 +11,9 @@ var events_array = [];
 var artistInfo = [];
 var artistImg = [];
 var concertVenues = [];
+
+var ticketPrice = [];
+var preformerNames =[];
 var videoIdArray = [];
 var videoPlayer;
 /***************************************************************************************************
@@ -19,10 +22,12 @@ var videoPlayer;
  * @returns: {undefined} none
  * initializes the application, including adding click handlers and pulling in any data from the server, in later versions
  */
-function initializeApp(){
+function initializeApp() {
     addClickHandlersToElements();
-    createPlayer();
     loadVideo();  
+    // artistPictureDynamicCreation();
+    createPlayer();
+    loadVideo();
 }
 
 /***************************************************************************************************
@@ -30,9 +35,17 @@ function initializeApp(){
  * @params {undefined}
  * @returns  {undefined}
  */
-function addClickHandlersToElements(){
+function addClickHandlersToElements() {
     $('.search-events').on('click', getDataFromTicketMaster);
 }
+
+// function artistPictureDynamicCreation() {
+//     for(var i = 0; i<artistImg[1].length; i++){
+//         var container = $(".left-bottom-col-3");
+//         var imgContainer = $("<div>").append(artistImg[i][i]);
+//         imgContainer.appendTo(container);
+//     }
+// }
 function flickrImages(){
 
     // var flickrImages = {
@@ -82,19 +95,118 @@ var response_dummy =
 *     
 */
 
-function getDataFromTicketMaster () {
+// function flickrImages() {
+//     var venue = "hollywood palladium venue outside";
+//     var search_url = 'https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=555bbd6b607a0ffb10da03124b8906b6&format=json&nojsoncallback=1&text=' + venue;
+//
+//     $.ajax({
+//         dataType: 'json',
+//         method: 'get',
+//         url: search_url,
+//         data: {
+//             'api_key': '555bbd6b607a0ffb10da03124b8906b6'
+//         },
+//         success: function (response) {
+//
+//             error: function (response) {
+//                 console.log(response);
+//             }
+//         });
+//
+//     //https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
+//
+//
+// }
+
+function flickrLoop() {
+    var venueImages =
+        {
+            "photos": {
+                "photo": [
+                    {
+                        "id": "27020496362",
+                        "owner": "94467141@N00",
+                        "secret": "32cb198536",
+                        "server": "7070",
+                        "farm": 8,
+                        "title": "Stevie Nicks and Dave Grohl, ladies...",
+                        "ispublic": 1,
+                        "isfriend": 0,
+                        "isfamily": 0
+                    },
+                    {
+                        "id": "30198250325",
+                        "owner": "100899330@N03",
+                        "secret": "a09725a645",
+                        "server": "5562",
+                        "farm": 6,
+                        "title": "Pre-Show",
+                        "ispublic": 1,
+                        "isfriend": 0,
+                        "isfamily": 0
+                    },
+                    {
+                        "id": "22592033217",
+                        "owner": "58112562@N00",
+                        "secret": "9700cbbcc0",
+                        "server": "5689",
+                        "farm": 6,
+                        "title": "City National Civic",
+                        "ispublic": 1,
+                        "isfriend": 0,
+                        "isfamily": 0
+                    },
+                    {
+                        "id": "35489133763",
+                        "owner": "7948216@N05",
+                        "secret": "9c28d0e767",
+                        "server": "4303",
+                        "farm": 5,
+                        "title": "07-22-2017 Berkeley, CA - Greek Theatre",
+                        "ispublic": 1,
+                        "isfriend": 0,
+                        "isfamily": 0
+                    },
+                    {
+                        "id": "31142080295",
+                        "owner": "34457978@N00",
+                        "secret": "5b455ec238",
+                        "server": "5764",
+                        "farm": 6,
+                        "title": "Fox Theater (Oakland)",
+                        "ispublic": 1,
+                        "isfriend": 0,
+                        "isfamily": 0
+                    }
+
+                ]
+            }
+
+        };
+
+    for(var i = 0; i < venueImages.photos.photo.length; i++){
+        console.log(venueImages.photos.photo[i]);
+        var img_src = "https://farm" + venueImages.photos.photo[i].farm + ".staticflickr.com/" + venueImages.photos.photo[i].server + "/" + venueImages.photos.photo[i].id + "_" + venueImages.photos.photo[i].secret + ".jpg";
+        // flickr_pic.attr("src", img_src);
+       var one_image= $('<img>').attr("src", img_src);
+        $("#venues").append(one_image);
+    }
+};
+
+
+function getDataFromTicketMaster() {
     var keyword = $('#genre')[0];
     keyword = keyword.options[keyword.selectedIndex].value;
     console.log(keyword);
 
     $.ajax({
         type: "GET",
-        url: "https://app.ticketmaster.com/discovery/v2/events?apikey=tBBObsl2YtXpvAceOW6DOKwRtZpd8bxd&keyword="+keyword+"&countryCode=US&stateCode=Ca",
+        url: "https://app.ticketmaster.com/discovery/v2/events?apikey=tBBObsl2YtXpvAceOW6DOKwRtZpd8bxd&keyword=" + keyword + "&countryCode=US&stateCode=Ca",
         dataType: "text",
         success: function (json_data) {
             var data = JSON.parse(json_data);
             console.log(data);
-            for(var i =0; i < data._embedded.events.length; i++){
+            for (var i = 0; i < data._embedded.events.length; i++) {
                 var fesivalObjects = data._embedded.events[i];
                 //events_array.push(fesivalObjects);
 
@@ -119,6 +231,38 @@ function getDataFromTicketMaster () {
     });
 }
 
+function getArtistFromEvents() {
+    for (var i = 0; i < hiphop_array.length; i++) {
+        var attraction = hiphop_array[i]._embedded.attractions;
+        artistInfo.push(attraction);
+        var venue = hiphop_array[i]._embedded.venues[0].name;
+        concertVenues.push(venue);
+    }
+    getArtistImages();
+}
+
+function getArtistImages() {
+    for (var i = 0; i < artistInfo.length; i++) {
+        var artistImgArray = [];
+
+        var names = hiphop_array[i]._embedded.attractions[0].name;
+        preformerNames.push(names)
+        }
+    getArtistImages();
+}
+
+function getArtistImages () {
+    for (var i = 0; i < artistInfo.length; i++) {
+        var artistImgArray = [];
+        for (var x = 0; x < artistInfo[i].length; x++) {
+            var artistUrl = artistInfo[i][x].images[0].url;
+            artistImgArray.push(artistUrl);
+        }
+        artistImg.push(artistImgArray);
+    }
+}
+    // getPriceFromConcert()
+
 // function getArtistFromEvents() {
 //     for(var i=0; i<events_array.length; i++){
 //         var attraction = events_array[i]._embedded.attractions;
@@ -128,37 +272,6 @@ function getDataFromTicketMaster () {
 //         }
 //         getArtistImages();
 // }
-
-// function getArtistImages (){
-//     for(var i=0; i<artistInfo.length; i++){
-//         var artistImgArray = [];
-//         for(var x=0; x<artistInfo[i].length; x++){
-//             var artistUrl = artistInfo[i][x].images[0].url;
-//             artistImgArray.push(artistUrl);
-//             }
-//         artistImg.push(artistImgArray);
-//         }
-// }
-
-
-function updateEventsLists(data_object){
-    console.log(data_object);
-    //debugger;
-    var get_img = data_object.img;
-    var img_tag = $('<img>').attr('src', get_img).css('width','100px');
-    var img = $('<td>');
-    var name = $('<td>').text(data_object.name);
-    var location = $('<td>').text(data_object.location);
-    var date = $('<td>').text(data_object.date);       
-    var tr =  $('<tr>');      
-    
-      img.append(img_tag);   
-      tr.append(img, name, location, date);           
-      $('tbody').append(tr);  
-
-      
-}
-
 
 function loadVideo() {
     $.ajax({
@@ -176,13 +289,65 @@ function loadVideo() {
                 console.log('success', response);
                 for ( var i = 0; i < response.video.length; i++) {
                     videoIdArray.push(response.video[i].id);
-                }                
+                }     
+                createPlayer(); 
+            }
+        }
+    });
+}
+
+function updateEventsLists(data_object) {
+    console.log(data_object);
+    //debugger;
+    var get_img = data_object.img;
+    var img_tag = $('<img>').attr('src', get_img).css('width', '100px');
+    var img = $('<td>');
+    var name = $('<td>').text(data_object.name);
+    var location = $('<td>').text(data_object.location);
+    var date = $('<td>').text(data_object.date);       
+    var tr =  $('<tr>');      
+    
+      img.append(img_tag);   
+      tr.append(img, name, location, date);           
+      $('tbody').append(tr);  
+
+      
+}
+
+// function getPriceFromConcert() {
+//     for(var x=0; x<hiphop_array.length; x++){
+//         var priceArray = [];
+//         var minPrice = hiphop_array[x].priceRanges;
+//         var maxPrice = hiphop_array[x].priceRanges;
+//         priceArray.push(minPrice,maxPrice);
+//         ticketPrice.push(priceArray);
+//     }
+//     getArtistImages();
+// }
+
+function loadVideo() {
+    $.ajax({
+        dataType: 'json',
+        data: {
+            api_key: 'IkLZGbSrRC',
+            q: 'drake live set',
+            maxResults: 5,
+            type: 'video'
+        },
+        method: 'POST',
+        url: 'https://s-apis.learningfuze.com/hackathon/youtube/search.php',
+        success: function (response) {
+            if (response.success) {
+                console.log('success', response);
+                for (var i = 0; i < response.video.length; i++) {
+                    videoIdArray.push(response.video[i].id);
+                }
             }
         }
     })
-};
+}
 
-    //Loads IFrame Player API asynchronously
+//Loads IFrame Player API asynchronously
 function createPlayer() {
     var tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
@@ -199,10 +364,11 @@ function onYouTubeIframeAPIReady() {
         height: '345',
         width: '530',
         videoId: videoIdArray[0],
-        playerVars: { 
+        playerVars: {
             'autoplay': 1,
             'start': 1,
             // 'playlist': 'Q8sa_3oHYEc, YnwsMEabmSo, MOpcEayO1Yw', how do I make this populate from videoArray?
         }
     });
 }
+
