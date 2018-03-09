@@ -30,7 +30,7 @@ var ticketObject = {
  */
 function initializeApp() {
     addClickHandlersToElements();
-    $('.secondScreen').addClass('hidden');
+
     createPlayer();
     // loadVideo();
     // artistPictureDynamicCreation();
@@ -44,6 +44,7 @@ function initializeApp() {
 function addClickHandlersToElements() {
     $('.search-events').on('click', getDataFromTicketMaster);
     $('.backButton').on('click', backButtonActions);
+    $('.secondScreen').addClass('hidden');
     // $('.row').on('click', sendDataToOtherSections);
 }
 function artistPictureDynamicCreation() {
@@ -441,7 +442,7 @@ function onYouTubeIframeAPIReady() {
     videoPlayer = new YT.Player('player', {
         height: '345',
         width: '530',
-        videoId: 'Uem47H8idwk',//videoIdArray[0],
+        videoId: 'L6c_mYQ9LaM',//videoIdArray[0],
         playerVars: {
             'autoplay': 1,
             'start': 1
@@ -470,7 +471,7 @@ function sendDataToOtherSections(eventId,object) {
                 $(".artists").append("Name: " + events_array[i].name);
                 $(".venue").append("Location: " + events_array[i].location);
                 $(".date").append("Date: " + events_array[i].date);
-                $(".tickets").append("Ticket-Price: " + events_array[i].url);
+                $(".tickets").append("Ticket-URL " + events_array[i].url);
                 $('.secondScreen').removeClass('hidden');
                 $('.firstScreen').addClass('hidden');
                 $('.events-lists').addClass('hidden'); 
@@ -493,10 +494,5 @@ function backButtonActions() {
     $('.secondHeader h1, #img-1, #img-2, #img-3, #img-4, .artists, .venue, .date, .tickets').empty();
     $('.secondScreen').addClass('hidden');
     $('.events-lists, .firstScreen').removeClass('hidden');
-<<<<<<< HEAD
-};
-
-=======
     $('.search-events').prop('disabled',false);
 }
->>>>>>> ef4431ca0e1439c4994362b1b304b743702019d1
