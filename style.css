@@ -136,7 +136,6 @@ button.search-events:hover, .row:hover, .backButton:hover {
     position: absolute;
     width: 62.5%;
     height: 100%;
-    border: 2px black solid;
 }
 .secondHeader {
     display: flex;
@@ -148,7 +147,6 @@ button.search-events:hover, .row:hover, .backButton:hover {
     border-radius: 5%;
     width: 55%;
     height: 50%;
-    border: 2px solid black;
     margin: auto;   
     margin-top: 1%;
     margin-bottom: 4%;
