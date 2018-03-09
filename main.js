@@ -407,13 +407,6 @@ function updateEventsLists(events_array) {
             "data-event": events_array[i].id,
             on: { 
                 click:function() {
-<<<<<<< HEAD
-                   //debugger;
-=======
-                    events_array = [];
-                    events_array1 = [];
-                    // $("#player").remove();
->>>>>>> e4c9c0f9a81339d7723e24b4e8529af173114e23
                     var eventId = $(this).attr('data-event');
                     sendDataToOtherSections(eventId,this);
                 },          
