@@ -31,6 +31,7 @@ var ticketObject = {
 function initializeApp() {
     addClickHandlersToElements();
     $('.secondScreen').addClass('hidden');
+    createPlayer();
     // loadVideo();
     // artistPictureDynamicCreation();
 }
@@ -265,7 +266,7 @@ function flickrLoop(venueLocation) {
         "The Pacific Amphitheatre": "",
         "Pechanga Resort and Casino": "",
         "William Saroyan Theatre Fresno Convention & Entertainment Center": ""
-    }
+    };
 
     var locationId = refList[venueLocation];
 
@@ -287,11 +288,11 @@ function displayImage(venueImage){
     $('.secondScreen').css('display', 'block');
 };
 
-function populateEventInformation(data_object) {
-    //after button pressed, the data from the event that was pressed will be pulled into this function to be populated onto the DOM.
-};
+// function populateEventInformation(data_object) {
+//     //after button pressed, the data from the event that was pressed will be pulled into this function to be populated onto the DOM.
+// };
 
-
+//Keaton
 function getArtistImages () {
     for (var i = 0; i < artistInfo.length; i++) {
         var artistImgArray = [];
@@ -303,7 +304,7 @@ function getArtistImages () {
     }
 }
 
-
+//keaton
 function getArtistFromEvents() {
     for(var i=0; i<events_array1.length; i++){
         var attraction = events_array1[i]._embedded.attractions;
@@ -338,6 +339,7 @@ function loadVideo(name) {
         }
     });
 }
+//keaton
 function getDataFromTicketMaster() {
     var keyword = $('#genre')[0];
     keyword = keyword.options[keyword.selectedIndex].value;
@@ -386,7 +388,9 @@ function getDataFromTicketMaster() {
         }
     });
 }
-
+//Creating jQuery dom table and appeanded it to the Dom;
+//On click function sends data to "sendDataToOtherSections" so we can use the data for the right stats bar
+//
 function updateEventsLists(events_array) {
     var tbody = $('<tbody>').addClass('table-content');   
     var table = $('<table>').addClass('events-lists');  
@@ -485,7 +489,7 @@ function sendDataToOtherSections(eventId,object) {
                 $('.secondScreen').removeClass('hidden');
                 $('.firstScreen').addClass('hidden');
                 $('.events-lists').addClass('hidden'); 
-                flickrLoop(events_array[i].location);
+                // flickrLoop(events_array[i].location);
                 loadVideo(events_array[i].name);
             }
         }
