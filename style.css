@@ -214,8 +214,21 @@ thead > tr > th{
 .event-info > div {
     width: 100%;
     border: #ccc 1px solid;
-    margin: 3% 0;
+    margin: 6px 0;
     padding: 8px;
+    color: #555555;
+}
+.event-info .event-info-header{
+    border: none;
+    margin: 20px 0px 10px;
+    color: #13547a;
+    font-size: 1.6em;
+    font-weight: 700;
+    padding: 0;
+}
+
+[contentEditable=true]:empty:not(:focus):before{
+    content:attr(data-text)
 }
 
 .hidden {

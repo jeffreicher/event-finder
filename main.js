@@ -30,6 +30,7 @@ var ticketObject = {
  */
 function initializeApp() {
     addClickHandlersToElements();
+    createPlayer();
     // loadVideo();
     // artistPictureDynamicCreation();
 }
@@ -328,11 +329,12 @@ function loadVideo(name) {
         url: 'https://s-apis.learningfuze.com/hackathon/youtube/search.php',
         success: function(response){
             if(response.success){
+                videoIdArray=[];
                 console.log('success', response);
                 for ( var i = 0; i < response.video.length; i++) {
                     videoIdArray.push(response.video[i].id);
-                }     
-                createPlayer(); 
+                }
+                changePlayer(videoIdArray[0]);
             }
         }
     });
@@ -346,12 +348,12 @@ function getDataFromTicketMaster() {
         url: "https://app.ticketmaster.com/discovery/v2/events?apikey=tBBObsl2YtXpvAceOW6DOKwRtZpd8bxd&keyword=" + keyword + "&countryCode=US&stateCode=Ca",
         dataType: "text",
         success: function (json_data) {
-            debugger;
             var data = JSON.parse(json_data);
             console.log(data);
             for (var i = 0; i < data._embedded.events.length; i++) {
                 var fesivalObjects = data._embedded.events[i];
                 events_array1.push(fesivalObjects);
+                debugger;
                 data_object = {
                     img: data._embedded.events[i].images[0].url,
                     img2: data._embedded.events[i].images[1].url,
@@ -361,6 +363,7 @@ function getDataFromTicketMaster() {
                     location: data._embedded.events[i]._embedded.venues[0].name,
                     date: data._embedded.events[i].dates.start.localDate,
                     id:data._embedded.events[i].id,
+                    url: data._embedded.events[i].url,
                    // ticketPrice: data._embedded.events[i].priceRanges[0].max
 
                   };
@@ -439,7 +442,6 @@ function updateEventsLists(events_array) {
 
 //Loads IFrame Player API asynchronously
 function createPlayer() {
-    debugger;
     var tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
     var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -451,13 +453,16 @@ function onYouTubeIframeAPIReady() {
     videoPlayer = new YT.Player('player', {
         height: '345',
         width: '530',
-        videoId: videoIdArray[0],
+        videoId: 'Uem47H8idwk',//videoIdArray[0],
         playerVars: {
             // 'autoplay': 1,
             'start': 1
             // 'playlist': 'Q8sa_3oHYEc, YnwsMEabmSo, MOpcEayO1Yw', how do I make this populate from videoArray?
         }
     });
+}
+function changePlayer(newID){
+    videoPlayer.a.src = 'https://www.youtube.com/embed/'+newID+'?start=1';
 }
 function sendDataToOtherSections(eventId,object) {
 
@@ -481,7 +486,7 @@ function sendDataToOtherSections(eventId,object) {
                 $(".artists").append("Name: " + events_array[i].name);
                 $(".venue").append("Location: " + events_array[i].location);
                 $(".date").append("Date: " + events_array[i].date);
-                $(".tickets").append("Ticket-Price: " + events_array[i].ticketPrice);
+                $(".tickets").append("Ticket-Price: " + events_array[i].url);
                 $('.secondScreen').removeClass('hidden');
                 $('.firstScreen').addClass('hidden');
                 $('.events-lists').addClass('hidden'); 
