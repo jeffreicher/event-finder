@@ -407,13 +407,6 @@ function updateEventsLists(events_array) {
             "data-event": events_array[i].id,
             on: { 
                 click:function() {
-<<<<<<< HEAD
-                   //debugger;
-=======
-                    events_array = [];
-                    events_array1 = [];
-                    // $("#player").remove();
->>>>>>> e4c9c0f9a81339d7723e24b4e8529af173114e23
                     var eventId = $(this).attr('data-event');
                     sendDataToOtherSections(eventId,this);
                 },          
@@ -452,7 +445,7 @@ function onYouTubeIframeAPIReady() {
     videoPlayer = new YT.Player('player', {
         height: '345',
         width: '530',
-        videoId: 'Uem47H8idwk',//videoIdArray[0],
+        videoId: 'L6c_mYQ9LaM',//videoIdArray[0],
         playerVars: {
             'autoplay': 1,
             'start': 1
@@ -481,7 +474,7 @@ function sendDataToOtherSections(eventId,object) {
                 $(".artists").append("Name: " + events_array[i].name);
                 $(".venue").append("Location: " + events_array[i].location);
                 $(".date").append("Date: " + events_array[i].date);
-                $(".tickets").append("Ticket-Price: " + events_array[i].url);
+                $(".tickets").append("Ticket-URL " + events_array[i].url);
                 $('.secondScreen').removeClass('hidden');
                 $('.firstScreen').addClass('hidden');
                 $('.events-lists').addClass('hidden'); 
