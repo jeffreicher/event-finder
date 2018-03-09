@@ -283,7 +283,7 @@ function flickrLoop(venueLocation) {
 function displayImage(venueImage){
     var img_src = "https://farm" + venueImage.farm + ".staticflickr.com/" + venueImage.server + "/" + venueImage.id + "_" + venueImage.secret + ".jpg";
     console.log(img_src);
-    var one_image= $('<img>').attr("src", img_src);
+    var one_image= $('<img>').attr("src", img_src).addClass('venueImages');
     $('.secondScreenTopContainer').empty().append(one_image);
     $('.firstScreen').css('display', 'none');
     $('.secondScreen').css('display', 'block');
