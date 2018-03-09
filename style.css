@@ -156,6 +156,7 @@ button.search-events:hover, .row:hover, .backButton:hover {
     border-radius: 5%;
     height: 100%;
     width: 100%;
+    margin-top: 2%;
 }
 
 /*.venueImages{*/
