@@ -82,7 +82,11 @@ select#genre {
     padding: 11px 25px;
     border: none;
     font-size: inherit;
-    background-position: 97% center;
+    background-position: 97% center;    
+}
+
+button.search-events:hover, .row:hover, .backButton:hover {
+    cursor: pointer;
 }
 
 #container{
@@ -146,12 +150,13 @@ select#genre {
     height: 50%;
     border: 2px solid black;
     margin: auto;   
-    margin-top: 4%;
+    margin-top: 1%;
 }
 .bottomContainer {
     height: 100%;
     width: 100%;
     display: flex;
+    margin-top: 2%;
 }
 .secondScreenBottomContainer{
     border-radius: 50%;
@@ -252,9 +257,7 @@ thead > tr > th{
 .backButton {
     font-size: 4vh;
     margin-left: 2.5%;
-    font-size: 5em;
 }
-
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {

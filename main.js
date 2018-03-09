@@ -30,6 +30,7 @@ var ticketObject = {
  */
 function initializeApp() {
     addClickHandlersToElements();
+    $('.secondScreen').addClass('hidden');
     // loadVideo();
     // artistPictureDynamicCreation();
 }
@@ -41,12 +42,9 @@ function initializeApp() {
  */
 function addClickHandlersToElements() {
     $('.search-events').on('click', getDataFromTicketMaster);
-    $('.secondScreen').addClass('hidden');
     $('.backButton').on('click', backButtonActions);
-    
     // $('.row').on('click', sendDataToOtherSections);
 }
-
 function artistPictureDynamicCreation() {
     for(var i = 0; i<artistImg[1].length; i++){
         var container = $(".left-bottom-col-3");
@@ -330,11 +328,12 @@ function loadVideo(name) {
         url: 'https://s-apis.learningfuze.com/hackathon/youtube/search.php',
         success: function(response){
             if(response.success){
+                videoIdArray=[];
                 console.log('success', response);
                 for ( var i = 0; i < response.video.length; i++) {
                     videoIdArray.push(response.video[i].id);
-                }     
-                createPlayer(); 
+                }
+                changePlayer(videoIdArray[0]);
             }
         }
     });
@@ -353,6 +352,7 @@ function getDataFromTicketMaster() {
             for (var i = 0; i < data._embedded.events.length; i++) {
                 var fesivalObjects = data._embedded.events[i];
                 events_array1.push(fesivalObjects);
+                debugger;
                 data_object = {
                     img: data._embedded.events[i].images[0].url,
                     img2: data._embedded.events[i].images[1].url,
@@ -360,12 +360,19 @@ function getDataFromTicketMaster() {
                     img4: data._embedded.events[i].images[3].url,
                     name: data._embedded.events[i].name,
                     location: data._embedded.events[i]._embedded.venues[0].name,
-                    date: data._embedded.events[i].dates.start.dateTime,
+                    date: data._embedded.events[i].dates.start.localDate,
                     id:data._embedded.events[i].id,
+                    url: data._embedded.events[i].url,
                    // ticketPrice: data._embedded.events[i].priceRanges[0].max
 
                   };
-                  events_array.push(data_object);                  
+                if(events_array.length > 20){
+                    events_array = [];
+                    $(".events-lists").remove();
+                    events_array.push(data_object);
+                } else {
+                    events_array.push(data_object);
+                }
                  
             }           
             updateEventsLists(events_array);
@@ -396,7 +403,13 @@ function updateEventsLists(events_array) {
             "data-event": events_array[i].id,
             on: { 
                 click:function() {
+<<<<<<< HEAD
                    //debugger;
+=======
+                    events_array = [];
+                    events_array1 = [];
+                    // $("#player").remove();
+>>>>>>> e4c9c0f9a81339d7723e24b4e8529af173114e23
                     var eventId = $(this).attr('data-event');
                     sendDataToOtherSections(eventId,this);
                 },          
@@ -435,22 +448,28 @@ function onYouTubeIframeAPIReady() {
     videoPlayer = new YT.Player('player', {
         height: '345',
         width: '530',
-        videoId: videoIdArray[0],
+        videoId: 'Uem47H8idwk',//videoIdArray[0],
         playerVars: {
-            // 'autoplay': 1,
+            'autoplay': 1,
             'start': 1
             // 'playlist': 'Q8sa_3oHYEc, YnwsMEabmSo, MOpcEayO1Yw', how do I make this populate from videoArray?
         }
     });
 }
+function changePlayer(newID){
+    videoPlayer.a.src = 'https://www.youtube.com/embed/'+newID+'?start=1';
+}
 function sendDataToOtherSections(eventId,object) {
     console.log(object);
-
+    $('.search-events').prop('disabled',true);
 
     // $("#player").empty();
     for (var i = 0; i < events_array.length; i++) {
             if(eventId === events_array[i].id) {      
-                $(".secondHeader h1").append(events_array[i].name).addClass('secondHeader');       
+                $(".secondHeader h1").append(events_array[i].name).addClass('secondHeader');  
+                // for (var artist_i=0; artist_i<artistImg[i].length; artist_i++){
+                //     $("#img-" + (artist_i+1) ).append($("<img>").attr('src', artistImg[i][artist_i]).addClass('artistImages'));
+                // }    //code to dynamically add photos so that the photo lines are gone.  
                 $("#img-1").append($("<img>").attr('src', artistImg[i][0]).addClass('artistImages'));
                 $("#img-2").append($("<img>").attr('src', artistImg[i][1]).addClass('artistImages'));
                 $("#img-3").append($("<img>").attr('src', artistImg[i][2]).addClass('artistImages'));
@@ -458,11 +477,11 @@ function sendDataToOtherSections(eventId,object) {
                 $(".artists").append("Name: " + events_array[i].name);
                 $(".venue").append("Location: " + events_array[i].location);
                 $(".date").append("Date: " + events_array[i].date);
-                $(".tickets").append("Ticket-Price: " + events_array[i].ticketPrice);
+                $(".tickets").append("Ticket-Price: " + events_array[i].url);
                 $('.secondScreen').removeClass('hidden');
                 $('.firstScreen').addClass('hidden');
                 $('.events-lists').addClass('hidden'); 
-                // flickrLoop(events_array[i].location);
+                flickrLoop(events_array[i].location);
                 loadVideo(events_array[i].name);
             }
         }
@@ -481,5 +500,6 @@ function backButtonActions() {
     $('.secondHeader h1, #img-1, #img-2, #img-3, #img-4, .artists, .venue, .date, .tickets').empty();
     $('.secondScreen').addClass('hidden');
     $('.events-lists, .firstScreen').removeClass('hidden');
+    $('.search-events').prop('disabled',false);
 
 }
