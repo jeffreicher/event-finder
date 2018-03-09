@@ -31,6 +31,7 @@ var ticketObject = {
 function initializeApp() {
     addClickHandlersToElements();
     $('.secondScreen').addClass('hidden');
+    createPlayer();
     // loadVideo();
     // artistPictureDynamicCreation();
 }
@@ -485,7 +486,7 @@ function sendDataToOtherSections(eventId,object) {
                 $('.secondScreen').removeClass('hidden');
                 $('.firstScreen').addClass('hidden');
                 $('.events-lists').addClass('hidden'); 
-                flickrLoop(events_array[i].location);
+                // flickrLoop(events_array[i].location);
                 loadVideo(events_array[i].name);
             }
         }
@@ -505,5 +506,4 @@ function backButtonActions() {
     $('.secondScreen').addClass('hidden');
     $('.events-lists, .firstScreen').removeClass('hidden');
     $('.search-events').prop('disabled',false);
-
 }
