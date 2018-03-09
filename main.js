@@ -199,6 +199,42 @@ function flickrLoop(venueLocation) {
                         "isfriend": 0,
                         "isfamily": 0
                     },
+                    // Fivepoint Amphitheatre
+                    {
+                        "id": "36211111392",
+                        "owner": "21024152@N05",
+                        "secret": "f727e98a93",
+                        "server": "4422",
+                        "farm": 5,
+                        "title": "KISS 2000 at Irvine Meadows Amphitheater",
+                        "ispublic": 1,
+                        "isfriend": 0,
+                        "isfamily": 0
+                    },
+                    // Shoreline Amphitheatre
+                    {
+                        "id": "39379605704",
+                        "owner": "133744508@N06",
+                        "secret": "a49c8b8f13",
+                        "server": "4602",
+                        "farm": 5,
+                        "title": "Shoreline Amphitheatre.",
+                        "ispublic": 1,
+                        "isfriend": 0,
+                        "isfamily": 0
+                    },
+                    // Toyota Amphitheatre
+                    {
+                        "id": "27191296995",
+                        "owner": "141266836@N08",
+                        "secret": "f419ebe08a",
+                        "server": "7259",
+                        "farm": 8,
+                        "title": "Toyota Amphitheatre",
+                        "ispublic": 1,
+                        "isfriend": 0,
+                        "isfamily": 0
+                    }
                 ]
             }
 
@@ -206,16 +242,29 @@ function flickrLoop(venueLocation) {
 
     var refList = {
         "Mattress Firm Amphitheatre": "37522480132",
-        "The Observatory": "22927627330",
+        "Mattress Firm Amphitheatre (Formerly Sleep Train Amphitheatre)": "37522480132",
+        "The Observatory - Santa Ana": "22927627330",
         "Teragram Ballroom": "30043253042",
-        "KovZpZAEA67A": "8040060204",
-        "KovZpZA1enFA": "4484999982",
-        "Fox Theater": "31142080295",
-        "KovZpZAFadlA": "35489133763",
-        "KovZpZAJk71A": "22592033217",
+        "House of Blues Anaheim": "8040060204",
+        "Mezzanine": "4484999982",
+        "Fox Theater - Oakland": "31142080295",
+        "Greek Theatre-U.C. Berkeley": "35489133763",
+        "Greek Theatre": "35489133763",
+        "City National Civic": "22592033217",
         "Bill Graham Civic Auditorium": "30479561483",
         "Hollywood Palladium": "27020496362",
-        "Hollywood Pantages Theater": "31084523390"
+        "Hollywood Pantages Theatre": "31084523390",
+        "FivePoint Amphitheatre": "36211111392",
+        "Shoreline Amphitheatre": "39379605704",
+        "Toyota Amphitheatre": "27191296995",
+        "Copper Blues Oxnard Resturant": "",
+        "Dodger Stadium": "",
+        "Save Mart Center": "",
+        "Honda Center": "",
+        "The Forum": "",
+        "The Pacific Amphitheatre": "",
+        "Pechanga Resort and Casino": "",
+        "William Saroyan Theatre Fresno Convention & Entertainment Center": ""
     }
 
     var locationId = refList[venueLocation];
@@ -223,7 +272,6 @@ function flickrLoop(venueLocation) {
     for(var i = 0; i < venueImages.photos.photo.length; i++){
         if(venueImages.photos.photo[i].id === locationId){
             displayImage(venueImages.photos.photo[i]);
-            alert(venueImages.photos.photo[i].id);
         }
     };
 
@@ -313,7 +361,8 @@ function getDataFromTicketMaster() {
                     location: data._embedded.events[i]._embedded.venues[0].name,
                     date: data._embedded.events[i].dates.start.localDate,
                     id:data._embedded.events[i].id,
-                    // ticketPrice: data._embedded.events[i].priceRanges[0].max
+                   // ticketPrice: data._embedded.events[i].priceRanges[0].max
+
                   };
                 if(events_array.length > 20){
                     events_array = [];
@@ -373,7 +422,7 @@ function updateEventsLists(events_array) {
         tbody.append(tr);
     }        
        table.append(thead, tbody);
-      $('.firstScreen').prepend(table);
+      $('.left-col').prepend(table);
 
 }
 

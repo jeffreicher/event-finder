@@ -177,9 +177,17 @@ select#genre {
 .table-content > tr > td {
     border-bottom: 2px solid #ddd;
 }
+thead{
+    /* position: fixed; */
+    top:0;
+    width: 100%;
+    overflow: hidden;
+}
+
 thead > tr > th{
     padding:10px 0;
 }
+
 .event-info{
     display: flex;
     position: relative;
@@ -221,5 +229,54 @@ thead > tr > th{
 
 .secondHeader {
     text-align: center;
-    font-size: 2em;
+    font-size: 5em;
+}
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .drop-down {        
+        width: 100%;
+    }
+    select#genre {
+        width: 50%; 
+    }
+    button.search-events {
+        padding: 11px 16px;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .drop-down {        
+        width: 60%;
+    }
+    select#genre {
+        width: 60%; 
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .drop-down {        
+        width: 60%;
+    }
+    select#genre {
+        width: 60%; 
+    }
+} 
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .drop-down {        
+        width: 50%;
+    }
+    select#genre {
+        width: 50%; 
+    }
+} 
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+   
 }
