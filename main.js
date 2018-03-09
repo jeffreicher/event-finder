@@ -30,7 +30,7 @@ var ticketObject = {
  */
 function initializeApp() {
     addClickHandlersToElements();
-    $('.secondScreen').addClass('hidden');
+
     createPlayer();
     // loadVideo();
     // artistPictureDynamicCreation();
@@ -44,6 +44,7 @@ function initializeApp() {
 function addClickHandlersToElements() {
     $('.search-events').on('click', getDataFromTicketMaster);
     $('.backButton').on('click', backButtonActions);
+    $('.secondScreen').addClass('hidden');
     // $('.row').on('click', sendDataToOtherSections);
 }
 function artistPictureDynamicCreation() {
@@ -493,10 +494,5 @@ function backButtonActions() {
     $('.secondHeader h1, #img-1, #img-2, #img-3, #img-4, .artists, .venue, .date, .tickets').empty();
     $('.secondScreen').addClass('hidden');
     $('.events-lists, .firstScreen').removeClass('hidden');
-<<<<<<< HEAD
-};
-
-=======
     $('.search-events').prop('disabled',false);
 }
->>>>>>> ef4431ca0e1439c4994362b1b304b743702019d1
