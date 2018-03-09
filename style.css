@@ -151,7 +151,19 @@ button.search-events:hover, .row:hover, .backButton:hover {
     border: 2px solid black;
     margin: auto;   
     margin-top: 1%;
+    margin-bottom: 4%;
 }
+
+.venueImages{
+    border-radius: 5%;
+    height: 100%;
+    width: 100%;
+}
+
+/*.venueImages{*/
+    /*width: 100%;*/
+/*}*/
+
 .bottomContainer {
     height: 100%;
     width: 100%;
