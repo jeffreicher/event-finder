@@ -378,6 +378,7 @@ function getDataFromTicketMaster() {
                  
             }           
             updateEventsLists(events_array);
+            
         
         // Parse the response.
         // Do other things.
@@ -406,9 +407,13 @@ function updateEventsLists(events_array) {
             "data-event": events_array[i].id,
             on: { 
                 click:function() {
+<<<<<<< HEAD
+                   //debugger;
+=======
                     events_array = [];
                     events_array1 = [];
                     // $("#player").remove();
+>>>>>>> e4c9c0f9a81339d7723e24b4e8529af173114e23
                     var eventId = $(this).attr('data-event');
                     sendDataToOtherSections(eventId,this);
                 },          
@@ -430,18 +435,9 @@ function updateEventsLists(events_array) {
        table.append(thead, tbody);
       $('.left-col').prepend(table);
 
+     
 }
 
-// function getPriceFromConcert() {
-//     for(var x=0; x<hiphop_array.length; x++){
-//         var priceArray = [];
-//         var minPrice = hiphop_array[x].priceRanges;
-//         var maxPrice = hiphop_array[x].priceRanges;
-//         priceArray.push(minPrice,maxPrice);
-//         ticketPrice.push(priceArray);
-//     }
-//     getArtistImages();
-// }
 
 //Loads IFrame Player API asynchronously
 function createPlayer() {
@@ -509,5 +505,4 @@ function backButtonActions() {
     $('.secondScreen').addClass('hidden');
     $('.events-lists, .firstScreen').removeClass('hidden');
     $('.search-events').prop('disabled',false);
-
 }
