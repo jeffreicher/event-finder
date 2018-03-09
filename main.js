@@ -30,6 +30,7 @@ var ticketObject = {
  */
 function initializeApp() {
     addClickHandlersToElements();
+    $('.secondScreen').addClass('hidden');
     // loadVideo();
     // artistPictureDynamicCreation();
 }
@@ -41,7 +42,6 @@ function initializeApp() {
  */
 function addClickHandlersToElements() {
     $('.search-events').on('click', getDataFromTicketMaster);
-    $('.secondScreen').addClass('hidden');
     $('.backButton').on('click', backButtonActions);
     
     // $('.row').on('click', sendDataToOtherSections);
@@ -453,12 +453,15 @@ function onYouTubeIframeAPIReady() {
 }
 function sendDataToOtherSections(eventId,object) {
     console.log(object);
-
+    $('.search-events').prop('disabled',true);
 
     // $("#player").empty();
     for (var i = 0; i < events_array.length; i++) {
             if(eventId === events_array[i].id) {      
-                $(".secondHeader h1").append(events_array[i].name).addClass('secondHeader');       
+                $(".secondHeader h1").append(events_array[i].name).addClass('secondHeader');  
+                // for (var artist_i=0; artist_i<artistImg[i].length; artist_i++){
+                //     $("#img-" + (artist_i+1) ).append($("<img>").attr('src', artistImg[i][artist_i]).addClass('artistImages'));
+                // }    //code to dynamically add photos so that the photo lines are gone.  
                 $("#img-1").append($("<img>").attr('src', artistImg[i][0]).addClass('artistImages'));
                 $("#img-2").append($("<img>").attr('src', artistImg[i][1]).addClass('artistImages'));
                 $("#img-3").append($("<img>").attr('src', artistImg[i][2]).addClass('artistImages'));
@@ -470,7 +473,7 @@ function sendDataToOtherSections(eventId,object) {
                 $('.secondScreen').removeClass('hidden');
                 $('.firstScreen').addClass('hidden');
                 $('.events-lists').addClass('hidden'); 
-                // flickrLoop(events_array[i].location);
+                flickrLoop(events_array[i].location);
                 loadVideo(events_array[i].name);
             }
         }
@@ -489,5 +492,6 @@ function backButtonActions() {
     $('.secondHeader h1, #img-1, #img-2, #img-3, #img-4, .artists, .venue, .date, .tickets').empty();
     $('.secondScreen').addClass('hidden');
     $('.events-lists, .firstScreen').removeClass('hidden');
+    $('.search-events').prop('disabled',false);
 
 }
