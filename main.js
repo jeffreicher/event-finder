@@ -455,7 +455,7 @@ function onYouTubeIframeAPIReady() {
         width: '530',
         videoId: 'Uem47H8idwk',//videoIdArray[0],
         playerVars: {
-            // 'autoplay': 1,
+            'autoplay': 1,
             'start': 1
             // 'playlist': 'Q8sa_3oHYEc, YnwsMEabmSo, MOpcEayO1Yw', how do I make this populate from videoArray?
         }
