@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Lato|Roboto|Lobster|Shrikhand" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <script src="main.js"></script>
+    <title>Music Festival</title>    
+</head>
+<body>
+   <header>
+    <div class="logo">Music Concerts</div>
+   </header>
+   <div id="search">
+       <div class="drop-down">
+           <select name="genre" id="genre">
+               <option value="electronic">Electronic</option>
+               <option value="rock">Rock</option>
+               <option value="country">Country Music</option>
+           </select>
+           <button class="search-events">Search</button>
+       </div>
+    </div>
+   <div id="container">
+    <div class="left-col">
+
+
+        <div class="firstScreen">
+            <div class="news-1">
+            <h1>Latest Concert</h1>
+            <p>
+                As one of the most beloved electronic dance music artists today, Steve Aoki has worked alongside the likes Kid Cudi, Travis Barker, Chiddy Bang, Lil Jon, 
+                and many more to create hits like “No Beef,” “Boneless,” and “Beat Down.” Secure a spot at one of his dazzling shows by purchasing Steve Aoki tickets from the 
+                marketplace. 
+            </p>
+            <p>Find out more about <a href="http://www.steveaoki.com/news/" target="_blank">Steve Aoki</a>.</p>            
+                <img src="images/steveaoki-concert.jpg" alt="Steve Oaki">
+            </div>
+        </div>
+
+        <div class="secondScreen">
+            <div class="secondHeader">
+                <span class='backButton'><i class="far fa-caret-square-left"></i></span>
+                <h1></h1>
+            </div>
+            <div class="secondScreenTopContainer">POSTER</div>
+            <div class="bottomContainer">
+                <div class="secondScreenBottomContainer" id="img-1"></div>
+                <div class="secondScreenBottomContainer" id="img-2"></div>
+                <div class="secondScreenBottomContainer" id="img-3"></div>
+                <div class="secondScreenBottomContainer" id="img-4"></div>
+            </div>            
+        </div>
+        
+    </div>
+    <div class="right-col">
+        <div class="event-info">
+            <div class="event-info-header">Concert Information</div>
+            <div class="artists" contentEditable=true data-text="Artist"></div>
+            <div class="venue" contentEditable=true data-text="Location"></div>
+            <div class="date" contentEditable=true data-text="Date"></div>
+            <div class="time" contentEditable=true data-text="Time"></div>
+            <div class="tickets" contentEditable=true data-text="See Tickets"></div>
+        </div>
+        <div id="player"></div>
+    </div>
+   </div>
+</body>
+</html>
