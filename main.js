@@ -32,8 +32,6 @@ function initializeApp() {
     addClickHandlersToElements();
 
     createPlayer();
-    // loadVideo();
-    // artistPictureDynamicCreation();
 }
 
 /***************************************************************************************************
