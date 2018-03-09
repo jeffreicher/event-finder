@@ -32,8 +32,6 @@ function initializeApp() {
     addClickHandlersToElements();
 
     createPlayer();
-    // loadVideo();
-    // artistPictureDynamicCreation();
 }
 
 /***************************************************************************************************
@@ -45,7 +43,6 @@ function addClickHandlersToElements() {
     $('.search-events').on('click', getDataFromTicketMaster);
     $('.backButton').on('click', backButtonActions);
     $('.secondScreen').addClass('hidden');
-    // $('.row').on('click', sendDataToOtherSections);
 }
 function artistPictureDynamicCreation() {
     for(var i = 0; i<artistImg[1].length; i++){
@@ -57,7 +54,6 @@ function artistPictureDynamicCreation() {
 
 function flickrImages() {
     var flickr_pic = $('<img>');
-    //https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
     var img_src = "https://farm" + venueImages.photos.photo[0].farm + ".staticflickr.com/" + venueImages.photos.photo[0].server + "/" + venueImages.photos.photo[0].id + "_" + venueImages.photos.photo[0].secret + ".jpg";
     flickr_pic.attr("src", img_src);
 }
@@ -362,7 +358,6 @@ function getDataFromTicketMaster() {
                     date: data._embedded.events[i].dates.start.localDate,
                     id:data._embedded.events[i].id,
                     url: data._embedded.events[i].url,
-                   // ticketPrice: data._embedded.events[i].priceRanges[0].max
 
                   };
                 if(events_array.length > 20){
@@ -375,20 +370,13 @@ function getDataFromTicketMaster() {
                  
             }           
             updateEventsLists(events_array);
-            
-        
-        // Parse the response.
-        // Do other things.
+
             getArtistFromEvents();
         },
         error: function (xhr, status, err) {
-            // This time, we do not end up here!
         }
     });
 }
-//Creating jQuery dom table and appeanded it to the Dom;
-//On click function sends data to "sendDataToOtherSections" so we can use the data for the right stats bar
-//
 function updateEventsLists(events_array) {
     var tbody = $('<tbody>').addClass('table-content');   
     var table = $('<table>').addClass('events-lists');  
@@ -428,8 +416,6 @@ function updateEventsLists(events_array) {
      
 }
 
-
-//Loads IFrame Player API asynchronously
 function createPlayer() {
     var tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
@@ -437,33 +423,28 @@ function createPlayer() {
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 }
 
-//Function creates an <iframe> & Youtube player after API code downloads
 function onYouTubeIframeAPIReady() {
     videoPlayer = new YT.Player('player', {
         height: '345',
         width: '530',
-        videoId: 'L6c_mYQ9LaM',//videoIdArray[0],
+        videoId: 'L6c_mYQ9LaM',
         playerVars: {
             'autoplay': 1,
             'start': 1
-            // 'playlist': 'Q8sa_3oHYEc, YnwsMEabmSo, MOpcEayO1Yw', how do I make this populate from videoArray?
+
         }
     });
 }
 function changePlayer(newID){
     videoPlayer.a.src = 'https://www.youtube.com/embed/'+newID+'?start=1';
 }
+//keaton
 function sendDataToOtherSections(eventId,object) {
     console.log(object);
     $('.search-events').prop('disabled',true);
-
-    // $("#player").empty();
     for (var i = 0; i < events_array.length; i++) {
             if(eventId === events_array[i].id) {      
-                $(".secondHeader h1").append(events_array[i].name).addClass('secondHeader');  
-                // for (var artist_i=0; artist_i<artistImg[i].length; artist_i++){
-                //     $("#img-" + (artist_i+1) ).append($("<img>").attr('src', artistImg[i][artist_i]).addClass('artistImages'));
-                // }    //code to dynamically add photos so that the photo lines are gone.  
+                $(".secondHeader h1").append(events_array[i].name).addClass('secondHeader');
                 $("#img-1").append($("<img>").attr('src', artistImg[i][0]).addClass('artistImages'));
                 $("#img-2").append($("<img>").attr('src', artistImg[i][1]).addClass('artistImages'));
                 $("#img-3").append($("<img>").attr('src', artistImg[i][2]).addClass('artistImages'));
@@ -479,17 +460,9 @@ function sendDataToOtherSections(eventId,object) {
                 loadVideo(events_array[i].name);
             }
         }
-        // var venueInfoObject = object;
-        // var sideBarObject = {
-        // name: object.name,
-        // location: data_object.location,
-        //
-        // };
-    }
-    // var name = $('.artists').text(data_object.name);
 
-    // console.log(this)
-    //how to make tr a clickable button that will send data to the other areas in web page?
+    }
+
 function backButtonActions() {
     $('.secondHeader h1, #img-1, #img-2, #img-3, #img-4, .artists, .venue, .date, .tickets').empty();
     $('.secondScreen').addClass('hidden');
