@@ -132,9 +132,10 @@ select#genre {
     border: 2px black solid;
 }
 .secondHeader {
-    height: 8%;
+    display: flex;
+    justify-content: space-around;
     width: 100%;
-    border: 2px black solid;
+    margin-top: .5%
 }
 .secondScreenTopContainer{
     border-radius: 5%;
@@ -142,7 +143,7 @@ select#genre {
     height: 50%;
     border: 2px solid black;
     margin: auto;   
-    margin-top: 1%;
+    margin-top: 4%;
 }
 .bottomContainer {
     height: 100%;
@@ -240,8 +241,14 @@ thead > tr > th{
     border-radius: 50%;
 }
 
-.secondHeader {
+.secondHeader h1 {
     text-align: center;
+    font-size: 2em;
+}
+
+.backButton {
+    font-size: 4vh;
+    margin-left: 2.5%;
     font-size: 5em;
 }
 
