@@ -438,7 +438,7 @@ function loadVideo(name) {
 
 //changes the video played by changing the video Id
 function changePlayer(newID){
-    videoPlayer.a.src = 'https://www.youtube.com/embed/'+newID+'?start=1';
+    videoPlayer.a.src = 'https://www.youtube.com/embed/'+newID+'?autoplay=1&loop=1&controls=0&modestbranding=1';
 }
 //keaton
 function sendDataToOtherSections(eventId,object) {
