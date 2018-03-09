@@ -35,14 +35,18 @@ function initializeApp() {
 
 /***************************************************************************************************
  * addClickHandlersAndStylesToElements
- * @params {undefined}
- * @returns  {undefined}
+ * @params {undefined} none
+ * @returns  {undefined} none
+ * gives buttons function to execute when clicked, as well as adding a class to the hidden div
  */
+ 
 function addClickHandlersAndStylesToElements() {
     $('.search-events').on('click', getDataFromTicketMaster);
     $('.backButton').on('click', backButtonActions);
     $('.secondScreen').addClass('hidden');
 }
+
+
 function artistPictureDynamicCreation() {
     for(var i = 0; i<artistImg[1].length; i++){
         var container = $(".left-bottom-col-3");
@@ -272,17 +276,11 @@ function flickrLoop(venueLocation) {
 
 function displayImage(venueImage){
     var img_src = "https://farm" + venueImage.farm + ".staticflickr.com/" + venueImage.server + "/" + venueImage.id + "_" + venueImage.secret + ".jpg";
-    console.log(img_src);
-    debugger;
     var one_image= $('<img>').attr("src", img_src).addClass('venueImages');
     $('.secondScreenTopContainer').empty().append(one_image);
     $('.firstScreen').addClass('.hidden');
     $('.secondScreen').removeClass('.hidden');
 };
-
-// function populateEventInformation(data_object) {
-//     //after button pressed, the data from the event that was pressed will be pulled into this function to be populated onto the DOM.
-// };
 
 //Keaton
 function getArtistImages () {
