@@ -30,7 +30,6 @@ var ticketObject = {
  */
 function initializeApp() {
     addClickHandlersToElements();
-
     createPlayer();
 }
 
@@ -347,7 +346,6 @@ function getDataFromTicketMaster() {
             for (var i = 0; i < data._embedded.events.length; i++) {
                 var fesivalObjects = data._embedded.events[i];
                 events_array1.push(fesivalObjects);
-                debugger;
                 data_object = {
                     img: data._embedded.events[i].images[0].url,
                     img2: data._embedded.events[i].images[1].url,
@@ -412,8 +410,6 @@ function updateEventsLists(events_array) {
     }        
        table.append(thead, tbody);
       $('.left-col').prepend(table);
-
-     
 }
 
 function createPlayer() {
@@ -469,3 +465,4 @@ function backButtonActions() {
     $('.events-lists, .firstScreen').removeClass('hidden');
     $('.search-events').prop('disabled',false);
 }
+
