@@ -460,20 +460,20 @@ function onYouTubeIframeAPIReady() {
     });
 }
 function sendDataToOtherSections(eventId,object) {
-    console.log(object);
-    $("#img-1").empty();
-    $("#img-2").empty();
-    $("#img-3").empty();
-    $("#img-4").empty();
-    $(".name").empty();
-    $(".venue").empty();
-    $(".date").empty();
-    $(".tickets").empty();
+
+    // $("#img-1").empty();
+    // $("#img-2").empty();
+    // $("#img-3").empty();
+    // $("#img-4").empty();
+    // $(".name").empty();
+    // $(".venue").empty();
+    // $(".date").empty();
+    // $(".tickets").empty();
 
     // $("#player").empty();
     for (var i = 0; i < events_array.length; i++) {
             if(eventId === events_array[i].id) {      
-                $(".secondHeader").append(events_array[i].name).addClass('secondHeader');       
+                $(".secondHeader h1").append(events_array[i].name).addClass('secondHeader');       
                 $("#img-1").append($("<img>").attr('src', artistImg[i][0]).addClass('artistImages'));
                 $("#img-2").append($("<img>").attr('src', artistImg[i][1]).addClass('artistImages'));
                 $("#img-3").append($("<img>").attr('src', artistImg[i][2]).addClass('artistImages'));
@@ -484,8 +484,8 @@ function sendDataToOtherSections(eventId,object) {
                 $(".tickets").append("Ticket-Price: " + events_array[i].ticketPrice);
                 $('.secondScreen').removeClass('hidden');
                 $('.firstScreen').addClass('hidden');
-                $('tbody, tr').addClass('hidden'); 
-                flickrLoop(events_array[i].location);
+                $('.events-lists').addClass('hidden'); 
+                // flickrLoop(events_array[i].location);
                 loadVideo(events_array[i].name);
             }
         }
@@ -501,8 +501,8 @@ function sendDataToOtherSections(eventId,object) {
     // console.log(this)
     //how to make tr a clickable button that will send data to the other areas in web page?
 function backButtonActions() {
-    $('.secondHeader').empty();
+    $('.secondHeader h1, #img-1, #img-2, #img-3, #img-4, .artists, .venue, .date, .tickets').empty();
     $('.secondScreen').addClass('hidden');
-    $('tbody, tr').removeClass('hidden');
+    $('.events-lists, .firstScreen').removeClass('hidden');
 
 }
