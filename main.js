@@ -30,6 +30,8 @@ var ticketObject = {
  */
 function initializeApp() {
     addClickHandlersToElements();
+    $('.secondScreen').addClass('hidden');
+    createPlayer();
     // loadVideo();
     // artistPictureDynamicCreation();
 }
@@ -41,12 +43,9 @@ function initializeApp() {
  */
 function addClickHandlersToElements() {
     $('.search-events').on('click', getDataFromTicketMaster);
-    $('.secondScreen').addClass('hidden');
     $('.backButton').on('click', backButtonActions);
-    
     // $('.row').on('click', sendDataToOtherSections);
 }
-
 function artistPictureDynamicCreation() {
     for(var i = 0; i<artistImg[1].length; i++){
         var container = $(".left-bottom-col-3");
@@ -264,7 +263,7 @@ function flickrLoop(venueLocation) {
         "The Pacific Amphitheatre": "",
         "Pechanga Resort and Casino": "",
         "William Saroyan Theatre Fresno Convention & Entertainment Center": ""
-    }
+    };
 
     var locationId = refList[venueLocation];
 
@@ -285,11 +284,11 @@ function displayImage(venueImage){
     $('.secondScreen').removeClass('.hidden');
 };
 
-function populateEventInformation(data_object) {
-    //after button pressed, the data from the event that was pressed will be pulled into this function to be populated onto the DOM.
-};
+// function populateEventInformation(data_object) {
+//     //after button pressed, the data from the event that was pressed will be pulled into this function to be populated onto the DOM.
+// };
 
-
+//Keaton
 function getArtistImages () {
     for (var i = 0; i < artistInfo.length; i++) {
         var artistImgArray = [];
@@ -301,7 +300,7 @@ function getArtistImages () {
     }
 }
 
-
+//keaton
 function getArtistFromEvents() {
     for(var i=0; i<events_array1.length; i++){
         var attraction = events_array1[i]._embedded.attractions;
@@ -326,15 +325,17 @@ function loadVideo(name) {
         url: 'https://s-apis.learningfuze.com/hackathon/youtube/search.php',
         success: function(response){
             if(response.success){
+                videoIdArray=[];
                 console.log('success', response);
                 for ( var i = 0; i < response.video.length; i++) {
                     videoIdArray.push(response.video[i].id);
-                }     
-                createPlayer(); 
+                }
+                changePlayer(videoIdArray[0]);
             }
         }
     });
 }
+//keaton
 function getDataFromTicketMaster() {
     var keyword = $('#genre')[0];
     keyword = keyword.options[keyword.selectedIndex].value;
@@ -349,6 +350,7 @@ function getDataFromTicketMaster() {
             for (var i = 0; i < data._embedded.events.length; i++) {
                 var fesivalObjects = data._embedded.events[i];
                 events_array1.push(fesivalObjects);
+                debugger;
                 data_object = {
                     img: data._embedded.events[i].images[0].url,
                     img2: data._embedded.events[i].images[1].url,
@@ -356,15 +358,23 @@ function getDataFromTicketMaster() {
                     img4: data._embedded.events[i].images[3].url,
                     name: data._embedded.events[i].name,
                     location: data._embedded.events[i]._embedded.venues[0].name,
-                    date: data._embedded.events[i].dates.start.dateTime,
+                    date: data._embedded.events[i].dates.start.localDate,
                     id:data._embedded.events[i].id,
+                    url: data._embedded.events[i].url,
                    // ticketPrice: data._embedded.events[i].priceRanges[0].max
 
                   };
-                  events_array.push(data_object);                  
+                if(events_array.length > 20){
+                    events_array = [];
+                    $(".events-lists").remove();
+                    events_array.push(data_object);
+                } else {
+                    events_array.push(data_object);
+                }
                  
             }           
             updateEventsLists(events_array);
+            
         
         // Parse the response.
         // Do other things.
@@ -375,7 +385,9 @@ function getDataFromTicketMaster() {
         }
     });
 }
-
+//Creating jQuery dom table and appeanded it to the Dom;
+//On click function sends data to "sendDataToOtherSections" so we can use the data for the right stats bar
+//
 function updateEventsLists(events_array) {
     var tbody = $('<tbody>').addClass('table-content');   
     var table = $('<table>').addClass('events-lists');  
@@ -391,7 +403,13 @@ function updateEventsLists(events_array) {
             "data-event": events_array[i].id,
             on: { 
                 click:function() {
-                    debugger;
+<<<<<<< HEAD
+                   //debugger;
+=======
+                    events_array = [];
+                    events_array1 = [];
+                    // $("#player").remove();
+>>>>>>> e4c9c0f9a81339d7723e24b4e8529af173114e23
                     var eventId = $(this).attr('data-event');
                     sendDataToOtherSections(eventId,this);
                 },          
@@ -413,18 +431,9 @@ function updateEventsLists(events_array) {
        table.append(thead, tbody);
       $('.left-col').prepend(table);
 
+     
 }
 
-// function getPriceFromConcert() {
-//     for(var x=0; x<hiphop_array.length; x++){
-//         var priceArray = [];
-//         var minPrice = hiphop_array[x].priceRanges;
-//         var maxPrice = hiphop_array[x].priceRanges;
-//         priceArray.push(minPrice,maxPrice);
-//         ticketPrice.push(priceArray);
-//     }
-//     getArtistImages();
-// }
 
 //Loads IFrame Player API asynchronously
 function createPlayer() {
@@ -439,7 +448,7 @@ function onYouTubeIframeAPIReady() {
     videoPlayer = new YT.Player('player', {
         height: '345',
         width: '530',
-        videoId: videoIdArray[0],
+        videoId: 'Uem47H8idwk',//videoIdArray[0],
         playerVars: {
             'autoplay': 1,
             'start': 1
@@ -447,14 +456,20 @@ function onYouTubeIframeAPIReady() {
         }
     });
 }
+function changePlayer(newID){
+    videoPlayer.a.src = 'https://www.youtube.com/embed/'+newID+'?start=1';
+}
 function sendDataToOtherSections(eventId,object) {
     console.log(object);
-
+    $('.search-events').prop('disabled',true);
 
     // $("#player").empty();
     for (var i = 0; i < events_array.length; i++) {
             if(eventId === events_array[i].id) {      
-                $(".secondHeader h1").append(events_array[i].name).addClass('secondHeader');       
+                $(".secondHeader h1").append(events_array[i].name).addClass('secondHeader');  
+                // for (var artist_i=0; artist_i<artistImg[i].length; artist_i++){
+                //     $("#img-" + (artist_i+1) ).append($("<img>").attr('src', artistImg[i][artist_i]).addClass('artistImages'));
+                // }    //code to dynamically add photos so that the photo lines are gone.  
                 $("#img-1").append($("<img>").attr('src', artistImg[i][0]).addClass('artistImages'));
                 $("#img-2").append($("<img>").attr('src', artistImg[i][1]).addClass('artistImages'));
                 $("#img-3").append($("<img>").attr('src', artistImg[i][2]).addClass('artistImages'));
@@ -462,7 +477,7 @@ function sendDataToOtherSections(eventId,object) {
                 $(".artists").append("Name: " + events_array[i].name);
                 $(".venue").append("Location: " + events_array[i].location);
                 $(".date").append("Date: " + events_array[i].date);
-                $(".tickets").append("Ticket-Price: " + events_array[i].ticketPrice);
+                $(".tickets").append("Ticket-Price: " + events_array[i].url);
                 $('.secondScreen').removeClass('hidden');
                 $('.firstScreen').addClass('hidden');
                 $('.events-lists').addClass('hidden'); 
@@ -485,5 +500,10 @@ function backButtonActions() {
     $('.secondHeader h1, #img-1, #img-2, #img-3, #img-4, .artists, .venue, .date, .tickets').empty();
     $('.secondScreen').addClass('hidden');
     $('.events-lists, .firstScreen').removeClass('hidden');
+<<<<<<< HEAD
 };
 
+=======
+    $('.search-events').prop('disabled',false);
+}
+>>>>>>> ef4431ca0e1439c4994362b1b304b743702019d1
