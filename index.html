@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/css?family=Lato|Roboto|Lobster|Shrikhand" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
     <script src="main.js"></script>
     <title>Music Festival</title>    
@@ -42,9 +43,14 @@
         </div>
 
         <div class="secondScreen">
-            <div class="secondHeader"></div>
-            <button  class="backButton">Back</button>
-            <div class="secondScreenTopContainer"></div>
+            <!--<div class="secondHeader"></div>-->
+            <!--<button  class="backButton">Back</button>-->
+            <!--<div class="secondScreenTopContainer"></div>-->
+            <div class="secondHeader">
+                <span class='backButton'><i class="far fa-caret-square-left"></i></span>
+                <h1></h1>
+            </div>
+            <div class="secondScreenTopContainer">POSTER</div>
             <div class="bottomContainer">
                 <div class="secondScreenBottomContainer" id="img-1">ARTIST</div>
                 <div class="secondScreenBottomContainer" id="img-2">VENUE</div>
@@ -56,11 +62,12 @@
     </div>
     <div class="right-col">
         <div class="event-info">
-            <div class="artists"></div>
-            <div class="venue"></div>
-            <div class="date"></div>
-            <div class="time"></div>
-            <div class="tickets"></div>
+            <div class="event-info-header">Concert Information</div>
+            <div class="artists" contentEditable=true data-text="Artist"></div>
+            <div class="venue" contentEditable=true data-text="Location"></div>
+            <div class="date" contentEditable=true data-text="Date"></div>
+            <div class="time" contentEditable=true data-text="Time"></div>
+            <div class="tickets" contentEditable=true data-text="See Tickets"></div>
         </div>
         <div id="player"></div>
     </div>

@@ -70,7 +70,7 @@ function flickrLoop(venueLocation) {
                 "photo": [
                     // Hollywood Palladium
                     {
-                        "id": "27020496362", //"KovZpZAEAlaA"
+                        "id": "27020496362",
                         "owner": "94467141@N00",
                         "secret": "32cb198536",
                         "server": "7070",
@@ -79,10 +79,11 @@ function flickrLoop(venueLocation) {
                         "ispublic": 1,
                         "isfriend": 0,
                         "isfamily": 0
+                        ,
                     },
                     // Bill Graham Civic Auditorium
                     {
-                        "id": "30479561483", // "KovZpaKope"
+                        "id": "30479561483",
                         "owner": "141233868@N02",
                         "secret": "31493d3001",
                         "server": "5715",
@@ -94,7 +95,7 @@ function flickrLoop(venueLocation) {
                     },
                     // City National Civic
                     {
-                        "id": "22592033217", //"KovZpZAJk71A"
+                        "id": "22592033217",
                         "owner": "58112562@N00",
                         "secret": "9700cbbcc0",
                         "server": "5689",
@@ -106,7 +107,7 @@ function flickrLoop(venueLocation) {
                     },
                     // Greek Theatre
                     {
-                        "id": "35489133763", // "KovZpZAFadlA"
+                        "id": "35489133763",
                         "owner": "7948216@N05",
                         "secret": "9c28d0e767",
                         "server": "4303",
@@ -118,7 +119,7 @@ function flickrLoop(venueLocation) {
                     },
                     // Fox Theater
                     {
-                        "id": "31142080295", // "KovZpaKoXe"
+                        "id": "31142080295",
                         "owner": "34457978@N00",
                         "secret": "5b455ec238",
                         "server": "5764",
@@ -130,7 +131,7 @@ function flickrLoop(venueLocation) {
                     },
                     // Mezzanine
                     {
-                        "id": "4484999982", // "KovZpZA1enFA"
+                        "id": "4484999982",
                         "owner": "49005895@N08",
                         "secret": "98681bd752",
                         "server": "4008",
@@ -142,7 +143,7 @@ function flickrLoop(venueLocation) {
                     },
                     // House of Blues Anaheim
                     {
-                        "id": "8040060204", //"KovZpZAEA67A"
+                        "id": "8040060204",
                         "owner": "72756218@N04",
                         "secret": "78bca717da",
                         "server": "8179",
@@ -154,7 +155,7 @@ function flickrLoop(venueLocation) {
                     },
                     // Teragram Ballroom
                     {
-                        "id": "30043253042", // "KovZpZAEvnFA"
+                        "id": "30043253042",
                         "owner": "8263900@N06",
                         "secret": "402dc7f3bd",
                         "server": "5518",
@@ -167,7 +168,7 @@ function flickrLoop(venueLocation) {
 
                     // The Observatory
                     {
-                        "id": "22927627330", // "Z6r9jZ6eAe"
+                        "id": "22927627330",
                         "owner": "12694516@N04",
                         "secret": "b0f524cb25",
                         "server": "5739",
@@ -179,7 +180,7 @@ function flickrLoop(venueLocation) {
                     },
                     // Mattress Firm Amphitheatre
                     {
-                        "id": "37522480132", //"KovZpa2WZe"
+                        "id": "37522480132",
                         "owner": "157274368@N08",
                         "secret": "57b78471b3",
                         "server": "4456",
@@ -191,22 +192,23 @@ function flickrLoop(venueLocation) {
                     },
                     // Hollywood Pantages Theater
                     {
-                        "id": "31084523390", // "KovZpZAEeFaA"
+                        "id": "31084523630",
                         "owner": "42029827@N00",
-                        "secret": "0a5431123d",
-                        "server": "5597",
+                        "secret": "970b9a611c",
+                        "server": "5601",
                         "farm": 6,
                         "title": "Hollywood Pantages Theatre",
                         "ispublic": 1,
                         "isfriend": 0,
                         "isfamily": 0
+
                     },
                     // Fivepoint Amphitheatre
                     {
-                        "id": "36211111392",
+                        "id": "36211111572",
                         "owner": "21024152@N05",
-                        "secret": "f727e98a93",
-                        "server": "4422",
+                        "secret": "52ea661488",
+                        "server": "4352",
                         "farm": 5,
                         "title": "KISS 2000 at Irvine Meadows Amphitheater",
                         "ispublic": 1,
@@ -225,17 +227,12 @@ function flickrLoop(venueLocation) {
                         "isfriend": 0,
                         "isfamily": 0
                     },
+                    {
+                        "id": "39379605704",
+                    },
                     // Toyota Amphitheatre
                     {
                         "id": "27191296995",
-                        "owner": "141266836@N08",
-                        "secret": "f419ebe08a",
-                        "server": "7259",
-                        "farm": 8,
-                        "title": "Toyota Amphitheatre",
-                        "ispublic": 1,
-                        "isfriend": 0,
-                        "isfamily": 0
                     }
                 ]
             }
@@ -255,8 +252,8 @@ function flickrLoop(venueLocation) {
         "City National Civic": "22592033217",
         "Bill Graham Civic Auditorium": "30479561483",
         "Hollywood Palladium": "27020496362",
-        "Hollywood Pantages Theatre": "31084523390",
-        "FivePoint Amphitheatre": "36211111392",
+        "Hollywood Pantages Theatre": "31084523630",
+        "FivePoint Amphitheatre": "36211111572",
         "Shoreline Amphitheatre": "39379605704",
         "Toyota Amphitheatre": "27191296995",
         "Copper Blues Oxnard Resturant": "",
@@ -276,17 +273,16 @@ function flickrLoop(venueLocation) {
             displayImage(venueImages.photos.photo[i]);
         }
     };
-
-// flickr_pic.attr("src", img_src);
 };
 
 function displayImage(venueImage){
     var img_src = "https://farm" + venueImage.farm + ".staticflickr.com/" + venueImage.server + "/" + venueImage.id + "_" + venueImage.secret + ".jpg";
     console.log(img_src);
+    debugger;
     var one_image= $('<img>').attr("src", img_src).addClass('venueImages');
     $('.secondScreenTopContainer').empty().append(one_image);
-    $('.firstScreen').css('display', 'none');
-    $('.secondScreen').css('display', 'block');
+    $('.firstScreen').addClass('.hidden');
+    $('.secondScreen').removeClass('.hidden');
 };
 
 function populateEventInformation(data_object) {
@@ -362,7 +358,8 @@ function getDataFromTicketMaster() {
                     location: data._embedded.events[i]._embedded.venues[0].name,
                     date: data._embedded.events[i].dates.start.dateTime,
                     id:data._embedded.events[i].id,
-                    // ticketPrice: data._embedded.events[i].priceRanges[0].max
+                   // ticketPrice: data._embedded.events[i].priceRanges[0].max
+
                   };
                   events_array.push(data_object);                  
                  
@@ -414,7 +411,7 @@ function updateEventsLists(events_array) {
         tbody.append(tr);
     }        
        table.append(thead, tbody);
-      $('.firstScreen').prepend(table);
+      $('.left-col').prepend(table);
 
 }
 
@@ -444,7 +441,7 @@ function onYouTubeIframeAPIReady() {
         width: '530',
         videoId: videoIdArray[0],
         playerVars: {
-            // 'autoplay': 1,
+            'autoplay': 1,
             'start': 1
             // 'playlist': 'Q8sa_3oHYEc, YnwsMEabmSo, MOpcEayO1Yw', how do I make this populate from videoArray?
         }
@@ -452,19 +449,12 @@ function onYouTubeIframeAPIReady() {
 }
 function sendDataToOtherSections(eventId,object) {
     console.log(object);
-    $("#img-1").empty();
-    $("#img-2").empty();
-    $("#img-3").empty();
-    $("#img-4").empty();
-    $(".artists").empty();
-    $(".venue").empty();
-    $(".date").empty();
-    $(".tickets").empty();
+
 
     // $("#player").empty();
     for (var i = 0; i < events_array.length; i++) {
             if(eventId === events_array[i].id) {      
-                $(".secondHeader").append(events_array[i].name).addClass('secondHeader');       
+                $(".secondHeader h1").append(events_array[i].name).addClass('secondHeader');       
                 $("#img-1").append($("<img>").attr('src', artistImg[i][0]).addClass('artistImages'));
                 $("#img-2").append($("<img>").attr('src', artistImg[i][1]).addClass('artistImages'));
                 $("#img-3").append($("<img>").attr('src', artistImg[i][2]).addClass('artistImages'));
@@ -475,7 +465,7 @@ function sendDataToOtherSections(eventId,object) {
                 $(".tickets").append("Ticket-Price: " + events_array[i].ticketPrice);
                 $('.secondScreen').removeClass('hidden');
                 $('.firstScreen').addClass('hidden');
-                $('tbody, tr').addClass('hidden'); 
+                $('.events-lists').addClass('hidden'); 
                 flickrLoop(events_array[i].location);
                 loadVideo(events_array[i].name);
             }
@@ -492,8 +482,8 @@ function sendDataToOtherSections(eventId,object) {
     // console.log(this)
     //how to make tr a clickable button that will send data to the other areas in web page?
 function backButtonActions() {
-    $('.secondHeader').empty();
+    $('.secondHeader h1, #img-1, #img-2, #img-3, #img-4, .artists, .venue, .date, .tickets').empty();
     $('.secondScreen').addClass('hidden');
-    $('tbody, tr').removeClass('hidden');
+    $('.events-lists, .firstScreen').removeClass('hidden');
+};
 
-}
