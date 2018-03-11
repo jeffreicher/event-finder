@@ -389,7 +389,6 @@ function updateEventsLists(events_array) {
 
 //how does this work with the youtubeframapiready?
 function createPlayer() {
-    debugger;
     var tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
     var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -440,35 +439,36 @@ function loadVideo(name) {
 function changePlayer(newID){
     videoPlayer.a.src = 'https://www.youtube.com/embed/'+newID+'?autoplay=1&loop=1&controls=0&modestbranding=1';
 }
+
 //keaton
 function sendDataToOtherSections(eventId,object) {
-    console.log(object);
-    $('.search-events').prop('disabled',true);
-    for (var i = 0; i < events_array.length; i++) {
-            if(eventId === events_array[i].id) {      
-                $(".secondHeader h1").append(events_array[i].name).addClass('secondHeader');
-                $("#img-1").append($("<img>").attr('src', artistImg[i][0]).addClass('artistImages'));
-                $("#img-2").append($("<img>").attr('src', artistImg[i][1]).addClass('artistImages'));
-                $("#img-3").append($("<img>").attr('src', artistImg[i][2]).addClass('artistImages'));
-                $("#img-4").append($("<img>").attr('src', artistImg[i][3]).addClass('artistImages'));
-                $(".artists").append("Name: " + events_array[i].name);
-                $(".venue").append("Location: " + events_array[i].location);
-                $(".date").append("Date: " + events_array[i].date);
-                $(".tickets").append("Ticket-URL " + events_array[i].url);
-                $('.secondScreen').removeClass('hidden');
-                $('.firstScreen').addClass('hidden');
-                $('.events-lists').addClass('hidden'); 
-                flickrLoop(events_array[i].location);
-                loadVideo(events_array[i].name);
-            }
+    $('.search-events').prop('disabled', true);
+    for(var i = 0; i<events_array.length; i++) {
+        if(eventId === events_array[i].id) {      
+            $(".secondHeader h1").append(events_array[i].name).addClass('secondHeader');
+            $("#img-1").append($("<img>").attr('src', artistImg[i][0]).addClass('artistImages'));
+            $("#img-2").append($("<img>").attr('src', artistImg[i][1]).addClass('artistImages'));
+            $("#img-3").append($("<img>").attr('src', artistImg[i][2]).addClass('artistImages'));
+            $("#img-4").append($("<img>").attr('src', artistImg[i][3]).addClass('artistImages'));
+            $(".artists").append("Name: " + events_array[i].name);
+            $(".venue").append("Location: " + events_array[i].location);
+            $(".date").append("Date: " + events_array[i].date);
+            $(".tickets").append("Ticket-URL " + events_array[i].url);
+            $('.secondScreen').removeClass('hidden');
+            $('.firstScreen').addClass('hidden');
+            $('.events-lists').addClass('hidden'); 
+            flickrLoop(events_array[i].location);
+            loadVideo(events_array[i].name);
         }
+    }    
 
-    }
+}
+
 
 function backButtonActions() {
     $('.secondHeader h1, #img-1, #img-2, #img-3, #img-4, .artists, .venue, .date, .tickets').empty();
     $('.secondScreen').addClass('hidden');
     $('.events-lists, .firstScreen').removeClass('hidden');
-    $('.search-events').prop('disabled',false);
+    $('.search-events').prop('disabled', false);
 }
 
