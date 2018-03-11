@@ -223,12 +223,49 @@ function flickrLoop(venueLocation) {
                         "isfriend": 0,
                         "isfamily": 0
                     },
-                    {
-                        "id": "39379605704",
-                    },
                     // Toyota Amphitheatre
                     {
-                        "id": "27191296995",
+                        "id": "35313499455",
+                        "owner": "26517219@N02",
+                        "secret": "d2855bb70b",
+                        "server": "4279",
+                        "farm": 5,
+                        "title": "Reggae In The Desert 2017",
+                        "ispublic": 1,
+                        "isfriend": 0,
+                        "isfamily": 0
+                    },
+                    // Copper Blues Oxnard Resturant
+                    {
+
+                    },
+                    // Dodger Stadium
+                    {
+
+                    },
+                    // Save Mart Center
+                    {
+
+                    },
+                    // Honda Center
+                    {
+
+                    },
+                    // The Forum
+                    {
+
+                    },
+                    // The Pacific Amphitheatre
+                    {
+
+                    },
+                    // Pechanga Resort and Casino
+                    {
+
+                    },
+                    // William Saroyan Theatre Fresno Convention & Entertainment Center
+                    {
+
                     }
                 ]
             }
@@ -251,7 +288,7 @@ function flickrLoop(venueLocation) {
         "Hollywood Pantages Theatre": "31084523630",
         "FivePoint Amphitheatre": "36211111572",
         "Shoreline Amphitheatre": "39379605704",
-        "Toyota Amphitheatre": "27191296995",
+        "Toyota Amphitheatre": "35313499455",
         "Copper Blues Oxnard Resturant": "",
         "Dodger Stadium": "",
         "Save Mart Center": "",
