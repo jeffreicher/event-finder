@@ -156,6 +156,7 @@ button.search-events:hover, .row:hover, .backButton:hover {
     border-radius: 5%;
     height: 100%;
     width: 100%;
+    margin-top: 2%;
 }
 
 /*.venueImages{*/
@@ -268,6 +269,7 @@ thead > tr > th{
     font-size: 4vh;
     margin-left: 2.5%;
 }
+
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {

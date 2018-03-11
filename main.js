@@ -29,21 +29,24 @@ var ticketObject = {
  * initializes the application, including adding click handlers and pulling in any data from the server, in later versions
  */
 function initializeApp() {
-    addClickHandlersToElements();
-
+    addClickHandlersAndStylesToElements();
     createPlayer();
 }
 
 /***************************************************************************************************
- * addClickHandlerstoElements
- * @params {undefined}
- * @returns  {undefined}
+ * addClickHandlersAndStylesToElements
+ * @params {undefined} none
+ * @returns  {undefined} none
+ * gives buttons function to execute when clicked, as well as adding a class to the hidden div
  */
-function addClickHandlersToElements() {
+ 
+function addClickHandlersAndStylesToElements() {
     $('.search-events').on('click', getDataFromTicketMaster);
     $('.backButton').on('click', backButtonActions);
     $('.secondScreen').addClass('hidden');
 }
+
+
 function artistPictureDynamicCreation() {
     for(var i = 0; i<artistImg[1].length; i++){
         var container = $(".left-bottom-col-3");
@@ -310,17 +313,11 @@ function flickrLoop(venueLocation) {
 
 function displayImage(venueImage){
     var img_src = "https://farm" + venueImage.farm + ".staticflickr.com/" + venueImage.server + "/" + venueImage.id + "_" + venueImage.secret + ".jpg";
-    console.log(img_src);
-    debugger;
     var one_image= $('<img>').attr("src", img_src).addClass('venueImages');
     $('.secondScreenTopContainer').empty().append(one_image);
     $('.firstScreen').addClass('.hidden');
     $('.secondScreen').removeClass('.hidden');
 };
-
-// function populateEventInformation(data_object) {
-//     //after button pressed, the data from the event that was pressed will be pulled into this function to be populated onto the DOM.
-// };
 
 //Keaton
 function getArtistImages () {
@@ -345,30 +342,6 @@ function getArtistFromEvents() {
         getArtistImages();
 }
 
-
-function loadVideo(name) {
-    $.ajax({
-        dataType: 'json',
-        data: {
-            api_key: 'IkLZGbSrRC',
-            q: name + ' live set',
-            maxResults: 5,
-            type: 'video'
-        },
-        method: 'POST',
-        url: 'https://s-apis.learningfuze.com/hackathon/youtube/search.php',
-        success: function(response){
-            if(response.success){
-                videoIdArray=[];
-                console.log('success', response);
-                for ( var i = 0; i < response.video.length; i++) {
-                    videoIdArray.push(response.video[i].id);
-                }
-                changePlayer(videoIdArray[0]);
-            }
-        }
-    });
-}
 //keaton
 function getDataFromTicketMaster() {
     var keyword = $('#genre')[0];
@@ -384,7 +357,6 @@ function getDataFromTicketMaster() {
             for (var i = 0; i < data._embedded.events.length; i++) {
                 var fesivalObjects = data._embedded.events[i];
                 events_array1.push(fesivalObjects);
-                debugger;
                 data_object = {
                     img: data._embedded.events[i].images[0].url,
                     img2: data._embedded.events[i].images[1].url,
@@ -414,6 +386,7 @@ function getDataFromTicketMaster() {
         }
     });
 }
+
 function updateEventsLists(events_array) {
     var tbody = $('<tbody>').addClass('table-content');   
     var table = $('<table>').addClass('events-lists');  
@@ -449,17 +422,19 @@ function updateEventsLists(events_array) {
     }        
        table.append(thead, tbody);
       $('.left-col').prepend(table);
-
-     
 }
 
+//how does this work with the youtubeframapiready?
 function createPlayer() {
+    debugger;
     var tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
     var firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 }
 
+//loads new YouTube player with properties and stores in video player global 
+//Error parsing header X-XSS-Protection is a bug found in chrome
 function onYouTubeIframeAPIReady() {
     videoPlayer = new YT.Player('player', {
         height: '345',
@@ -467,14 +442,42 @@ function onYouTubeIframeAPIReady() {
         videoId: 'L6c_mYQ9LaM',
         playerVars: {
             'autoplay': 1,
-            'start': 1
-
+            'controls': 0,
+            'loop': 1,
+            'modestbranding': 1,
         }
     });
 }
-function changePlayer(newID){
-    videoPlayer.a.src = 'https://www.youtube.com/embed/'+newID+'?start=1';
+
+// loads video from learningfuze server using an api key to that if is successful, stores videos in a video array and calls changeplayer with video array at 0
+function loadVideo(name) {
+    $.ajax({
+        dataType: 'json',
+        data: {
+            api_key: 'IkLZGbSrRC',
+            q: name + ' live set',
+            maxResults: 5,
+            type: 'video'
+        },
+        method: 'POST',
+        url: 'https://s-apis.learningfuze.com/hackathon/youtube/search.php',
+        success: function(response){
+            if(response.success){
+                videoIdArray=[];
+                for ( var video_i = 0; video_i < response.video.length; video_i++) {
+                    videoIdArray.push(response.video[video_i].id);
+                }
+                changePlayer(videoIdArray[0]);
+            }
+        }
+    });
 }
+
+//changes the video played by changing the video Id
+function changePlayer(newID){
+    videoPlayer.a.src = 'https://www.youtube.com/embed/'+newID+'?autoplay=1&loop=1&controls=0&modestbranding=1';
+}
+
 //keaton
 function sendDataToOtherSections(eventId,object) {
     console.log(object);
@@ -506,3 +509,4 @@ function backButtonActions() {
     $('.events-lists, .firstScreen').removeClass('hidden');
     $('.search-events').prop('disabled',false);
 }
+
