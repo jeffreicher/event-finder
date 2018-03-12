@@ -142,12 +142,12 @@ function flickrLoop(venueLocation) {
                     },
                     // House of Blues Anaheim
                     {
-                        "id": "8040060204",
-                        "owner": "72756218@N04",
-                        "secret": "78bca717da",
-                        "server": "8179",
-                        "farm": 9,
-                        "title": "House of Blues Anaheim",
+                        "id": "24538777316",
+                        "owner": "114791119@N03",
+                        "secret": "8f47c61d74",
+                        "server": "1599",
+                        "farm": 2,
+                        "title": "Concert Night: Vixen @ house of blues - Anaheim",
                         "ispublic": 1,
                         "isfriend": 0,
                         "isfamily": 0
@@ -226,16 +226,141 @@ function flickrLoop(venueLocation) {
                         "isfriend": 0,
                         "isfamily": 0
                     },
-                    {
-                        "id": "39379605704",
-                    },
                     // Toyota Amphitheatre
                     {
-                        "id": "27191296995",
+                        "id": "35313499455",
+                        "owner": "26517219@N02",
+                        "secret": "d2855bb70b",
+                        "server": "4279",
+                        "farm": 5,
+                        "title": "Reggae In The Desert 2017",
+                        "ispublic": 1,
+                        "isfriend": 0,
+                        "isfamily": 0
+                    },
+
+                    // Copper Blues Oxnard Resturant
+                    {
+                        "id": "16911708381",
+                        "owner": "132128485@N07",
+                        "secret": "f51a79f4e8",
+                        "server": "8726",
+                        "farm": 9,
+                        "title": "House of Blues Anaheim",
+                        "ispublic": 1,
+                        "isfriend": 0,
+                        "isfamily": 0
+                    },
+                    // Dodger Stadium
+                    {
+                        "id": "28245830409",
+                        "owner": "30005186@N02",
+                        "secret": "673c3e16aa",
+                        "server": "4614",
+                        "farm": 5,
+                        "title": "Dodger Stadium Sunset",
+                        "ispublic": 1,
+                        "isfriend": 0,
+                        "isfamily": 0
+                    },
+                    // Save Mart Center
+                    {
+                        "id": "7015873977",
+                        "owner": "33769160@N08",
+                        "secret": "43e7beed0b",
+                        "server": "7182",
+                        "farm": 8,
+                        "title": "Save Mart Center",
+                        "ispublic": 1,
+                        "isfriend": 0,
+                        "isfamily": 0
+                    },
+                    // Honda Center
+                    {
+                        "id": "24167854377",
+                        "owner": "34247477@N02",
+                        "secret": "9df10fb85e",
+                        "server": "4574",
+                        "farm": 5,
+                        "title": "ANAHEIM, HONDA CENTER",
+                        "ispublic": 1,
+                        "isfriend": 0,
+                        "isfamily": 0
+                    },
+                    // The Forum
+                    {
+                        "id": "26708886578",
+                        "owner": "157882033@N04",
+                        "secret": "aa87a23dd8",
+                        "server": "4605",
+                        "farm": 5,
+                        "title": "1989.11.24 Inglewood,CA The Great Western Forum",
+                        "ispublic": 1,
+                        "isfriend": 0,
+                        "isfamily": 0
+                    },
+                    // The Pacific Amphitheatre
+                    {
+                        "id": "37329376526",
+                        "owner": "32382511@N08",
+                        "secret": "2432f1890c",
+                        "server": "4432",
+                        "farm": 5,
+                        "title": "The Good Vibes Summer Tour 2017",
+                        "ispublic": 1,
+                        "isfriend": 0,
+                        "isfamily": 0
+                    },
+                    // Pechanga Resort and Casino
+                    {
+                        "id": "14703167940",
+                        "owner": "96695795@N08",
+                        "secret": "1ccdcbea74",
+                        "server": "3851",
+                        "farm": 4,
+                        "title": "Slash at Pechanga Resort & Casino",
+                        "ispublic": 1,
+                        "isfriend": 0,
+                        "isfamily": 0
+                    },
+                    // William Saroyan Theatre Fresno Convention & Entertainment Center
+                    {
+                        "id": "12917601805",
+                        "owner": "27914970@N04",
+                        "secret": "315ef8e9e4",
+                        "server": "2864",
+                        "farm": 3,
+                        "title": "William Saroyan Theatre",
+                        "ispublic": 1,
+                        "isfriend": 0,
+                        "isfamily": 0
+                    },
+                    // Empire Polo Field
+                    {
+                        "id": "14362034359",
+                        "owner": "12178022@N05",
+                        "secret": "a285a83c5c",
+                        "server": "5503",
+                        "farm": 6,
+                        "title": "T60C1748 Stagecoach 2014, Thursday",
+                        "ispublic": 1,
+                        "isfriend": 0,
+                        "isfamily": 0
+                    },
+                    // Del Mar Fairgrounds
+                    {
+                        "id": "7599282810",
+                        "owner": "30051793@N07",
+                        "secret": "8139e00fb0",
+                        "server": "7115",
+                        "farm": 8,
+                        "title": "Del Mar Fairgrounds",
+                        "ispublic": 1,
+                        "isfriend": 0,
+                        "isfamily": 0
                     }
                 ]
             }
-
         };
 
     var refList = {
@@ -243,7 +368,7 @@ function flickrLoop(venueLocation) {
         "Mattress Firm Amphitheatre (Formerly Sleep Train Amphitheatre)": "37522480132",
         "The Observatory - Santa Ana": "22927627330",
         "Teragram Ballroom": "30043253042",
-        "House of Blues Anaheim": "8040060204",
+        "House of Blues Anaheim": "24538777316",
         "Mezzanine": "4484999982",
         "Fox Theater - Oakland": "31142080295",
         "Greek Theatre-U.C. Berkeley": "35489133763",
@@ -254,15 +379,17 @@ function flickrLoop(venueLocation) {
         "Hollywood Pantages Theatre": "31084523630",
         "FivePoint Amphitheatre": "36211111572",
         "Shoreline Amphitheatre": "39379605704",
-        "Toyota Amphitheatre": "27191296995",
-        "Copper Blues Oxnard Resturant": "",
-        "Dodger Stadium": "",
-        "Save Mart Center": "",
-        "Honda Center": "",
-        "The Forum": "",
-        "The Pacific Amphitheatre": "",
-        "Pechanga Resort and Casino": "",
-        "William Saroyan Theatre Fresno Convention & Entertainment Center": ""
+        "Toyota Amphitheatre": "35313499455",
+        "Copper Blues Oxnard Resturant": "16911708381",
+        "Dodger Stadium": "28245830409",
+        "Save Mart Center": "7015873977",
+        "Honda Center": "24167854377",
+        "The Forum": "26708886578",
+        "The Pacific Amphitheatre": "37329376526",
+        "Pechanga Resort and Casino": "14703167940",
+        "William Saroyan Theatre Fresno Convention & Entertainment     Center": "12917601805",
+        "Empire Polo Field": "14362034359",
+        "Del Mar Fairgrounds": "7599282810"
     };
 
     var locationId = refList[venueLocation];
