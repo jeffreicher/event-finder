@@ -458,10 +458,13 @@ function changePlayer(newID){
 
 //keaton
 function sendDataToOtherSections(eventId,object) {
-    $('.search-events').prop('disabled', true);
-    for(var i = 0; i<events_array.length; i++) {
+    console.log(object);
+    $('.search-events').prop('disabled',true);
+    for (var i = 0; i < events_array.length; i++) {
         if(eventId === events_array[i].id) {      
-            $(".secondHeader h1").append(events_array[i].name).addClass('secondHeader');
+            $(".secondHeader h1").append(events_array[i].name).addClass('secondHeader_h1');
+            $(".secondHeader .country").append("Country: " + events_array[i].country).addClass('country');
+            $(".secondHeader .city").append("City: " + events_array[i].city);
             $("#img-1").append($("<img>").attr('src', artistImg[i][0]).addClass('artistImages'));
             $("#img-2").append($("<img>").attr('src', artistImg[i][1]).addClass('artistImages'));
             $("#img-3").append($("<img>").attr('src', artistImg[i][2]).addClass('artistImages'));
@@ -469,19 +472,21 @@ function sendDataToOtherSections(eventId,object) {
             $(".artists").append("Name: " + events_array[i].name);
             $(".venue").append("Location: " + events_array[i].location);
             $(".date").append("Date: " + events_array[i].date);
-            $(".tickets").append("Ticket-URL " + events_array[i].url);
+            $(".tickets").append("Ticket Info: " + events_array[i].url);
             $('.secondScreen').removeClass('hidden');
             $('.firstScreen').addClass('hidden');
             $('.events-lists').addClass('hidden'); 
             flickrLoop(events_array[i].location);
             loadVideo(events_array[i].name);
         }
-    }    
+    }
+}   
 
-}
+
 
 
 function backButtonActions() {
+     //added county and city
     $('.secondHeader h1, #img-1, #img-2, #img-3, #img-4, .artists, .venue, .date, .tickets, .secondHeader .country, .secondHeader .city').empty();
     $('.secondScreen').addClass('hidden');
     $('.events-lists, .firstScreen').removeClass('hidden');
