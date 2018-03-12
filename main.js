@@ -464,6 +464,7 @@ function sendDataToOtherSections(eventId,object) {
     for (var i = 0; i < events_array.length; i++) {
             if(eventId === events_array[i].id) {      
                 $(".secondHeader h1").append(events_array[i].name).addClass('secondHeader_h1');
+                //added county and city
                 $(".secondHeader .country").append("Country: " + events_array[i].country).addClass('country');
                 $(".secondHeader .city").append("City: " + events_array[i].city);
                 $("#img-1").append($("<img>").attr('src', artistImg[i][0]).addClass('artistImages'));
@@ -485,6 +486,7 @@ function sendDataToOtherSections(eventId,object) {
     }
 
 function backButtonActions() {
+     //added county and city
     $('.secondHeader h1, #img-1, #img-2, #img-3, #img-4, .artists, .venue, .date, .tickets, .secondHeader .country, .secondHeader .city').empty();
     $('.secondScreen').addClass('hidden');
     $('.events-lists, .firstScreen').removeClass('hidden');
