@@ -20,7 +20,7 @@ var videoIdArray = [];
 var videoPlayer;
 var artistName;
 var ticketObject = {
-  ticketPrice: [],
+    ticketPrice: []
 };
 /***************************************************************************************************
  * initializeApp
@@ -31,6 +31,7 @@ var ticketObject = {
 function initializeApp() {
     addClickHandlersAndStylesToElements();
     createPlayer();
+    $('table').stickyTableHeaders();
 }
 
 /***************************************************************************************************
@@ -276,11 +277,25 @@ function flickrLoop(venueLocation) {
 
 function displayImage(venueImage){
     var img_src = "https://farm" + venueImage.farm + ".staticflickr.com/" + venueImage.server + "/" + venueImage.id + "_" + venueImage.secret + ".jpg";
-    var one_image= $('<img>').attr("src", img_src).addClass('venueImages');
+    var one_image= $('<div>').css({
+        background:'url('+img_src+') center center / cover no-repeat',        
+        width: '100%',
+        height: '400px',        
+    });
     $('.secondScreenTopContainer').empty().append(one_image);
     $('.firstScreen').addClass('.hidden');
     $('.secondScreen').removeClass('.hidden');
-};
+
+}
+
+// function displayImage(venueImage){
+//     var img_src = "https://farm" + venueImage.farm + ".staticflickr.com/" + venueImage.server + "/" + venueImage.id + "_" + venueImage.secret + ".jpg";
+//     var one_image= $('<img>').attr("src", img_src).addClass('venueImages');
+//     $('.secondScreenTopContainer').empty().append(one_image);
+//     $('.firstScreen').addClass('.hidden');
+//     $('.secondScreen').removeClass('.hidden');
+    
+// }
 
 //Keaton
 function getArtistImages () {
@@ -329,8 +344,9 @@ function getDataFromTicketMaster() {
                     location: data._embedded.events[i]._embedded.venues[0].name,
                     date: data._embedded.events[i].dates.start.localDate,
                     id:data._embedded.events[i].id,
-                    url: data._embedded.events[i].url,
-
+                    url: data._embedded.events[i].url,                    
+                    country: data._embedded.events[i]._embedded.venues[0].country.name,
+                    city: data._embedded.events[i]._embedded.venues[0].city.name,
                   };
                 if(events_array.length > 20){
                     events_array = [];
@@ -389,7 +405,7 @@ function updateEventsLists(events_array) {
 
 //how does this work with the youtubeframapiready?
 function createPlayer() {
-    debugger;
+    //debugger;
     var tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
     var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -400,8 +416,8 @@ function createPlayer() {
 //Error parsing header X-XSS-Protection is a bug found in chrome
 function onYouTubeIframeAPIReady() {
     videoPlayer = new YT.Player('player', {
-        height: '345',
-        width: '530',
+       // height: '345',
+        width: '100%',
         videoId: 'L6c_mYQ9LaM',
         playerVars: {
             'autoplay': 1,
@@ -447,7 +463,9 @@ function sendDataToOtherSections(eventId,object) {
     $('.search-events').prop('disabled',true);
     for (var i = 0; i < events_array.length; i++) {
             if(eventId === events_array[i].id) {      
-                $(".secondHeader h1").append(events_array[i].name).addClass('secondHeader');
+                $(".secondHeader h1").append(events_array[i].name).addClass('secondHeader_h1');
+                $(".secondHeader .country").append("Country: " + events_array[i].country).addClass('country');
+                $(".secondHeader .city").append("City: " + events_array[i].city);
                 $("#img-1").append($("<img>").attr('src', artistImg[i][0]).addClass('artistImages'));
                 $("#img-2").append($("<img>").attr('src', artistImg[i][1]).addClass('artistImages'));
                 $("#img-3").append($("<img>").attr('src', artistImg[i][2]).addClass('artistImages'));
@@ -455,7 +473,7 @@ function sendDataToOtherSections(eventId,object) {
                 $(".artists").append("Name: " + events_array[i].name);
                 $(".venue").append("Location: " + events_array[i].location);
                 $(".date").append("Date: " + events_array[i].date);
-                $(".tickets").append("Ticket-URL " + events_array[i].url);
+                $(".tickets").append("Ticket Info: " + events_array[i].url);
                 $('.secondScreen').removeClass('hidden');
                 $('.firstScreen').addClass('hidden');
                 $('.events-lists').addClass('hidden'); 
@@ -467,7 +485,7 @@ function sendDataToOtherSections(eventId,object) {
     }
 
 function backButtonActions() {
-    $('.secondHeader h1, #img-1, #img-2, #img-3, #img-4, .artists, .venue, .date, .tickets').empty();
+    $('.secondHeader h1, #img-1, #img-2, #img-3, #img-4, .artists, .venue, .date, .tickets, .secondHeader .country, .secondHeader .city').empty();
     $('.secondScreen').addClass('hidden');
     $('.events-lists, .firstScreen').removeClass('hidden');
     $('.search-events').prop('disabled',false);
