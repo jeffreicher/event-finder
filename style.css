@@ -103,7 +103,7 @@ button.search-events:hover, .row:hover, .backButton:hover {
     overflow: scroll;
     display: inline-block;
     width: 70%;
-    height: 100%;
+    height: 102%;
     margin: 0 5px;
     background: #ebebeb;
     box-sizing: border-box; 
@@ -133,7 +133,7 @@ button.search-events:hover, .row:hover, .backButton:hover {
 }
 .secondScreen{
     top: 0;
-    position: absolute;
+    position: relative;
     width: 62.5%;
     height: 100%;
 }
@@ -178,11 +178,24 @@ button.search-events:hover, .row:hover, .backButton:hover {
 }
 .right-col{
     display: inline-block;
-    width: 30%;
-    height: 100%;
+    width: 100%;
+    height: 50%;
     margin: 0 5px;
     background: #fff;
     box-sizing: border-box; 
+}
+
+.right-col-2{
+    display: inline-block;
+    width: 100%;
+    height: 50%;
+    margin: 0 5px;
+    background: #fff;
+    box-sizing: border-box;
+}
+
+.right-container{
+
 }
 
 .events-lists {
@@ -209,16 +222,20 @@ thead > tr > th{
 }
 
 .event-info{
-    display: flex;
-    position: relative;
+    display: inline;
+    /* position: relative; */
     width: 100%;
     padding: 0% 4%;
     margin-bottom: 2%;
     height: 50%;
-    background: #ebebeb;
     box-sizing: border-box;
     flex-direction: column;
 }
+
+#player {
+    width: 100%;
+}
+
 .video{
     display: flex;
     position: relative;
@@ -281,6 +298,24 @@ thead > tr > th{
     }
     button.search-events {
         padding: 11px 16px;
+    }
+    .left-col{
+        overflow: scroll;
+        display: inline-block;
+        width: 100%;
+        height: 102%;
+        margin: 0 5px;
+        background: #ebebeb;
+        box-sizing: border-box; 
+    }
+    #container{
+        display: grid;
+        position: relative;
+        width: 100%;
+        padding: 0% 4%;
+        margin-bottom: 2%;
+        height: 75%;
+        background: #fff;
     }
 }
 

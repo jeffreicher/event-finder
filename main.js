@@ -41,7 +41,10 @@ function initializeApp() {
  */
  
 function addClickHandlersAndStylesToElements() {
-    $('.search-events').on('click', getDataFromTicketMaster);
+    $('.search-events').on('click', function(){
+      getDataFromTicketMaster();
+      $('.firstScreen').addClass('hidden');  
+    });
     $('.backButton').on('click', backButtonActions);
     $('.secondScreen').addClass('hidden');
 }
@@ -426,7 +429,6 @@ function updateEventsLists(events_array) {
 
 //how does this work with the youtubeframapiready?
 function createPlayer() {
-    debugger;
     var tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
     var firstScriptTag = document.getElementsByTagName('script')[0];
