@@ -3,19 +3,12 @@
  * Listen for the document to load and initialize the application
  */
 $(document).ready(initializeApp);
-var firstConcert = null;
-    function initializeApp() {
-        firstConcert = new MusicConcert();
-        addClickHandlersAndStylesToElements();
-        // createPlayer();
-    };
 
-    function addClickHandlersAndStylesToElements() {
-        // $('.search-events').on('click', this.getDataFromTicketMaster);
-        // $('.backButton').on('click', this.backButtonActions);
-        $('.secondScreen').addClass('hidden');
-    }
+let firstConcert = null;
 
+function initializeApp() {
+    firstConcert = new MusicConcert();
+};
 
 /***********************
  * events_array - global array to hold hiphop info objects
@@ -37,7 +30,9 @@ class MusicConcert {
         this.ticketObject = {
         ticketPrice: [],
         }
-    }
+        this.addClickHandlersAndStylesToElements();
+        this.createPlayer();
+    };
     /***************************************************************************************************
      * initializeApp
      * @params {undefined} none
@@ -52,7 +47,12 @@ class MusicConcert {
      * @returns  {undefined} none
      * gives buttons function to execute when clicked, as well as adding a class to the hidden div
      */
-    
+
+    addClickHandlersAndStylesToElements() {
+        $('.search-events').on('click', this.getDataFromTicketMaster.bind(this));
+        $('.backButton').on('click', this.backButtonActions.bind(this));
+        $('.secondScreen').addClass('hidden');
+    }
 
     artistPictureDynamicCreation() {
         for(var i = 0; i<artistImg[1].length; i++){
@@ -322,7 +322,9 @@ class MusicConcert {
                 console.log(data);
                 for (var i = 0; i < data._embedded.events.length; i++) {
                     var fesivalObjects = data._embedded.events[i];
-                    events_array1.push(fesivalObjects);
+                    console.log(fesivalObjects);
+                    console.log(typeof this.events_array1);
+                    this.events_array1.push(fesivalObjects);
                     data_object = {
                         img: data._embedded.events[i].images[0].url,
                         img2: data._embedded.events[i].images[1].url,
