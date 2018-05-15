@@ -55,9 +55,9 @@ class MusicConcert {
     }
 
     artistPictureDynamicCreation() {
-        for(var i = 0; i<artistImg[1].length; i++){
+        for(var i = 0; i<this.artistImg[1].length; i++){
             var container = $(".left-bottom-col-3");
-            var imgContainer = $("<div>").append(artistImg[i][i]);
+            var imgContainer = $("<div>").append(this.artistImg[i][i]);
             imgContainer.appendTo(container);
         }
     }
@@ -288,25 +288,26 @@ class MusicConcert {
         $('.secondScreen').removeClass('.hidden');
     }
 
-    getArtistImages () {
-        for (var i = 0; i < artistInfo.length; i++) {
-            var artistImgArray = [];
-            for (var x = 0; x < artistInfo[i].length; x++) {
-                var artistUrl = artistInfo[i][x].images[0].url;
-                artistImgArray.push(artistUrl);
-            }
-            artistImg.push(artistImgArray);
-        }
-    } 
+    // getArtistImages() {
+    //     console.log(this.artistInfo);
+    //     for (var i = 0; i < this.artistInfo.length; i++) {
+    //         var artistImgArray = [];
+    //         for (var x = 0; x < this.artistInfo[i].length; x++) {
+    //             var artistUrl = this.artistInfo[i][x].images[0].url;
+    //             artistImgArray.push(artistUrl);
+    //         }
+    //         this.artistImg.push(artistImgArray);
+    //     }
+    // } 
 
     getArtistFromEvents() {
-        for(var i=0; i<events_array1.length; i++){
-            var attraction = events_array1[i]._embedded.attractions;
-            artistInfo.push(attraction);
-            var venue = events_array1[i]._embedded.venues[0].name;
-            concertVenues.push(venue);
+        for(var i=0; i<this.events_array1.length; i++){
+            var attraction = this.events_array1[i]._embedded.attractions;
+            this.artistInfo.push(attraction);
+            var venue = this.events_array1[i]._embedded.venues[0].name;
+            this.concertVenues.push(venue);
             }
-            getArtistImages();
+            // this.getArtistImages();
     }  
 
     getDataFromTicketMaster() {
@@ -317,7 +318,7 @@ class MusicConcert {
             type: "GET",
             url: "https://app.ticketmaster.com/discovery/v2/events?apikey=tBBObsl2YtXpvAceOW6DOKwRtZpd8bxd&keyword=" + keyword + "&countryCode=US&stateCode=Ca",
             dataType: "text",
-            success: function (json_data) {
+            success: (json_data) => {
                 var data = JSON.parse(json_data);
                 console.log(data);
                 for (var i = 0; i < data._embedded.events.length; i++) {
@@ -325,7 +326,7 @@ class MusicConcert {
                     console.log(fesivalObjects);
                     console.log(typeof this.events_array1);
                     this.events_array1.push(fesivalObjects);
-                    data_object = {
+                    this.data_object = {
                         img: data._embedded.events[i].images[0].url,
                         img2: data._embedded.events[i].images[1].url,
                         img3: data._embedded.events[i].images[2].url,
@@ -337,18 +338,18 @@ class MusicConcert {
                         url: data._embedded.events[i].url,
 
                     };
-                    if(events_array.length > 20){
-                        events_array = [];
+                    if(this.events_array.length > 20){
+                        this.events_array = [];
                         $(".events-lists").remove();
-                        events_array.push(data_object);
+                        this.events_array.push(this.data_object);
                     } else {
-                        events_array.push(data_object);
+                        this.events_array.push(this.data_object);
                     }
                     
                 }           
-                updateEventsLists(events_array);
+                this.updateEventsLists(this.events_array);
 
-                getArtistFromEvents();
+                this.getArtistFromEvents();
             },
             error: function (xhr, status, err) {
             }
@@ -358,20 +359,20 @@ class MusicConcert {
     updateEventsLists(events_array) {
         var tbody = $('<tbody>').addClass('table-content');   
         var table = $('<table>').addClass('events-lists');  
-        for(var i=0; i<events_array.length; i++){
-            var get_img = events_array[i].img;
+        for(var i=0; i<this.events_array.length; i++){
+            var get_img = this.events_array[i].img;
             var img_tag = $('<img>').attr('src', get_img).css('width', '100px');
             var img = $('<td>');
-            var name = $('<td>').text(events_array[i].name);
-            var location = $('<td>').text(events_array[i].location);
-            var date = $('<td>').text(events_array[i].date);  
+            var name = $('<td>').text(this.events_array[i].name);
+            var location = $('<td>').text(this.events_array[i].location);
+            var date = $('<td>').text(this.events_array[i].date);  
             var tr =  $('<tr>', {
                 class:'row',
-                "data-event": events_array[i].id,
+                "data-event": this.events_array[i].id,
                 on: { 
-                    click:function() {
+                    click:() => {
                         var eventId = $(this).attr('data-event');
-                        sendDataToOtherSections(eventId,this);
+                        this.sendDataToOtherSections(eventId,this);
                     },          
                 }
             });
@@ -442,22 +443,22 @@ class MusicConcert {
 
     sendDataToOtherSections(eventId,object) {
         $('.search-events').prop('disabled', true);
-        for(var i = 0; i<events_array.length; i++) {
-            if(eventId === events_array[i].id) {      
-                $(".secondHeader h1").append(events_array[i].name).addClass('secondHeader');
-                $("#img-1").append($("<img>").attr('src', artistImg[i][0]).addClass('artistImages'));
-                $("#img-2").append($("<img>").attr('src', artistImg[i][1]).addClass('artistImages'));
-                $("#img-3").append($("<img>").attr('src', artistImg[i][2]).addClass('artistImages'));
-                $("#img-4").append($("<img>").attr('src', artistImg[i][3]).addClass('artistImages'));
-                $(".artists").append("Name: " + events_array[i].name);
-                $(".venue").append("Location: " + events_array[i].location);
-                $(".date").append("Date: " + events_array[i].date);
-                $(".tickets").append("Ticket-URL " + events_array[i].url);
+        for(var i = 0; i<this.events_array.length; i++) {
+            if(eventId === this.events_array[i].id) {      
+                $(".secondHeader h1").append(this.events_array[i].name).addClass('secondHeader');
+                $("#img-1").append($("<img>").attr('src', this.artistImg[i][0]).addClass('artistImages'));
+                $("#img-2").append($("<img>").attr('src', this.artistImg[i][1]).addClass('artistImages'));
+                $("#img-3").append($("<img>").attr('src', this.artistImg[i][2]).addClass('artistImages'));
+                $("#img-4").append($("<img>").attr('src', this.artistImg[i][3]).addClass('artistImages'));
+                $(".artists").append("Name: " + this.events_array[i].name);
+                $(".venue").append("Location: " + this.events_array[i].location);
+                $(".date").append("Date: " + this.events_array[i].date);
+                $(".tickets").append("Ticket-URL " + this.events_array[i].url);
                 $('.secondScreen').removeClass('hidden');
                 $('.firstScreen').addClass('hidden');
                 $('.events-lists').addClass('hidden'); 
-                flickrLoop(events_array[i].location);
-                loadVideo(events_array[i].name);
+                this.flickrLoop(this.events_array[i].location);
+                this.loadVideo(this.events_array[i].name);
             }
         }    
 
