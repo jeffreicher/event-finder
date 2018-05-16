@@ -3,7 +3,6 @@
  * Listen for the document to load and initialize the application
  */
 $(document).ready(initializeApp);
-
 let firstConcert = null;
 
 function initializeApp() {
@@ -30,6 +29,32 @@ class MusicConcert {
         this.ticketObject = {
         ticketPrice: [],
         }
+        this.refList = {
+            "Mattress Firm Amphitheatre": "37522480132",
+            "Mattress Firm Amphitheatre (Formerly Sleep Train Amphitheatre)": "37522480132",
+            "The Observatory - Santa Ana": "22927627330",
+            "Teragram Ballroom": "30043253042",
+            "House of Blues Anaheim": "8040060204",
+            "Mezzanine": "4484999982",
+            "Fox Theater - Oakland": "31142080295",
+            "Greek Theatre-U.C. Berkeley": "35489133763",
+            "Greek Theatre": "35489133763",
+            "City National Civic": "22592033217",
+            "Bill Graham Civic Auditorium": "30479561483",
+            "Hollywood Palladium": "27020496362",
+            "Hollywood Pantages Theatre": "31084523630",
+            "FivePoint Amphitheatre": "36211111572",
+            "Shoreline Amphitheatre": "39379605704",
+            "Toyota Amphitheatre": "27191296995",
+            "Copper Blues Oxnard Resturant": "",
+            "Dodger Stadium": "",
+            "Save Mart Center": "",
+            "Honda Center": "",
+            "The Forum": "",
+            "The Pacific Amphitheatre": "",
+            "Pechanga Resort and Casino": "",
+            "William Saroyan Theatre Fresno Convention & Entertainment Center": ""
+        };
         this.addClickHandlersAndStylesToElements();
         this.createPlayer();
     };
@@ -68,32 +93,7 @@ class MusicConcert {
         flickr_pic.attr("src", img_src);
     }
 
-    var refList = {
-        "Mattress Firm Amphitheatre": "37522480132",
-        "Mattress Firm Amphitheatre (Formerly Sleep Train Amphitheatre)": "37522480132",
-        "The Observatory - Santa Ana": "22927627330",
-        "Teragram Ballroom": "30043253042",
-        "House of Blues Anaheim": "8040060204",
-        "Mezzanine": "4484999982",
-        "Fox Theater - Oakland": "31142080295",
-        "Greek Theatre-U.C. Berkeley": "35489133763",
-        "Greek Theatre": "35489133763",
-        "City National Civic": "22592033217",
-        "Bill Graham Civic Auditorium": "30479561483",
-        "Hollywood Palladium": "27020496362",
-        "Hollywood Pantages Theatre": "31084523630",
-        "FivePoint Amphitheatre": "36211111572",
-        "Shoreline Amphitheatre": "39379605704",
-        "Toyota Amphitheatre": "27191296995",
-        "Copper Blues Oxnard Resturant": "",
-        "Dodger Stadium": "",
-        "Save Mart Center": "",
-        "Honda Center": "",
-        "The Forum": "",
-        "The Pacific Amphitheatre": "",
-        "Pechanga Resort and Casino": "",
-        "William Saroyan Theatre Fresno Convention & Entertainment Center": ""
-    };
+
 
 
     flickrLoop(venueLocation) {
@@ -110,7 +110,7 @@ class MusicConcert {
             success: function(response) {
                 console.log("Flickr response: ", response);
                 var venueImages = response;
-                var locationId = refList[venueLocation];
+                var locationId = this.refList[venueLocation];
 
                 for(var i = 0; i < venueImages.photos.photo.length; i++){
                     if(venueImages.photos.photo[i].id === locationId){
