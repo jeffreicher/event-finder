@@ -165,8 +165,8 @@ class MusicConcert {
                     var fesivalObjects = data._embedded.events[i];
                     console.log(fesivalObjects);
                     console.log(typeof this.events_array1);
-                    this.events_array1.push(fesivalObjects);
-                    data_object = {
+                    MusicConcert.events_array1 = (fesivalObjects);
+                    var data_object = {
                         img: data._embedded.events[i].images[0].url,
                         img2: data._embedded.events[i].images[1].url,
                         img3: data._embedded.events[i].images[2].url,
@@ -178,16 +178,16 @@ class MusicConcert {
                         url: data._embedded.events[i].url,
 
                     };
-                    if(events_array.length > 20){
-                        events_array = [];
+                    if(MusicConcert.events_array > 20){
+                        MusicConcert.events_array = [];
                         $(".events-lists").remove();
-                        events_array.push(data_object);
+                        MusicConcert.events_array.push(data_object);
                     } else {
-                        events_array.push(data_object);
+                        MusicConcert.events_array.push(data_object);
                     }
                     
                 }           
-                updateEventsLists(events_array);
+                MusicConcert.updateEventsLists(events_array);
 
                 getArtistFromEvents();
             },
