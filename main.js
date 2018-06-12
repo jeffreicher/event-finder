@@ -73,9 +73,24 @@ class MusicConcert {
      */
 
     addClickHandlersAndStylesToElements() {
+        $('.search-events').on('click', function(){
+            console.log('Click Working');
+            $('.firstScreen').addClass('hidden');
+            firstConcert.events_array = [];
+            firstConcert.events_array1 = [];
+            firstConcert.artistInfo = [];
+            firstConcert.artistImg = [];
+            firstConcert.artistInfo = [];
+            firstConcert.artistInfo = [];
+            $('.events-lists').empty();
+        })
         $('.search-events').on('click', this.getDataFromTicketMaster.bind(this));
         $('.backButton').on('click', this.backButtonActions.bind(this));
         $('.secondScreen').addClass('hidden');
+    }
+
+    clearTableContentOnSearch(){
+        
     }
 
     artistPictureDynamicCreation() {
@@ -308,7 +323,7 @@ class MusicConcert {
     backButtonActions() {
         $('.secondHeader h1, #img-1, #img-2, #img-3, #img-4, .artists, .venue, .date, .tickets').empty();
         $('.secondScreen').addClass('hidden');
-        $('.events-lists, .firstScreen').removeClass('hidden');
+        $('.events-lists').removeClass('hidden');
         $('.search-events').prop('disabled', false);
     }
 }
