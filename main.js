@@ -3,7 +3,6 @@
  * Listen for the document to load and initialize the application
  */
 $(document).ready(initializeApp);
-let firstConcert = null;
 
 function initializeApp() {
     firstConcert = new MusicConcert();
@@ -80,7 +79,7 @@ class MusicConcert {
     }
 
     artistPictureDynamicCreation() {
-        for(var i = 0; i<artistImg[1].length; i++){
+        for(var i = 0; i<firstConcert.artistImg[1].length; i++){
             var container = $(".left-bottom-col-3");
             var imgContainer = $("<div>").append(artistImg[i][i]);
             imgContainer.appendTo(container);
@@ -114,7 +113,7 @@ class MusicConcert {
 
                 for(var i = 0; i < venueImages.photos.photo.length; i++){
                     if(venueImages.photos.photo[i].id === locationId){
-                        displayImage(venueImages.photos.photo[i]);
+                        firstConcert.displayImage(venueImages.photos.photo[i]);
                     }
                 };
             }
@@ -130,24 +129,24 @@ class MusicConcert {
     }
 
     getArtistImages () {
-        for (var i = 0; i < artistInfo.length; i++) {
+        for (var i = 0; i < firstConcert.artistInfo.length; i++) {
             var artistImgArray = [];
-            for (var x = 0; x < artistInfo[i].length; x++) {
-                var artistUrl = artistInfo[i][x].images[0].url;
+            for (var x = 0; x < firstConcert.artistInfo[i].length; x++) {
+                var artistUrl = firstConcert.artistInfo[i][x].images[0].url;
                 artistImgArray.push(artistUrl);
             }
-            artistImg.push(artistImgArray);
+            firstConcert.artistImg.push(artistImgArray);
         }
     } 
 
     getArtistFromEvents() {
-        for(var i=0; i<events_array1.length; i++){
-            var attraction = events_array1[i]._embedded.attractions;
-            artistInfo.push(attraction);
-            var venue = events_array1[i]._embedded.venues[0].name;
-            concertVenues.push(venue);
+        for(var i=0; i<firstConcert.events_array1.length; i++){
+            var attraction = firstConcert.events_array1[i]._embedded.attractions;
+            firstConcert.artistInfo.push(attraction);
+            var venue = firstConcert.events_array1[i]._embedded.venues[0].name;
+            firstConcert.concertVenues.push(venue);
             }
-            getArtistImages();
+            firstConcert.getArtistImages();
     }  
 
     getDataFromTicketMaster() {
@@ -164,9 +163,9 @@ class MusicConcert {
                 for (var i = 0; i < data._embedded.events.length; i++) {
                     var fesivalObjects = data._embedded.events[i];
                     console.log(fesivalObjects);
-                    console.log(typeof this.events_array1);
-                    MusicConcert.events_array1 = (fesivalObjects);
-                    var data_object = {
+                    console.log(typeof firstConcert.events_array1);
+                    firstConcert.events_array1.push(fesivalObjects);
+                    firstConcert.data_object = {
                         img: data._embedded.events[i].images[0].url,
                         img2: data._embedded.events[i].images[1].url,
                         img3: data._embedded.events[i].images[2].url,
@@ -178,18 +177,20 @@ class MusicConcert {
                         url: data._embedded.events[i].url,
 
                     };
-                    if(MusicConcert.events_array > 20){
-                        MusicConcert.events_array = [];
+                    if(firstConcert.events_array > 20){
+                        firstConcert.events_array = [];
                         $(".events-lists").remove();
-                        MusicConcert.events_array.push(data_object);
+                        console.log(data_object);
+                        firstConcert.events_array.push(firstConcert.data_object);
                     } else {
-                        MusicConcert.events_array.push(data_object);
+                        firstConcert.events_array.push(firstConcert.data_object);
+                        console.log(firstConcert.events_array)
                     }
                     
                 }           
-                MusicConcert.updateEventsLists(events_array);
+                firstConcert.updateEventsLists(firstConcert.events_array);
 
-                getArtistFromEvents();
+                firstConcert.getArtistFromEvents();
             },
             error: function (xhr, status, err) {
             }
@@ -199,7 +200,7 @@ class MusicConcert {
     updateEventsLists(events_array) {
         var tbody = $('<tbody>').addClass('table-content');   
         var table = $('<table>').addClass('events-lists');  
-        for(var i=0; i<events_array.length; i++){
+        for(var i=0; i<this.events_array.length; i++){
             var get_img = events_array[i].img;
             var img_tag = $('<img>').attr('src', get_img).css('width', '100px');
             var img = $('<td>');
@@ -212,7 +213,7 @@ class MusicConcert {
                 on: { 
                     click:function() {
                         var eventId = $(this).attr('data-event');
-                        sendDataToOtherSections(eventId,this);
+                        firstConcert.sendDataToOtherSections(eventId,this);
                     },          
                 }
             });
@@ -271,7 +272,7 @@ class MusicConcert {
                     for ( var video_i = 0; video_i < response.video.length; video_i++) {
                         videoIdArray.push(response.video[video_i].id);
                     }
-                    changePlayer(videoIdArray[0]);
+                    firstConcert.changePlayer(videoIdArray[0]);
                 }
             }
         });
@@ -283,22 +284,22 @@ class MusicConcert {
 
     sendDataToOtherSections(eventId,object) {
         $('.search-events').prop('disabled', true);
-        for(var i = 0; i<events_array.length; i++) {
-            if(eventId === events_array[i].id) {      
-                $(".secondHeader h1").append(events_array[i].name).addClass('secondHeader');
-                $("#img-1").append($("<img>").attr('src', artistImg[i][0]).addClass('artistImages'));
-                $("#img-2").append($("<img>").attr('src', artistImg[i][1]).addClass('artistImages'));
-                $("#img-3").append($("<img>").attr('src', artistImg[i][2]).addClass('artistImages'));
-                $("#img-4").append($("<img>").attr('src', artistImg[i][3]).addClass('artistImages'));
-                $(".artists").append("Name: " + events_array[i].name);
-                $(".venue").append("Location: " + events_array[i].location);
-                $(".date").append("Date: " + events_array[i].date);
-                $(".tickets").append("Ticket-URL " + events_array[i].url);
+        for(var i = 0; i<firstConcert.events_array.length; i++) {
+            if(eventId === firstConcert.events_array[i].id) {      
+                $(".secondHeader h1").append(firstConcert.events_array[i].name).addClass('secondHeader');
+                $("#img-1").append($("<img>").attr('src', firstConcert.artistImg[i][0]).addClass('artistImages'));
+                $("#img-2").append($("<img>").attr('src', firstConcert.artistImg[i][1]).addClass('artistImages'));
+                $("#img-3").append($("<img>").attr('src', firstConcert.artistImg[i][2]).addClass('artistImages'));
+                $("#img-4").append($("<img>").attr('src', firstConcert.artistImg[i][3]).addClass('artistImages'));
+                $(".artists").append("Name: " + firstConcert.events_array[i].name);
+                $(".venue").append("Location: " + firstConcert.events_array[i].location);
+                $(".date").append("Date: " + firstConcert.events_array[i].date);
+                $(".tickets").append("Ticket-URL " + firstConcert.events_array[i].url);
                 $('.secondScreen').removeClass('hidden');
                 $('.firstScreen').addClass('hidden');
                 $('.events-lists').addClass('hidden'); 
-                flickrLoop(events_array[i].location);
-                loadVideo(events_array[i].name);
+                firstConcert.flickrLoop(firstConcert.events_array[i].location);
+                firstConcert.loadVideo(firstConcert.events_array[i].name);
             }
         }    
 
