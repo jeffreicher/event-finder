@@ -109,7 +109,7 @@ class MusicConcert {
             success: function(response) {
                 console.log("Flickr response: ", response);
                 var venueImages = response;
-                var locationId = this.refList[venueLocation];
+                var locationId = firstConcert.refList[venueLocation];
 
                 for(var i = 0; i < venueImages.photos.photo.length; i++){
                     if(venueImages.photos.photo[i].id === locationId){
