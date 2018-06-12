@@ -302,7 +302,7 @@ class MusicConcert {
         for(var i = 0; i<firstConcert.events_array.length; i++) {
             if(eventId === firstConcert.events_array[i].id) {      
                 $(".secondHeader h1").append(firstConcert.events_array[i].name).addClass('secondHeader');
-                $("#img-1").append($("<img>").attr('src', firstConcert.artistImg[i][0]).addClass('artistImages'));
+                $(".secondScreenTopContainer").append($("<img>").attr('src', firstConcert.artistImg[i][0]).addClass('artistImages'));
                 $("#img-2").append($("<img>").attr('src', firstConcert.artistImg[i][1]).addClass('artistImages'));
                 $("#img-3").append($("<img>").attr('src', firstConcert.artistImg[i][2]).addClass('artistImages'));
                 $("#img-4").append($("<img>").attr('src', firstConcert.artistImg[i][3]).addClass('artistImages'));
@@ -325,6 +325,7 @@ class MusicConcert {
         $('.secondScreen').addClass('hidden');
         $('.events-lists').removeClass('hidden');
         $('.search-events').prop('disabled', false);
+        $('.secondScreenTopContainer').empty();
     }
 }
 
