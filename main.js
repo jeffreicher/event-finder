@@ -23,7 +23,7 @@ class MusicConcert {
         this.ticketPrice = [];
         this.preformerNames =[];
         this.videoIdArray = [];
-        this.videoPlayer;
+        this.videoPlayer = 0;
         this.artistName;
         this.ticketObject = {
         ticketPrice: [],
@@ -56,6 +56,7 @@ class MusicConcert {
         };
         this.addClickHandlersAndStylesToElements();
         this.createPlayer();
+        
     };
     /***************************************************************************************************
      * initializeApp
@@ -71,11 +72,12 @@ class MusicConcert {
      * @returns  {undefined} none
      * gives buttons function to execute when clicked, as well as adding a class to the hidden div
      */
-
+    //================CLICK HANDLERS================================//
     addClickHandlersAndStylesToElements() {
+        $('.secondScreen').addClass('hidden');
         $('.search-events').on('click', function(){
-            console.log('Click Working');
             $('.firstScreen').addClass('hidden');
+            console.log('Click Working');
             firstConcert.events_array = [];
             firstConcert.events_array1 = [];
             firstConcert.artistInfo = [];
@@ -86,12 +88,23 @@ class MusicConcert {
         })
         $('.search-events').on('click', this.getDataFromTicketMaster.bind(this));
         $('.backButton').on('click', this.backButtonActions.bind(this));
-        $('.secondScreen').addClass('hidden');
     }
+
+    backButtonActions() {
+        $('.secondHeader h1, #img-1, #img-2, #img-3, #img-4, .artists, .venue, .date, .tickets').empty();
+        $('.secondScreen').addClass('hidden');
+        $('.events-lists').removeClass('hidden');
+        $('.search-events').prop('disabled', false);
+        $('.secondScreenTopContainer').empty();
+    }
+
 
     clearTableContentOnSearch(){
         
     }
+    //=====================================================================//
+
+    //=========================FLICKR======================================//
 
     artistPictureDynamicCreation() {
         for(var i = 0; i<firstConcert.artistImg[1].length; i++){
@@ -142,7 +155,81 @@ class MusicConcert {
         $('.firstScreen').addClass('.hidden');
         $('.secondScreen').removeClass('.hidden');
     }
+//=================================================================================================//
 
+//=======================YOUTUBE PLAYER FUNCTIONS==================================================//
+    createPlayer() {
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    }
+
+    // onYouTubeIframeAPIReady() {
+    //         videoPlayer = new YT.Player('player', {
+    //         height: '345',
+    //         width: '530',
+    //         videoId: 'L6c_mYQ9LaM',
+    //         playerVars: {
+    //             'autoplay': 1,
+    //             'controls': 0,
+    //             'loop': 1,
+    //             'modestbranding': 1,
+    //         }
+    //     });
+    // }
+
+    loadVideo(name) {
+        $.ajax({
+            dataType: 'json',
+            data: {
+                api_key: 'IkLZGbSrRC',
+                q: name + ' live set',
+                maxResults: 5,
+                type: 'video'
+            },
+            method: 'POST',
+            url: 'https://s-apis.learningfuze.com/hackathon/youtube/search.php',
+            success: function(response){
+                if(response.success){
+                    firstConcert.videoIdArray=[];
+                    for ( var video_i = 0; video_i < response.video.length; video_i++) {
+                        firstConcert.videoIdArray.push(response.video[video_i].id);
+                    }
+                    firstConcert.changePlayer(firstConcert.videoIdArray[0]);
+                }
+            }
+        });
+    }
+
+    changePlayer(newID){
+        videoPlayer.a.src = 'https://www.youtube.com/embed/'+newID+'?autoplay=1&loop=1&controls=0&modestbranding=1';
+    }
+    //=======================TICKET MASTER FUNCTIONS==================================================//
+
+    sendDataToOtherSections(eventId,object) {
+        $('.search-events').prop('disabled', true);
+        for(var i = 0; i<firstConcert.events_array.length; i++) {
+            if(eventId === firstConcert.events_array[i].id) {      
+                $(".secondHeader h1").append(firstConcert.events_array[i].name).addClass('secondHeader');
+                $(".secondScreenTopContainer").append($("<img>").attr('src', firstConcert.artistImg[i][0]).addClass('artistImages'));
+                $("#img-2").append($("<img>").attr('src', firstConcert.artistImg[i][1]).addClass('artistImages'));
+                $("#img-3").append($("<img>").attr('src', firstConcert.artistImg[i][2]).addClass('artistImages'));
+                $("#img-4").append($("<img>").attr('src', firstConcert.artistImg[i][3]).addClass('artistImages'));
+                $(".artists").append("Name: " + firstConcert.events_array[i].name);
+                $(".venue").append("Location: " + firstConcert.events_array[i].location);
+                $(".date").append("Date: " + firstConcert.events_array[i].date);
+                $(".tickets").append("Ticket-URL " + firstConcert.events_array[i].url);
+                $('.secondScreen').removeClass('hidden');
+                $('.firstScreen').addClass('hidden');
+                $('.events-lists').addClass('hidden'); 
+                firstConcert.flickrLoop(firstConcert.events_array[i].location);
+                firstConcert.loadVideo(firstConcert.events_array[i].name);
+            }
+        }    
+
+    }
+    
     getArtistImages () {
         for (var i = 0; i < firstConcert.artistInfo.length; i++) {
             var artistImgArray = [];
@@ -248,84 +335,18 @@ class MusicConcert {
         table.append(thead, tbody);
         $('.left-col').prepend(table);
     }
-
-    createPlayer() {
-        var tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        var firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-    }
-
-    onYouTubeIframeAPIReady() {
-        videoPlayer = new YT.Player('player', {
-            height: '345',
-            width: '530',
-            videoId: 'L6c_mYQ9LaM',
-            playerVars: {
-                'autoplay': 1,
-                'controls': 0,
-                'loop': 1,
-                'modestbranding': 1,
-            }
-        });
-    }
-
-    loadVideo(name) {
-        $.ajax({
-            dataType: 'json',
-            data: {
-                api_key: 'IkLZGbSrRC',
-                q: name + ' live set',
-                maxResults: 5,
-                type: 'video'
-            },
-            method: 'POST',
-            url: 'https://s-apis.learningfuze.com/hackathon/youtube/search.php',
-            success: function(response){
-                if(response.success){
-                    videoIdArray=[];
-                    for ( var video_i = 0; video_i < response.video.length; video_i++) {
-                        videoIdArray.push(response.video[video_i].id);
-                    }
-                    firstConcert.changePlayer(videoIdArray[0]);
-                }
-            }
-        });
-    }
-
-    changePlayer(newID){
-        videoPlayer.a.src = 'https://www.youtube.com/embed/'+newID+'?autoplay=1&loop=1&controls=0&modestbranding=1';
-    }
-
-    sendDataToOtherSections(eventId,object) {
-        $('.search-events').prop('disabled', true);
-        for(var i = 0; i<firstConcert.events_array.length; i++) {
-            if(eventId === firstConcert.events_array[i].id) {      
-                $(".secondHeader h1").append(firstConcert.events_array[i].name).addClass('secondHeader');
-                $(".secondScreenTopContainer").append($("<img>").attr('src', firstConcert.artistImg[i][0]).addClass('artistImages'));
-                $("#img-2").append($("<img>").attr('src', firstConcert.artistImg[i][1]).addClass('artistImages'));
-                $("#img-3").append($("<img>").attr('src', firstConcert.artistImg[i][2]).addClass('artistImages'));
-                $("#img-4").append($("<img>").attr('src', firstConcert.artistImg[i][3]).addClass('artistImages'));
-                $(".artists").append("Name: " + firstConcert.events_array[i].name);
-                $(".venue").append("Location: " + firstConcert.events_array[i].location);
-                $(".date").append("Date: " + firstConcert.events_array[i].date);
-                $(".tickets").append("Ticket-URL " + firstConcert.events_array[i].url);
-                $('.secondScreen').removeClass('hidden');
-                $('.firstScreen').addClass('hidden');
-                $('.events-lists').addClass('hidden'); 
-                firstConcert.flickrLoop(firstConcert.events_array[i].location);
-                firstConcert.loadVideo(firstConcert.events_array[i].name);
-            }
-        }    
-
-    }
-    
-    backButtonActions() {
-        $('.secondHeader h1, #img-1, #img-2, #img-3, #img-4, .artists, .venue, .date, .tickets').empty();
-        $('.secondScreen').addClass('hidden');
-        $('.events-lists').removeClass('hidden');
-        $('.search-events').prop('disabled', false);
-        $('.secondScreenTopContainer').empty();
-    }
 }
-
+//===========================================================================================================//
+function onYouTubeIframeAPIReady() {
+        videoPlayer = new YT.Player('player', {
+        height: '345',
+        width: '530',
+        videoId: 'L6c_mYQ9LaM',
+        playerVars: {
+            'autoplay': 1,
+            'controls': 0,
+            'loop': 1,
+            'modestbranding': 1,
+        }
+    });
+}

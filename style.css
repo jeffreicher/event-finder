@@ -178,7 +178,7 @@ button.search-events:hover, .row:hover, .backButton:hover {
     /* border: 2px solid; */
     float: left;
     margin-left: 7.5%;
-    background-color: #0d78a0
+    background-color: #0c769d
 }
 
 .rightSide{
@@ -299,6 +299,9 @@ thead > tr > th{
     margin-left: 2.5%;
 }
 
+#player{
+    width: 100%;
+}
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
