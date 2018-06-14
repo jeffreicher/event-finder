@@ -257,7 +257,7 @@ class MusicConcert {
         console.log(keyword);
         $.ajax({
             type: "GET",
-            url: "https://app.ticketmaster.com/discovery/v2/events?apikey=tBBObsl2YtXpvAceOW6DOKwRtZpd8bxd&keyword=" + keyword + "&countryCode=US&stateCode=Ca",
+            url: "https://app.ticketmaster.com/discovery/v2/events?apikey=tBBObsl2YtXpvAceOW6DOKwRtZpd8bxd&keyword=" + keyword + "&countryCode=US&stateCode=Az",
             dataType: "text",
             success: function (json_data) {
                 var data = JSON.parse(json_data);
