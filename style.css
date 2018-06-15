@@ -49,6 +49,7 @@ header .logo{
     transform: translate(-50%, -50%);
     width: 30%;
     padding: 10px;
+    height: 59%;
     border-radius: 4px;
 }
 
@@ -137,6 +138,7 @@ button.search-events:hover, .row:hover, .backButton:hover {
     position: absolute;
     width: 63%;
     height: 100%;
+    display: hidden;
 }
 .secondHeader {
     display: flex;
@@ -245,6 +247,8 @@ thead > tr > th{
     background: #ebebeb;
     box-sizing: border-box;
     flex-direction: column;
+    font-weight: bolder;
+    font-size: 18px;
 }
 .video{
     display: flex;
@@ -303,6 +307,17 @@ thead > tr > th{
     width: 100%;
 }
 
+.errorMessage{
+    text-align: center;
+    margin-top: 25%;
+    font-size: 28pt;
+}
+
+#genre {
+    height: 50%;
+    width: 50%;
+    font-size: 13pt
+}
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
     .drop-down {        
@@ -340,6 +355,7 @@ thead > tr > th{
 @media only screen and (min-width: 992px) {
     .drop-down {        
         width: 50%;
+        height: 65%;
     }
     select#genre {
         width: 50%; 

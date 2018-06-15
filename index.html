@@ -14,15 +14,14 @@
 </head>
 <body>
    <header>
-    <div class="logo">Concert Finder</div>
+    <div class="logo">Music Concert</div>
    </header>
    <div id="search">
        <div class="drop-down">
-           <select name="genre" id="genre">
-               <option value="electronic">Electronic</option>
+               <input type="text" id="genre">
+               <!-- <option value="electronic">Electronic</option>
                <option value="rock">Rock</option>
-               <option value="country">Country Music</option>
-           </select>
+               <option value="country">Country Music</option> -->
            <button class="search-events">Search</button>
        </div>
     </div>
@@ -65,11 +64,11 @@
     <div class="right-col">
         <div class="event-info">
             <div class="event-info-header">Concert Information</div>
-            <div class="artists" contentEditable=true data-text="Artist"></div>
-            <div class="venue" contentEditable=true data-text="Location"></div>
-            <div class="date" contentEditable=true data-text="Date"></div>
-            <div class="time" contentEditable=true data-text="Time"></div>
-            <div class="tickets" contentEditable=true data-text="See Tickets"></div>
+            <div class="artists" data-text="Artist">Artist</div>
+            <div class="venue" data-text="Location">Location</div>
+            <div class="date" data-text="Date">Date</div>
+            <div class="time" data-text="Time">Time</div>
+            <div class="tickets" data-text="See Tickets">Tickets</div>
         </div>
         <div id="player"></div>
     </div>

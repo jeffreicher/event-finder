@@ -85,17 +85,19 @@ class MusicConcert {
             firstConcert.artistInfo = [];
             firstConcert.artistInfo = [];
             $('.events-lists').empty();
+            $('.errorMessage').hide();
         })
         $('.search-events').on('click', this.getDataFromTicketMaster.bind(this));
         $('.backButton').on('click', this.backButtonActions.bind(this));
     }
 
     backButtonActions() {
-        $('.secondHeader h1, #img-1, #img-2, #img-3, #img-4, .artists, .venue, .date, .tickets').empty();
+        $('.secondHeader h1, #img-1, #img-2, #img-3, #img-4, .artists, .venue, .date, .tickets, .time').empty();
         $('.secondScreen').addClass('hidden');
         $('.events-lists').removeClass('hidden');
         $('.search-events').prop('disabled', false);
         $('.secondScreenTopContainer').empty();
+        firstConcert.updateSidebar();
     }
 
 
@@ -212,14 +214,15 @@ class MusicConcert {
         for(var i = 0; i<firstConcert.events_array.length; i++) {
             if(eventId === firstConcert.events_array[i].id) {      
                 $(".secondHeader h1").append(firstConcert.events_array[i].name).addClass('secondHeader');
-                $(".secondScreenTopContainer").append($("<img>").attr('src', firstConcert.artistImg[i][0]).addClass('artistImages'));
-                $("#img-2").append($("<img>").attr('src', firstConcert.artistImg[i][1]).addClass('artistImages'));
-                $("#img-3").append($("<img>").attr('src', firstConcert.artistImg[i][2]).addClass('artistImages'));
-                $("#img-4").append($("<img>").attr('src', firstConcert.artistImg[i][3]).addClass('artistImages'));
-                $(".artists").append("Name: " + firstConcert.events_array[i].name);
+                $(".secondScreenTopContainer").append($("<img>").attr('src', firstConcert.artistImg[0][i]).addClass('artistImages'));
+                // $("#img-2").append($("<img>").attr('src', firstConcert.artistImg[i][1]).addClass('artistImages'));
+                // $("#img-3").append($("<img>").attr('src', firstConcert.artistImg[i][2]).addClass('artistImages'));
+                // $("#img-4").append($("<img>").attr('src', firstConcert.artistImg[i][3]).addClass('artistImages'));
+                $(".artists").append("Artist: " + firstConcert.events_array[i].name);
                 $(".venue").append("Location: " + firstConcert.events_array[i].location);
                 $(".date").append("Date: " + firstConcert.events_array[i].date);
                 $(".tickets").append("Ticket-URL " + firstConcert.events_array[i].url);
+                $(".time").append("Time " + firstConcert.events_array1[i].url);
                 $('.secondScreen').removeClass('hidden');
                 $('.firstScreen').addClass('hidden');
                 $('.events-lists').addClass('hidden'); 
@@ -231,14 +234,12 @@ class MusicConcert {
     }
     
     getArtistImages () {
-        for (var i = 0; i < firstConcert.artistInfo.length; i++) {
-            var artistImgArray = [];
-            for (var x = 0; x < firstConcert.artistInfo[i].length; x++) {
-                var artistUrl = firstConcert.artistInfo[i][x].images[0].url;
-                artistImgArray.push(artistUrl);
-            }
-            firstConcert.artistImg.push(artistImgArray);
+        var artistImgArray = [];
+        for (var i = 0; i < firstConcert.events_array.length; i++) {
+            var artistUrl = firstConcert.events_array[i].img;
+            artistImgArray.push(artistUrl);
         }
+        firstConcert.artistImg.push(artistImgArray);
     } 
 
     getArtistFromEvents() {
@@ -252,20 +253,22 @@ class MusicConcert {
     }  
 
     getDataFromTicketMaster() {
-        var keyword = $('#genre')[0];
-        keyword = keyword.options[keyword.selectedIndex].value;
+        var keyword = $('#genre').val();
+        // var ca
+        // keyword = keyword.options[keyword.selectedIndex].value;
         console.log(keyword);
         $.ajax({
             type: "GET",
-            url: "https://app.ticketmaster.com/discovery/v2/events?apikey=tBBObsl2YtXpvAceOW6DOKwRtZpd8bxd&keyword=" + keyword + "&countryCode=US&stateCode=Az",
+            url: "https://app.ticketmaster.com/discovery/v2/events?apikey=tBBObsl2YtXpvAceOW6DOKwRtZpd8bxd&keyword=" + keyword + "&countryCode=US&stateCode=Ca",
             dataType: "text",
             success: function (json_data) {
                 var data = JSON.parse(json_data);
                 console.log(data);
+                if(data._embedded !== undefined){
                 for (var i = 0; i < data._embedded.events.length; i++) {
                     var fesivalObjects = data._embedded.events[i];
-                    console.log(fesivalObjects);
-                    console.log(typeof firstConcert.events_array1);
+                    // console.log(fesivalObjects);
+                    // console.log(typeof firstConcert.events_array1);
                     firstConcert.events_array1.push(fesivalObjects);
                     firstConcert.data_object = {
                         img: data._embedded.events[i].images[0].url,
@@ -286,13 +289,16 @@ class MusicConcert {
                         firstConcert.events_array.push(firstConcert.data_object);
                     } else {
                         firstConcert.events_array.push(firstConcert.data_object);
-                        console.log(firstConcert.events_array)
+                        // console.log(firstConcert.events_array)
                     }
                     
                 }           
                 firstConcert.updateEventsLists(firstConcert.events_array);
 
                 firstConcert.getArtistFromEvents();
+              } else {
+                  $('.left-col').append('<div class="errorMessage">No events found :(</div>');
+              }
             },
             error: function (xhr, status, err) {
             }
@@ -314,6 +320,7 @@ class MusicConcert {
                 "data-event": events_array[i].id,
                 on: { 
                     click:function() {
+                        $('.secondHeader h1, #img-1, #img-2, #img-3, #img-4, .artists, .venue, .date, .tickets').empty();
                         var eventId = $(this).attr('data-event');
                         firstConcert.sendDataToOtherSections(eventId,this);
                     },          
@@ -335,7 +342,15 @@ class MusicConcert {
         table.append(thead, tbody);
         $('.left-col').prepend(table);
     }
-}
+
+    updateSidebar() {
+        $(".artists").append("Artist");
+        $(".venue").append("Location");
+        $(".date").append("Date");
+        $(".time").append('Time')
+        $(".tickets").append("Tickets");
+    }
+} 
 //===========================================================================================================//
 function onYouTubeIframeAPIReady() {
         videoPlayer = new YT.Player('player', {
