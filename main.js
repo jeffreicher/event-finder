@@ -1,4 +1,3 @@
-
 /**
  * Listen for the document to load and initialize the application
  */
@@ -14,6 +13,7 @@ function initializeApp() {
  */
 class MusicConcert {
     constructor(){
+        this.stateSelector;
         this.events_array = [];
         this.events_array1 = [];
         this.artistInfo = [];
@@ -77,6 +77,9 @@ class MusicConcert {
         $('.secondScreen').addClass('hidden');
         $('.search-events').on('click', function(){
             $('.firstScreen').addClass('hidden');
+            // $('#genre').val('');
+            // $('#stateSelector').val('Al');
+            firstConcert.stateSelector = $("#stateSelector").val();
             console.log('Click Working');
             firstConcert.events_array = [];
             firstConcert.events_array1 = [];
@@ -221,8 +224,8 @@ class MusicConcert {
                 $(".artists").append("Artist: " + firstConcert.events_array[i].name);
                 $(".venue").append("Location: " + firstConcert.events_array[i].location);
                 $(".date").append("Date: " + firstConcert.events_array[i].date);
-                $(".tickets").append("Ticket-URL " + firstConcert.events_array[i].url);
-                $(".time").append("Time " + firstConcert.events_array1[i].url);
+                $(".tickets").append("Ticket-URL: " + firstConcert.events_array[i].url);
+                $(".time").append("Time: " + firstConcert.events_array1[i].url);
                 $('.secondScreen').removeClass('hidden');
                 $('.firstScreen').addClass('hidden');
                 $('.events-lists').addClass('hidden'); 
@@ -254,12 +257,14 @@ class MusicConcert {
 
     getDataFromTicketMaster() {
         var keyword = $('#genre').val();
+        var state = $('#stateSelector').val();
+        console.log(state)
         // var ca
         // keyword = keyword.options[keyword.selectedIndex].value;
         console.log(keyword);
         $.ajax({
             type: "GET",
-            url: "https://app.ticketmaster.com/discovery/v2/events?apikey=tBBObsl2YtXpvAceOW6DOKwRtZpd8bxd&keyword=" + keyword + "&countryCode=US&stateCode=Ca",
+            url: "https://app.ticketmaster.com/discovery/v2/events?apikey=tBBObsl2YtXpvAceOW6DOKwRtZpd8bxd&keyword=" + keyword + "&countryCode=US&stateCode="+ state,
             dataType: "text",
             success: function (json_data) {
                 var data = JSON.parse(json_data);
@@ -320,7 +325,7 @@ class MusicConcert {
                 "data-event": events_array[i].id,
                 on: { 
                     click:function() {
-                        $('.secondHeader h1, #img-1, #img-2, #img-3, #img-4, .artists, .venue, .date, .tickets').empty();
+                        $('.secondHeader h1, #img-1, #img-2, #img-3, #img-4, .artists, .venue, .date, .tickets, .time').empty();
                         var eventId = $(this).attr('data-event');
                         firstConcert.sendDataToOtherSections(eventId,this);
                     },          
