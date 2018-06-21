@@ -14,6 +14,7 @@ function initializeApp() {
 class MusicConcert {
     constructor(){
         this.stateSelector;
+        this.zipCode;
         this.events_array = [];
         this.events_array1 = [];
         this.artistInfo = [];
@@ -258,13 +259,15 @@ class MusicConcert {
     getDataFromTicketMaster() {
         var keyword = $('#genre').val();
         var state = $('#stateSelector').val();
+        var city = $('#zipCode').val();
+        console.log(zipCode);
         console.log(state)
         // var ca
         // keyword = keyword.options[keyword.selectedIndex].value;
         console.log(keyword);
         $.ajax({
             type: "GET",
-            url: "https://app.ticketmaster.com/discovery/v2/events?apikey=tBBObsl2YtXpvAceOW6DOKwRtZpd8bxd&keyword=" + keyword + "&countryCode=US&stateCode="+ state,
+            url: "https://app.ticketmaster.com/discovery/v2/events?apikey=tBBObsl2YtXpvAceOW6DOKwRtZpd8bxd&keyword=" + keyword + "&countryCode=US&stateCode="+ state + "&city=" + city,
             dataType: "text",
             success: function (json_data) {
                 var data = JSON.parse(json_data);
