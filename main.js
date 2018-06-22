@@ -295,8 +295,8 @@ class MusicConcert {
         var keyword = $('#genre').val();
         var state = $('#stateSelector').val();
         var city = $('#zipCode').val();
-        console.log(zipCode);
-        console.log(state)
+        // console.log(zipCode);
+        // console.log(state)
         // var ca
         // keyword = keyword.options[keyword.selectedIndex].value;
         console.log(keyword);
@@ -416,8 +416,8 @@ class MusicConcert {
 var locations = [];
 
 function initMap() {
-    console.log('map initiatied');
-    console.log(locations.length);
+    // console.log('map initiatied');
+    // console.log(locations.length);
     // The location of Uluru
     // var uluru = {lat: -25.344, lng: 131.036};
     
@@ -432,7 +432,7 @@ function initMap() {
             let lati = locations[i][0].lat
             let lngi = locations[i][0].lng
             parseFloat(lati, lngi)
-            console.log(lati, lngi);
+            // console.log(lati, lngi);
             addMarker({
                 lat:parseFloat(lati),
                 lng:parseFloat(lngi)
@@ -457,7 +457,7 @@ function initMap() {
  
 
   function latLong() {
-    console.log('Inside Function');
+    // console.log('Inside Function');
     for(let i=0; i < firstConcert.events_array.length; i++){
         let latPair = [];
         let latit = firstConcert.events_array1[i]._embedded.venues[0].location.latitude;
@@ -468,7 +468,7 @@ function initMap() {
             lng:longit
         });
         locations.push(latPair);
-        console.log(latPair[0]);
+        // console.log(latPair[0]);
         // firstConcert.latAndLong.push(latPair);
     }
     initMap();
