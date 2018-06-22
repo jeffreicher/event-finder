@@ -101,7 +101,7 @@ class MusicConcert {
     }
 
     backButtonActions() {
-        $('.secondHeader h1, #img-1, #img-2, #img-3, #img-4, .artists, .venue, .date, .tickets, .time').empty();
+        $('.secondHeader h1, #img-1, #img-2, #img-3, #img-4, .artists, .venue, .date, .tickets, .time, #innerArtistImageContainer').empty();
         $('.secondScreen').addClass('hidden');
         $('.events-lists').removeClass('hidden');
         $('.search-events').prop('disabled', false);
