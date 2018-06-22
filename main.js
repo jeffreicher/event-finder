@@ -57,7 +57,7 @@ class MusicConcert {
         };
         this.addClickHandlersAndStylesToElements();
         this.createPlayer();
-        
+        // this.initMap();
     };
     /***************************************************************************************************
      * initializeApp
@@ -78,6 +78,7 @@ class MusicConcert {
         $('.secondScreen').addClass('hidden');
         $('.search-events').on('click', function(){
             $('.firstScreen').addClass('hidden');
+            locations = [];
             // $('#genre').val('');
             // $('#stateSelector').val('Al');
             firstConcert.stateSelector = $("#stateSelector").val();
@@ -88,6 +89,7 @@ class MusicConcert {
             firstConcert.artistImg = [];
             firstConcert.artistInfo = [];
             firstConcert.artistInfo = [];
+            firstConcert.latAndLong = [];
             $('.events-lists').empty();
             $('.errorMessage').hide();
         })
@@ -109,6 +111,34 @@ class MusicConcert {
         
     }
     //=====================================================================//
+
+    //=============================GOOGLE==================================//
+    latLong() {
+        console.log('Inside Function');
+        for(let i=0; i < firstConcert.events_array.length; i++){
+            let latPair = [];
+            latPair.push(firstConcert.events_array1[i]._embedded.venues[0].location.latitude);
+            latPair.push(firstConcert.events_array1[i]._embedded.venues[0].location.longitude);
+            firstConcert.latAndLong.push(latPair);
+        }
+    }
+
+    createGoogleMarker() {
+
+    }
+    
+    // initMap() {
+    //     console.log('map initiatied');
+    //     // The location of Uluru
+    //     var uluru = {lat: -25.344, lng: 131.036};
+    //     // The map, centered at Uluru
+    //     var map = new google.maps.Map(
+    //         document.getElementById('map'), {zoom: 4, center: uluru});
+    //     // The marker, positioned at Uluru
+    //     var marker = new google.maps.Marker({position: uluru, map: map});
+    //   }
+    //=====================================================================//
+
 
     //=========================FLICKR======================================//
 
@@ -237,6 +267,8 @@ class MusicConcert {
 
     }
     
+
+
     getArtistImages () {
         var artistImgArray = [];
         for (var i = 0; i < firstConcert.events_array.length; i++) {
@@ -300,7 +332,9 @@ class MusicConcert {
                         // console.log(firstConcert.events_array)
                     }
                     
-                }           
+                }
+                latLong();
+
                 firstConcert.updateEventsLists(firstConcert.events_array);
 
                 firstConcert.getArtistFromEvents();
@@ -372,4 +406,65 @@ function onYouTubeIframeAPIReady() {
             'modestbranding': 1,
         }
     });
+}
+
+var locations = [];
+
+function initMap() {
+    console.log('map initiatied');
+    console.log(locations.length);
+    // The location of Uluru
+    // var uluru = {lat: -25.344, lng: 131.036};
+    
+    // The map, centered at Uluru
+    var map = new google.maps.Map(
+        document.getElementById('map'), {
+            zoom: 4,
+            center: new google.maps.LatLng(parseFloat(locations[0][0].lat), parseFloat(locations[0][0].lng)),
+        });
+
+        for(var i=0; i<locations.length; i++){
+            let lati = locations[i][0].lat
+            let lngi = locations[i][0].lng
+            parseFloat(lati, lngi)
+            console.log(lati, lngi);
+            addMarker({
+                lat:parseFloat(lati),
+                lng:parseFloat(lngi)
+            });
+             function addMarker(coords) {
+            var marker = new google.maps.Marker({
+            position: coords,
+            map: map
+            })
+        }
+        }
+        
+    }
+    // The marker, positioned at Uluru
+    // for(var i =0; i < firstConcert.latAndLong.length; i++){
+    //     var marker = new google.maps.Marker({
+    //         position: new google.maps.LatLng(locations[i][1]), 
+    //          map: map
+    //         });
+    // }
+
+ 
+
+  function latLong() {
+    console.log('Inside Function');
+    for(let i=0; i < firstConcert.events_array.length; i++){
+        let latPair = [];
+        let latit = firstConcert.events_array1[i]._embedded.venues[0].location.latitude;
+        let longit = firstConcert.events_array1[i]._embedded.venues[0].location.longitude;
+        parseInt(latit, longit);
+        latPair.push({
+            lat:latit,
+            lng:longit
+        });
+        locations.push(latPair);
+        console.log(latPair[0]);
+        // firstConcert.latAndLong.push(latPair);
+    }
+    initMap();
 }

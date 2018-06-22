@@ -239,6 +239,7 @@ thead > tr > th{
 
 .event-info{
     /* display: flex; */
+    display: none;
     position: relative;
     width: 100%;
     padding: 0% 4%;
@@ -376,4 +377,10 @@ thead > tr > th{
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
    
+}
+
+/*=================GOOGLE MAPS==============================*/
+#map {
+    height: 400px;
+    width: 100%;
 }
