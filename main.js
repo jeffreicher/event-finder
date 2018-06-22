@@ -5,6 +5,7 @@ $(document).ready(initializeApp);
 
 function initializeApp() {
     firstConcert = new MusicConcert();
+    $('.right-col').addClass('hidden');
 };
 
 /***********************
@@ -78,6 +79,7 @@ class MusicConcert {
         $('.secondScreen').addClass('hidden');
         $('.search-events').on('click', function(){
             $('.firstScreen').addClass('hidden');
+            $('.right-col').removeClass('hidden')
             locations = [];
             // $('#genre').val('');
             // $('#stateSelector').val('Al');
@@ -92,6 +94,7 @@ class MusicConcert {
             firstConcert.latAndLong = [];
             $('.events-lists').empty();
             $('.errorMessage').hide();
+            firstConcert.onYouTubeIframeAPIReady();
         })
         $('.search-events').on('click', this.getDataFromTicketMaster.bind(this));
         $('.backButton').on('click', this.backButtonActions.bind(this));
@@ -201,19 +204,19 @@ class MusicConcert {
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     }
 
-    // onYouTubeIframeAPIReady() {
-    //         videoPlayer = new YT.Player('player', {
-    //         height: '345',
-    //         width: '530',
-    //         videoId: 'L6c_mYQ9LaM',
-    //         playerVars: {
-    //             'autoplay': 1,
-    //             'controls': 0,
-    //             'loop': 1,
-    //             'modestbranding': 1,
-    //         }
-    //     });
-    // }
+    onYouTubeIframeAPIReady() {
+            firstConcert.videoPlayer = new YT.Player('player', {
+            height: '345',
+            width: '530',
+            videoId: '',
+            playerVars: {
+                'autoplay': 1,
+                'controls': 0,
+                'loop': 1,
+                'modestbranding': 1,
+            }
+        });
+    }
 
     loadVideo(name) {
         $.ajax({
@@ -239,7 +242,7 @@ class MusicConcert {
     }
 
     changePlayer(newID){
-        videoPlayer.a.src = 'https://www.youtube.com/embed/'+newID+'?autoplay=1&loop=1&controls=0&modestbranding=1';
+        firstConcert.videoPlayer.a.src = 'https://www.youtube.com/embed/'+newID+'?autoplay=1&loop=1&controls=0&modestbranding=1';
     }
     //=======================TICKET MASTER FUNCTIONS==================================================//
 
@@ -248,7 +251,7 @@ class MusicConcert {
         for(var i = 0; i<firstConcert.events_array.length; i++) {
             if(eventId === firstConcert.events_array[i].id) {      
                 $(".secondHeader h1").append(firstConcert.events_array[i].name).addClass('secondHeader');
-                $(".secondScreenTopContainer").append($("<img>").attr('src', firstConcert.artistImg[0][i]).addClass('artistImages'));
+                $("#innerArtistImageContainer").append($("<img>").attr('src', firstConcert.artistImg[0][i]).addClass('artistImages'));
                 // $("#img-2").append($("<img>").attr('src', firstConcert.artistImg[i][1]).addClass('artistImages'));
                 // $("#img-3").append($("<img>").attr('src', firstConcert.artistImg[i][2]).addClass('artistImages'));
                 // $("#img-4").append($("<img>").attr('src', firstConcert.artistImg[i][3]).addClass('artistImages'));
@@ -365,6 +368,8 @@ class MusicConcert {
                         $('.secondHeader h1, #img-1, #img-2, #img-3, #img-4, .artists, .venue, .date, .tickets, .time').empty();
                         var eventId = $(this).attr('data-event');
                         firstConcert.sendDataToOtherSections(eventId,this);
+                        $('.event-info').removeClass('hidden');
+                        // firstConcert.onYouTubeIframeAPIReady();
                     },          
                 }
             });
@@ -394,19 +399,19 @@ class MusicConcert {
     }
 } 
 //===========================================================================================================//
-function onYouTubeIframeAPIReady() {
-        videoPlayer = new YT.Player('player', {
-        height: '345',
-        width: '530',
-        videoId: 'L6c_mYQ9LaM',
-        playerVars: {
-            'autoplay': 1,
-            'controls': 0,
-            'loop': 1,
-            'modestbranding': 1,
-        }
-    });
-}
+// function onYouTubeIframeAPIReadyonYouTubeIframeAPIReady() {
+//         videoPlayer = new YT.Player('player', {
+//         height: '345',
+//         width: '530',
+//         videoId: 'L6c_mYQ9LaM',
+//         playerVars: {
+//             'autoplay': 1,
+//             'controls': 0,
+//             'loop': 1,
+//             'modestbranding': 1,
+//         }
+//     });
+// }
 
 var locations = [];
 
@@ -419,7 +424,7 @@ function initMap() {
     // The map, centered at Uluru
     var map = new google.maps.Map(
         document.getElementById('map'), {
-            zoom: 4,
+            zoom: 5,
             center: new google.maps.LatLng(parseFloat(locations[0][0].lat), parseFloat(locations[0][0].lng)),
         });
 

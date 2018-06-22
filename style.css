@@ -175,12 +175,14 @@ button.search-events:hover, .row:hover, .backButton:hover {
     background-color: #0c769d;
 }
 .leftSide{
-    width: 15%;
-    height: 65%;
+    width: 85%;
+    height: 75%;
     /* border: 2px solid; */
     float: left;
     margin-left: 7.5%;
-    background-color: #0c769d
+    background-color: #0c769d;
+    margin-top: 2%;
+    overflow: auto;
 }
 
 .rightSide{
@@ -198,6 +200,12 @@ button.search-events:hover, .row:hover, .backButton:hover {
     margin-top: 2%;
     overflow: hidden;
 }
+
+#artistImageContainer {
+    height: 65%;
+    width: 50%;
+    margin: auto;
+}
 .secondScreenBottomContainer{
     border-radius: 50%;
     flex-direction: column;
@@ -206,6 +214,7 @@ button.search-events:hover, .row:hover, .backButton:hover {
     margin: 2% .5%;
 }
 .right-col{
+    display: none;
     display: inline-block;
     width: 30%;
     height: 100%;
@@ -238,13 +247,12 @@ thead > tr > th{
 }
 
 .event-info{
-    /* display: flex; */
-    display: none;
     position: relative;
-    width: 100%;
+    width: 80%;
+    margin: auto;
     padding: 0% 4%;
-    margin-bottom: 2%;
-    height: 50%;
+    /* margin-bottom: 2%; */
+    height: 60%;
     background: #ebebeb;
     box-sizing: border-box;
     flex-direction: column;
@@ -288,6 +296,7 @@ thead > tr > th{
 }
 
 .artistImages {
+    contain: content;
     height: 100%;
     width: 100%;
     margin-left: 5%;
@@ -381,6 +390,7 @@ thead > tr > th{
 
 /*=================GOOGLE MAPS==============================*/
 #map {
-    height: 400px;
+    height: 45%;
     width: 100%;
+    margin-bottom: 5%;
 }
