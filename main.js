@@ -1,12 +1,11 @@
-
 /**
  * Listen for the document to load and initialize the application
  */
 $(document).ready(initializeApp);
-let firstConcert = null;
 
 function initializeApp() {
     firstConcert = new MusicConcert();
+    $('.right-col').addClass('hidden');
 };
 
 /***********************
@@ -15,6 +14,8 @@ function initializeApp() {
  */
 class MusicConcert {
     constructor(){
+        this.stateSelector;
+        this.zipCode;
         this.events_array = [];
         this.events_array1 = [];
         this.artistInfo = [];
@@ -24,7 +25,7 @@ class MusicConcert {
         this.ticketPrice = [];
         this.preformerNames =[];
         this.videoIdArray = [];
-        this.videoPlayer;
+        this.videoPlayer = 0;
         this.artistName;
         this.ticketObject = {
         ticketPrice: [],
@@ -57,6 +58,7 @@ class MusicConcert {
         };
         this.addClickHandlersAndStylesToElements();
         this.createPlayer();
+        // this.initMap();
     };
     /***************************************************************************************************
      * initializeApp
@@ -72,15 +74,79 @@ class MusicConcert {
      * @returns  {undefined} none
      * gives buttons function to execute when clicked, as well as adding a class to the hidden div
      */
-
+    //================CLICK HANDLERS================================//
     addClickHandlersAndStylesToElements() {
+        $('.secondScreen').addClass('hidden');
+        $('.search-events').on('click', function(){
+            $('.firstScreen').addClass('hidden');
+            $('.right-col').removeClass('hidden')
+            locations = [];
+            // $('#genre').val('');
+            // $('#stateSelector').val('Al');
+            firstConcert.stateSelector = $("#stateSelector").val();
+            console.log('Click Working');
+            firstConcert.events_array = [];
+            firstConcert.events_array1 = [];
+            firstConcert.artistInfo = [];
+            firstConcert.artistImg = [];
+            firstConcert.artistInfo = [];
+            firstConcert.artistInfo = [];
+            firstConcert.latAndLong = [];
+            $('.events-lists').empty();
+            $('.errorMessage').hide();
+            firstConcert.onYouTubeIframeAPIReady();
+        })
         $('.search-events').on('click', this.getDataFromTicketMaster.bind(this));
         $('.backButton').on('click', this.backButtonActions.bind(this));
-        $('.secondScreen').addClass('hidden');
     }
 
+    backButtonActions() {
+        $('.secondHeader h1, #img-1, #img-2, #img-3, #img-4, .artists, .venue, .date, .tickets, .time, #innerArtistImageContainer').empty();
+        $('.secondScreen').addClass('hidden');
+        $('.events-lists').removeClass('hidden');
+        $('.search-events').prop('disabled', false);
+        $('.secondScreenTopContainer').empty();
+        firstConcert.updateSidebar();
+    }
+
+
+    clearTableContentOnSearch(){
+        
+    }
+    //=====================================================================//
+
+    //=============================GOOGLE==================================//
+    latLong() {
+        console.log('Inside Function');
+        for(let i=0; i < firstConcert.events_array.length; i++){
+            let latPair = [];
+            latPair.push(firstConcert.events_array1[i]._embedded.venues[0].location.latitude);
+            latPair.push(firstConcert.events_array1[i]._embedded.venues[0].location.longitude);
+            firstConcert.latAndLong.push(latPair);
+        }
+    }
+
+    createGoogleMarker() {
+
+    }
+    
+    // initMap() {
+    //     console.log('map initiatied');
+    //     // The location of Uluru
+    //     var uluru = {lat: -25.344, lng: 131.036};
+    //     // The map, centered at Uluru
+    //     var map = new google.maps.Map(
+    //         document.getElementById('map'), {zoom: 4, center: uluru});
+    //     // The marker, positioned at Uluru
+    //     var marker = new google.maps.Marker({position: uluru, map: map});
+    //   }
+    //=====================================================================//
+
+
+    //=========================FLICKR======================================//
+
     artistPictureDynamicCreation() {
-        for(var i = 0; i<this.artistImg[1].length; i++){
+        for(var i = 0; i<firstConcert.artistImg[1].length; i++){
             var container = $(".left-bottom-col-3");
             var imgContainer = $("<div>").append(this.artistImg[i][i]);
             imgContainer.appendTo(container);
@@ -110,11 +176,11 @@ class MusicConcert {
             success: function(response) {
                 console.log("Flickr response: ", response);
                 var venueImages = response;
-                var locationId = this.refList[venueLocation];
+                var locationId = firstConcert.refList[venueLocation];
 
                 for(var i = 0; i < venueImages.photos.photo.length; i++){
                     if(venueImages.photos.photo[i].id === locationId){
-                        displayImage(venueImages.photos.photo[i]);
+                        firstConcert.displayImage(venueImages.photos.photo[i]);
                     }
                 };
             }
@@ -128,112 +194,9 @@ class MusicConcert {
         $('.firstScreen').addClass('.hidden');
         $('.secondScreen').removeClass('.hidden');
     }
+//=================================================================================================//
 
-    // getArtistImages() {
-    //     console.log(this.artistInfo);
-    //     for (var i = 0; i < this.artistInfo.length; i++) {
-    //         var artistImgArray = [];
-    //         for (var x = 0; x < this.artistInfo[i].length; x++) {
-    //             var artistUrl = this.artistInfo[i][x].images[0].url;
-    //             artistImgArray.push(artistUrl);
-    //         }
-    //         this.artistImg.push(artistImgArray);
-    //     }
-    // } 
-
-    getArtistFromEvents() {
-        for(var i=0; i<this.events_array1.length; i++){
-            var attraction = this.events_array1[i]._embedded.attractions;
-            this.artistInfo.push(attraction);
-            var venue = this.events_array1[i]._embedded.venues[0].name;
-            this.concertVenues.push(venue);
-            }
-            // this.getArtistImages();
-    }  
-
-    getDataFromTicketMaster() {
-        var keyword = $('#genre')[0];
-        keyword = keyword.options[keyword.selectedIndex].value;
-        console.log(keyword);
-        $.ajax({
-            type: "GET",
-            url: "https://app.ticketmaster.com/discovery/v2/events?apikey=tBBObsl2YtXpvAceOW6DOKwRtZpd8bxd&keyword=" + keyword + "&countryCode=US&stateCode=Ca",
-            dataType: "text",
-            success: (json_data) => {
-                var data = JSON.parse(json_data);
-                console.log(data);
-                for (var i = 0; i < data._embedded.events.length; i++) {
-                    var fesivalObjects = data._embedded.events[i];
-                    console.log(fesivalObjects);
-                    console.log(typeof this.events_array1);
-                    this.events_array1.push(fesivalObjects);
-                    this.data_object = {
-                        img: data._embedded.events[i].images[0].url,
-                        img2: data._embedded.events[i].images[1].url,
-                        img3: data._embedded.events[i].images[2].url,
-                        img4: data._embedded.events[i].images[3].url,
-                        name: data._embedded.events[i].name,
-                        location: data._embedded.events[i]._embedded.venues[0].name,
-                        date: data._embedded.events[i].dates.start.localDate,
-                        id:data._embedded.events[i].id,
-                        url: data._embedded.events[i].url,
-
-                    };
-                    if(this.events_array.length > 20){
-                        this.events_array = [];
-                        $(".events-lists").remove();
-                        this.events_array.push(this.data_object);
-                    } else {
-                        this.events_array.push(this.data_object);
-                    }
-                    
-                }           
-                this.updateEventsLists(this.events_array);
-
-                this.getArtistFromEvents();
-            },
-            error: function (xhr, status, err) {
-            }
-        });
-    }
-
-    updateEventsLists(events_array) {
-        var tbody = $('<tbody>').addClass('table-content');   
-        var table = $('<table>').addClass('events-lists');  
-        for(var i=0; i<this.events_array.length; i++){
-            var get_img = this.events_array[i].img;
-            var img_tag = $('<img>').attr('src', get_img).css('width', '100px');
-            var img = $('<td>');
-            var name = $('<td>').text(this.events_array[i].name);
-            var location = $('<td>').text(this.events_array[i].location);
-            var date = $('<td>').text(this.events_array[i].date);  
-            var tr =  $('<tr>', {
-                class:'row',
-                "data-event": this.events_array[i].id,
-                on: { 
-                    click:() => {
-                        var eventId = $(this).attr('data-event');
-                        this.sendDataToOtherSections(eventId,this);
-                    },          
-                }
-            });
-            img.append(img_tag);   
-            tr.append(img, name, location, date);
-
-            var th_empty =  $('<th>');  
-            var th_event =  $('<th>').text('Event'); 
-            var th_location =  $('<th>').text('Location');  
-            var th_date =  $('<th>').text('Date');     
-            var tr_th = $('<tr>');
-            var thead = $('<thead>');
-            tr_th.append(th_empty, th_event, th_location, th_date);
-            thead.append(tr_th);
-            tbody.append(tr);
-        }        
-        table.append(thead, tbody);
-        $('.left-col').prepend(table);
-    }
-
+//=======================YOUTUBE PLAYER FUNCTIONS==================================================//
     createPlayer() {
         var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
@@ -242,10 +205,10 @@ class MusicConcert {
     }
 
     onYouTubeIframeAPIReady() {
-        videoPlayer = new YT.Player('player', {
+            firstConcert.videoPlayer = new YT.Player('player', {
             height: '345',
             width: '530',
-            videoId: 'L6c_mYQ9LaM',
+            videoId: '',
             playerVars: {
                 'autoplay': 1,
                 'controls': 0,
@@ -268,48 +231,243 @@ class MusicConcert {
             url: 'https://s-apis.learningfuze.com/hackathon/youtube/search.php',
             success: function(response){
                 if(response.success){
-                    videoIdArray=[];
+                    firstConcert.videoIdArray=[];
                     for ( var video_i = 0; video_i < response.video.length; video_i++) {
-                        videoIdArray.push(response.video[video_i].id);
+                        firstConcert.videoIdArray.push(response.video[video_i].id);
                     }
-                    changePlayer(videoIdArray[0]);
+                    firstConcert.changePlayer(firstConcert.videoIdArray[0]);
                 }
             }
         });
     }
 
     changePlayer(newID){
-        videoPlayer.a.src = 'https://www.youtube.com/embed/'+newID+'?autoplay=1&loop=1&controls=0&modestbranding=1';
+        firstConcert.videoPlayer.a.src = 'https://www.youtube.com/embed/'+newID+'?autoplay=1&loop=1&controls=0&modestbranding=1';
     }
+    //=======================TICKET MASTER FUNCTIONS==================================================//
 
     sendDataToOtherSections(eventId,object) {
         $('.search-events').prop('disabled', true);
-        for(var i = 0; i<this.events_array.length; i++) {
-            if(eventId === this.events_array[i].id) {      
-                $(".secondHeader h1").append(this.events_array[i].name).addClass('secondHeader');
-                $("#img-1").append($("<img>").attr('src', this.artistImg[i][0]).addClass('artistImages'));
-                $("#img-2").append($("<img>").attr('src', this.artistImg[i][1]).addClass('artistImages'));
-                $("#img-3").append($("<img>").attr('src', this.artistImg[i][2]).addClass('artistImages'));
-                $("#img-4").append($("<img>").attr('src', this.artistImg[i][3]).addClass('artistImages'));
-                $(".artists").append("Name: " + this.events_array[i].name);
-                $(".venue").append("Location: " + this.events_array[i].location);
-                $(".date").append("Date: " + this.events_array[i].date);
-                $(".tickets").append("Ticket-URL " + this.events_array[i].url);
+        for(var i = 0; i<firstConcert.events_array.length; i++) {
+            if(eventId === firstConcert.events_array[i].id) {      
+                $(".secondHeader h1").append(firstConcert.events_array[i].name).addClass('secondHeader');
+                $("#innerArtistImageContainer").append($("<img>").attr('src', firstConcert.artistImg[0][i]).addClass('artistImages'));
+                // $("#img-2").append($("<img>").attr('src', firstConcert.artistImg[i][1]).addClass('artistImages'));
+                // $("#img-3").append($("<img>").attr('src', firstConcert.artistImg[i][2]).addClass('artistImages'));
+                // $("#img-4").append($("<img>").attr('src', firstConcert.artistImg[i][3]).addClass('artistImages'));
+                $(".artists").append("Artist: " + firstConcert.events_array[i].name);
+                $(".venue").append("Location: " + firstConcert.events_array[i].location);
+                $(".date").append("Date: " + firstConcert.events_array[i].date);
+                $(".tickets").append("Ticket-URL: " + firstConcert.events_array[i].url);
+                $(".time").append("Time: " + firstConcert.events_array1[i].url);
                 $('.secondScreen').removeClass('hidden');
                 $('.firstScreen').addClass('hidden');
                 $('.events-lists').addClass('hidden'); 
-                this.flickrLoop(this.events_array[i].location);
-                this.loadVideo(this.events_array[i].name);
+                firstConcert.flickrLoop(firstConcert.events_array[i].location);
+                firstConcert.loadVideo(firstConcert.events_array[i].name);
             }
         }    
 
     }
     
-    backButtonActions() {
-        $('.secondHeader h1, #img-1, #img-2, #img-3, #img-4, .artists, .venue, .date, .tickets').empty();
-        $('.secondScreen').addClass('hidden');
-        $('.events-lists, .firstScreen').removeClass('hidden');
-        $('.search-events').prop('disabled', false);
-    }
-}
 
+
+    getArtistImages () {
+        var artistImgArray = [];
+        for (var i = 0; i < firstConcert.events_array.length; i++) {
+            var artistUrl = firstConcert.events_array[i].img;
+            artistImgArray.push(artistUrl);
+        }
+        firstConcert.artistImg.push(artistImgArray);
+    } 
+
+    getArtistFromEvents() {
+        for(var i=0; i<firstConcert.events_array1.length; i++){
+            var attraction = firstConcert.events_array1[i]._embedded.attractions;
+            firstConcert.artistInfo.push(attraction);
+            var venue = firstConcert.events_array1[i]._embedded.venues[0].name;
+            firstConcert.concertVenues.push(venue);
+            }
+            firstConcert.getArtistImages();
+    }  
+
+    getDataFromTicketMaster() {
+        var keyword = $('#genre').val();
+        var state = $('#stateSelector').val();
+        var city = $('#zipCode').val();
+        // console.log(zipCode);
+        // console.log(state)
+        // var ca
+        // keyword = keyword.options[keyword.selectedIndex].value;
+        console.log(keyword);
+        $.ajax({
+            type: "GET",
+            url: "https://app.ticketmaster.com/discovery/v2/events?apikey=tBBObsl2YtXpvAceOW6DOKwRtZpd8bxd&keyword=" + keyword + "&countryCode=US&stateCode="+ state + "&city=" + city,
+            dataType: "text",
+            success: (json_data) => {
+                var data = JSON.parse(json_data);
+                console.log(data);
+                if(data._embedded !== undefined){
+                for (var i = 0; i < data._embedded.events.length; i++) {
+                    var fesivalObjects = data._embedded.events[i];
+                    // console.log(fesivalObjects);
+                    // console.log(typeof firstConcert.events_array1);
+                    firstConcert.events_array1.push(fesivalObjects);
+                    firstConcert.data_object = {
+                        img: data._embedded.events[i].images[0].url,
+                        img2: data._embedded.events[i].images[1].url,
+                        img3: data._embedded.events[i].images[2].url,
+                        img4: data._embedded.events[i].images[3].url,
+                        name: data._embedded.events[i].name,
+                        location: data._embedded.events[i]._embedded.venues[0].name,
+                        date: data._embedded.events[i].dates.start.localDate,
+                        id:data._embedded.events[i].id,
+                        url: data._embedded.events[i].url,
+
+                    };
+                    if(firstConcert.events_array > 20){
+                        firstConcert.events_array = [];
+                        $(".events-lists").remove();
+                        console.log(data_object);
+                        firstConcert.events_array.push(firstConcert.data_object);
+                    } else {
+                        firstConcert.events_array.push(firstConcert.data_object);
+                        // console.log(firstConcert.events_array)
+                    }
+                    
+                }
+                latLong();
+
+                firstConcert.updateEventsLists(firstConcert.events_array);
+
+                firstConcert.getArtistFromEvents();
+              } else {
+                  $('.left-col').append('<div class="errorMessage">No events found :(</div>');
+              }
+            },
+            error: function (xhr, status, err) {
+            }
+        });
+    }
+
+    updateEventsLists(events_array) {
+        var tbody = $('<tbody>').addClass('table-content');   
+        var table = $('<table>').addClass('events-lists');  
+        for(var i=0; i<this.events_array.length; i++){
+            var get_img = events_array[i].img;
+            var img_tag = $('<img>').attr('src', get_img).css('width', '100px');
+            var img = $('<td>');
+            var name = $('<td>').text(this.events_array[i].name);
+            var location = $('<td>').text(this.events_array[i].location);
+            var date = $('<td>').text(this.events_array[i].date);  
+            var tr =  $('<tr>', {
+                class:'row',
+                "data-event": this.events_array[i].id,
+                on: { 
+                    click:function() {
+                        $('.secondHeader h1, #img-1, #img-2, #img-3, #img-4, .artists, .venue, .date, .tickets, .time').empty();
+                        var eventId = $(this).attr('data-event');
+                        firstConcert.sendDataToOtherSections(eventId,this);
+                        $('.event-info').removeClass('hidden');
+                        // firstConcert.onYouTubeIframeAPIReady();
+                    },          
+                }
+            });
+            img.append(img_tag);   
+            tr.append(img, name, location, date);
+
+            var th_empty =  $('<th>');  
+            var th_event =  $('<th>').text('Event'); 
+            var th_location =  $('<th>').text('Location');  
+            var th_date =  $('<th>').text('Date');     
+            var tr_th = $('<tr>');
+            var thead = $('<thead>');
+            tr_th.append(th_empty, th_event, th_location, th_date);
+            thead.append(tr_th);
+            tbody.append(tr);
+        }        
+        table.append(thead, tbody);
+        $('.left-col').prepend(table);
+    }
+
+    updateSidebar() {
+        $(".artists").append("Artist");
+        $(".venue").append("Location");
+        $(".date").append("Date");
+        $(".time").append('Time')
+        $(".tickets").append("Tickets");
+    }
+} 
+//===========================================================================================================//
+// function onYouTubeIframeAPIReadyonYouTubeIframeAPIReady() {
+//         videoPlayer = new YT.Player('player', {
+//         height: '345',
+//         width: '530',
+//         videoId: 'L6c_mYQ9LaM',
+//         playerVars: {
+//             'autoplay': 1,
+//             'controls': 0,
+//             'loop': 1,
+//             'modestbranding': 1,
+//         }
+//     });
+// }
+
+var locations = [];
+
+function initMap() {
+    // console.log('map initiatied');
+    // console.log(locations.length);
+    // The location of Uluru
+    // var uluru = {lat: -25.344, lng: 131.036};
+    
+    // The map, centered at Uluru
+    var map = new google.maps.Map(
+        document.getElementById('map'), {
+            zoom: 5,
+            center: new google.maps.LatLng(parseFloat(locations[0][0].lat), parseFloat(locations[0][0].lng)),
+        });
+
+        for(var i=0; i<locations.length; i++){
+            let lati = locations[i][0].lat
+            let lngi = locations[i][0].lng
+            parseFloat(lati, lngi)
+            // console.log(lati, lngi);
+            addMarker({
+                lat:parseFloat(lati),
+                lng:parseFloat(lngi)
+            });
+             function addMarker(coords) {
+            var marker = new google.maps.Marker({
+            position: coords,
+            map: map
+            })
+        }
+        }
+        
+    }
+    // The marker, positioned at Uluru
+    // for(var i =0; i < firstConcert.latAndLong.length; i++){
+    //     var marker = new google.maps.Marker({
+    //         position: new google.maps.LatLng(locations[i][1]), 
+    //          map: map
+    //         });
+    // }
+
+  function latLong() {
+    // console.log('Inside Function');
+    for(let i=0; i < firstConcert.events_array.length; i++){
+        let latPair = [];
+        let latit = firstConcert.events_array1[i]._embedded.venues[0].location.latitude;
+        let longit = firstConcert.events_array1[i]._embedded.venues[0].location.longitude;
+        parseInt(latit, longit);
+        latPair.push({
+            lat:latit,
+            lng:longit
+        });
+        locations.push(latPair);
+        // console.log(latPair[0]);
+        // firstConcert.latAndLong.push(latPair);
+    }
+    initMap();
+}
