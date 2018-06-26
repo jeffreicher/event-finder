@@ -148,7 +148,7 @@ class MusicConcert {
     artistPictureDynamicCreation() {
         for(var i = 0; i<firstConcert.artistImg[1].length; i++){
             var container = $(".left-bottom-col-3");
-            var imgContainer = $("<div>").append(artistImg[i][i]);
+            var imgContainer = $("<div>").append(this.artistImg[i][i]);
             imgContainer.appendTo(container);
         }
     }
@@ -304,7 +304,7 @@ class MusicConcert {
             type: "GET",
             url: "https://app.ticketmaster.com/discovery/v2/events?apikey=tBBObsl2YtXpvAceOW6DOKwRtZpd8bxd&keyword=" + keyword + "&countryCode=US&stateCode="+ state + "&city=" + city,
             dataType: "text",
-            success: function (json_data) {
+            success: (json_data) => {
                 var data = JSON.parse(json_data);
                 console.log(data);
                 if(data._embedded !== undefined){
@@ -357,12 +357,12 @@ class MusicConcert {
             var get_img = events_array[i].img;
             var img_tag = $('<img>').attr('src', get_img).css('width', '100px');
             var img = $('<td>');
-            var name = $('<td>').text(events_array[i].name);
-            var location = $('<td>').text(events_array[i].location);
-            var date = $('<td>').text(events_array[i].date);  
+            var name = $('<td>').text(this.events_array[i].name);
+            var location = $('<td>').text(this.events_array[i].location);
+            var date = $('<td>').text(this.events_array[i].date);  
             var tr =  $('<tr>', {
                 class:'row',
-                "data-event": events_array[i].id,
+                "data-event": this.events_array[i].id,
                 on: { 
                     click:function() {
                         $('.secondHeader h1, #img-1, #img-2, #img-3, #img-4, .artists, .venue, .date, .tickets, .time').empty();
@@ -453,8 +453,6 @@ function initMap() {
     //          map: map
     //         });
     // }
-
- 
 
   function latLong() {
     // console.log('Inside Function');
