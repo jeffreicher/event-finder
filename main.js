@@ -27,6 +27,8 @@ class MusicConcert {
         this.videoIdArray = [];
         this.videoPlayer = 0;
         this.artistName;
+        this.marker = [];
+        this.locations = [];
         this.ticketObject = {
         ticketPrice: [],
         }
@@ -80,7 +82,8 @@ class MusicConcert {
         $('.search-events').on('click', function(){
             $('.firstScreen').addClass('hidden');
             $('.right-col').removeClass('hidden')
-            locations = [];
+            // firstConcert.latLong();
+            // firstConcert.initMap();
             // $('#genre').val('');
             // $('#stateSelector').val('Al');
             firstConcert.stateSelector = $("#stateSelector").val();
@@ -117,29 +120,61 @@ class MusicConcert {
 
     //=============================GOOGLE==================================//
     latLong() {
-        console.log('Inside Function');
+        // console.log('Inside Function');
         for(let i=0; i < firstConcert.events_array.length; i++){
             let latPair = [];
-            latPair.push(firstConcert.events_array1[i]._embedded.venues[0].location.latitude);
-            latPair.push(firstConcert.events_array1[i]._embedded.venues[0].location.longitude);
-            firstConcert.latAndLong.push(latPair);
+            let latit = firstConcert.events_array1[i]._embedded.venues[0].location.latitude;
+            let longit = firstConcert.events_array1[i]._embedded.venues[0].location.longitude;
+            parseInt(latit, longit);
+            latPair.push({
+                lat:latit,
+                lng:longit
+            });
+            firstConcert.locations.push(latPair);
+            // console.log(latPair[0]);
+            // firstConcert.latAndLong.push(latPair);
         }
-    }
-
-    createGoogleMarker() {
-
+        firstConcert.initMap();
     }
     
-    // initMap() {
-    //     console.log('map initiatied');
-    //     // The location of Uluru
-    //     var uluru = {lat: -25.344, lng: 131.036};
-    //     // The map, centered at Uluru
-    //     var map = new google.maps.Map(
-    //         document.getElementById('map'), {zoom: 4, center: uluru});
-    //     // The marker, positioned at Uluru
-    //     var marker = new google.maps.Marker({position: uluru, map: map});
-    //   }
+    initMap() {
+        // console.log('map initiatied');
+        // console.log(locations.length);
+        // The location of Uluru
+        // var uluru = {lat: -25.344, lng: 131.036};
+        
+        // The map, centered at Uluru
+        var map = new google.maps.Map(
+            document.getElementById('map'), {
+                zoom: 5,
+                center: new google.maps.LatLng(parseFloat(firstConcert.locations[0][0].lat), parseFloat(firstConcert.locations[0][0].lng)),
+            });
+    
+            for(var i=0; i<firstConcert.locations.length; i++){
+                let lati = firstConcert.locations[i][0].lat
+                let lngi = firstConcert.locations[i][0].lng
+                parseFloat(lati, lngi)
+                // console.log(lati, lngi);
+                addMarker({
+                    lat:parseFloat(lati),
+                    lng:parseFloat(lngi)
+                });
+                 function addMarker(coords) {
+                var marker = new google.maps.Marker({
+                position: coords,
+                animation: google.maps.Animation.DROP,
+                map: map
+                });
+                firstConcert.marker.push(marker);
+    
+                }
+                function changeMarker(marker) {
+                    var icon = new Google.maps.MarkerImage({ url:"http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=1|ffffff|c41200"});
+                    marker.setIcon(icon);
+                }
+            }
+            
+        }
     //=====================================================================//
 
 
@@ -336,7 +371,7 @@ class MusicConcert {
                     }
                     
                 }
-                latLong();
+                firstConcert.latLong();
 
                 firstConcert.updateEventsLists(firstConcert.events_array);
 
@@ -361,6 +396,7 @@ class MusicConcert {
             var location = $('<td>').text(this.events_array[i].location);
             var date = $('<td>').text(this.events_array[i].date);  
             var tr =  $('<tr>', {
+                // onmouseover = changeMarker(marker1),
                 class:'row',
                 "data-event": this.events_array[i].id,
                 on: { 
@@ -371,7 +407,8 @@ class MusicConcert {
                         $('.event-info').removeClass('hidden');
                         // firstConcert.onYouTubeIframeAPIReady();
                     },          
-                }
+                },
+                onmouseover
             });
             img.append(img_tag);   
             tr.append(img, name, location, date);
@@ -399,75 +436,3 @@ class MusicConcert {
     }
 } 
 //===========================================================================================================//
-// function onYouTubeIframeAPIReadyonYouTubeIframeAPIReady() {
-//         videoPlayer = new YT.Player('player', {
-//         height: '345',
-//         width: '530',
-//         videoId: 'L6c_mYQ9LaM',
-//         playerVars: {
-//             'autoplay': 1,
-//             'controls': 0,
-//             'loop': 1,
-//             'modestbranding': 1,
-//         }
-//     });
-// }
-
-var locations = [];
-
-function initMap() {
-    // console.log('map initiatied');
-    // console.log(locations.length);
-    // The location of Uluru
-    // var uluru = {lat: -25.344, lng: 131.036};
-    
-    // The map, centered at Uluru
-    var map = new google.maps.Map(
-        document.getElementById('map'), {
-            zoom: 5,
-            center: new google.maps.LatLng(parseFloat(locations[0][0].lat), parseFloat(locations[0][0].lng)),
-        });
-
-        for(var i=0; i<locations.length; i++){
-            let lati = locations[i][0].lat
-            let lngi = locations[i][0].lng
-            parseFloat(lati, lngi)
-            // console.log(lati, lngi);
-            addMarker({
-                lat:parseFloat(lati),
-                lng:parseFloat(lngi)
-            });
-             function addMarker(coords) {
-            var marker = new google.maps.Marker({
-            position: coords,
-            map: map
-            })
-        }
-        }
-        
-    }
-    // The marker, positioned at Uluru
-    // for(var i =0; i < firstConcert.latAndLong.length; i++){
-    //     var marker = new google.maps.Marker({
-    //         position: new google.maps.LatLng(locations[i][1]), 
-    //          map: map
-    //         });
-    // }
-
-  function latLong() {
-    // console.log('Inside Function');
-    for(let i=0; i < firstConcert.events_array.length; i++){
-        let latPair = [];
-        let latit = firstConcert.events_array1[i]._embedded.venues[0].location.latitude;
-        let longit = firstConcert.events_array1[i]._embedded.venues[0].location.longitude;
-        parseInt(latit, longit);
-        latPair.push({
-            lat:latit,
-            lng:longit
-        });
-        locations.push(latPair);
-        // console.log(latPair[0]);
-        // firstConcert.latAndLong.push(latPair);
-    }
-    initMap();
-}
