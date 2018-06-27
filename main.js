@@ -90,6 +90,8 @@ class MusicConcert {
             // $('#stateSelector').val('Al');
             firstConcert.stateSelector = $("#stateSelector").val();
             console.log('Click Working');
+            firstConcert.locations = [];
+            firstConcert.marker = [];
             firstConcert.events_array = [];
             firstConcert.events_array1 = [];
             firstConcert.artistInfo = [];
@@ -396,7 +398,7 @@ class MusicConcert {
     updateEventsLists(events_array) {
         var tbody = $('<tbody>').addClass('table-content');   
         var table = $('<table>').addClass('events-lists');  
-        for(var i=0; i<this.events_array.length -1; i++){
+        for(var i=0; i<this.events_array.length; i++){
             var id = i;
             var get_img = events_array[i].img;
             var img_tag = $('<img>').attr('src', get_img).css('width', '100px');
