@@ -136,7 +136,7 @@ button.search-events:hover, .row:hover, .backButton:hover {
 .secondScreen{
     top: 0;
     position: absolute;
-    width: 63%;
+    width: 63.6%;
     height: 100%;
     display: hidden;
 }
@@ -318,7 +318,8 @@ thead > tr > th{
 
 .backButton {
     font-size: 4vh;
-    margin-left: 2.5%;
+    /* margin-left: 2.5%; */
+    margin: .6% 0 0 2.5%;
 }
 
 #player{
