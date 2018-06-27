@@ -175,11 +175,11 @@ button.search-events:hover, .row:hover, .backButton:hover {
     background-color: #0c769d;
 }
 .leftSide{
-    width: 85%;
-    height: 75%;
+    /* width: 85%; */
+    height: 88%;
     /* border: 2px solid; */
     float: left;
-    margin-left: 7.5%;
+    /* margin-left: 7.5%; */
     background-color: #0c769d;
     margin-top: 2%;
     overflow: auto;
