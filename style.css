@@ -181,7 +181,7 @@ button.search-events:hover, .row:hover, .backButton:hover {
     float: left;
     /* margin-left: 7.5%; */
     background-color: #0c769d;
-    margin-top: 2%;
+    margin-top: 1%;
     overflow: auto;
 }
 
@@ -202,8 +202,8 @@ button.search-events:hover, .row:hover, .backButton:hover {
 }
 
 #artistImageContainer {
-    height: 70%;
-    width: 60%;
+    height: 50%;
+    width: 40%;
     margin: auto;
     background-color: #ebebeb;
     margin-top: 3%;
@@ -254,15 +254,15 @@ thead > tr > th{
 }
 
 .event-info{
-    position: relative;
+    /* position: relative; */
     width: 80%;
     margin: auto;
     padding: 0% 4%;
     /* margin-bottom: 2%; */
-    height: 60%;
+    /* height: 60%; */
     background: #ebebeb;
     box-sizing: border-box;
-    flex-direction: column;
+    /* flex-direction: column; */
     font-weight: bolder;
     font-size: 18px;
 }
