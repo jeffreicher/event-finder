@@ -301,8 +301,8 @@ class MusicConcert {
                 // $("#img-3").append($("<img>").attr('src', firstConcert.artistImg[i][2]).addClass('artistImages'));
                 // $("#img-4").append($("<img>").attr('src', firstConcert.artistImg[i][3]).addClass('artistImages'));
                 $(".artists").append(firstConcert.events_array[i].name);
-                $(".venue").append("Location: " + firstConcert.events_array[i].location);
-                $(".date").append("Date: " + firstConcert.events_array[i].date);
+                $(".venue").append(firstConcert.events_array[i].location);
+                $(".date").append(firstConcert.events_array[i].date);
                 $(".tickets-container > a").attr('href', firstConcert.events_array[i].url);
                 $(".time").append("Time: " + firstConcert.events_array1[i].url);
                 $('.secondScreen').removeClass('hidden');
