@@ -367,7 +367,7 @@ thead > tr > th{
         width: 89.5%;
     }
     .right-col {
-        margin-top: 15vh;
+        margin-top: 7vh;
     }
     .event-info {
         width: 90%;
@@ -381,6 +381,9 @@ thead > tr > th{
     }
     button.search-events {
         padding: 11px 16px;
+    }
+    .secondHeader h1 {
+        font-size: 22pt;
     }
 }
 
