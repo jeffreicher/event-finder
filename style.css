@@ -360,6 +360,12 @@ thead > tr > th{
     .left-col, .right-col {
         width: 100%;
     }
+    .secondScreen {
+        width: 89.5%;
+    }
+    .right-col {
+        margin-top: 15vh;
+    }
     .drop-down {        
         width: 100%;
     }
