@@ -354,6 +354,12 @@ thead > tr > th{
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
+    #container {
+        flex-wrap: wrap;
+    }
+    .left-col, .right-col {
+        width: 100%;
+    }
     .drop-down {        
         width: 100%;
     }
