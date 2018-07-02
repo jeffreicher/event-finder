@@ -28,6 +28,7 @@ class MusicConcert {
         this.videoPlayer = 0;
         this.artistName;
         this.marker = [];
+        this.map;
         this.currentMarker = 0;
         this.increaser = 0;
         this.locations = [];
@@ -108,6 +109,7 @@ class MusicConcert {
     }
 
     backButtonActions() {
+        firstConcert.showMarkers();
         $('.secondHeader h1, #img-1, #img-2, #img-3, #img-4, .artists, .venue, .date, .tickets, .time, #innerArtistImageContainer').empty();
         $('.secondScreen').addClass('hidden');
         $('.events-lists').removeClass('hidden');
@@ -143,48 +145,64 @@ class MusicConcert {
     }
     
     initMap() {
-            // console.log('map initiatied');
-            // console.log(locations.length);
-            // The location of Uluru
-            // var uluru = {lat: -25.344, lng: 131.036};
-            
-            // The map, centered at Uluru
             var map = new google.maps.Map(
                 document.getElementById('map'), {
                     zoom: 5,
                     center: new google.maps.LatLng(parseFloat(firstConcert.locations[0][0].lat), parseFloat(firstConcert.locations[0][0].lng)),
                 });
-        
-                for(var i=0; i<firstConcert.locations.length; i++){
-                    let lati = firstConcert.locations[i][0].lat
-                    let lngi = firstConcert.locations[i][0].lng
-                    parseFloat(lati, lngi)
-                    // console.log(lati, lngi);
-                    addMarker({
-                        lat:parseFloat(lati),
-                        lng:parseFloat(lngi)
-                    });
-                    function addMarker(coords) {
-                    var marker = new google.maps.Marker({
-                    position: coords,
-                    animation: google.maps.Animation.DROP,
-                    map: map
-                    });
-                    firstConcert.marker.push(marker);
-        
-                    }
-                    
-                }
-                
+                firstConcert.map = map;
+                firstConcert.setMarkerOnMap(map);
+            }
+
+    setMarkerOnMap(map) {
+            for(var i=0; i<firstConcert.locations.length; i++){
+                let lati = firstConcert.locations[i][0].lat
+                let lngi = firstConcert.locations[i][0].lng
+                parseFloat(lati, lngi)
+                // console.log(lati, lngi);
+                firstConcert.addMarker(
+                {
+                    lat:parseFloat(lati),
+                    lng:parseFloat(lngi)
+                }, map);
                 
             }
+        }        
+
+    clearMarkers() {
+            for(var i=0; i<firstConcert.marker.length; i++){
+                let marker = firstConcert.marker[i];
+                marker.setMap(null);
+            }
+        }
+    
+    showMarkers() {
+        for(var i=0; i<firstConcert.marker.length; i++){
+                let marker = firstConcert.marker[i];
+                marker.setMap(firstConcert.map)
+        }
+    
+    }
+    
+    showCurrentConcert(marker) {
+                marker.setMap(firstConcert.map)
+    }
+
+    addMarker(coords, map) {
+            var marker = new google.maps.Marker({
+                position: coords,
+                animation: google.maps.Animation.DROP,
+                map: map
+            });
+            firstConcert.marker.push(marker);
+        }        
     changeMarker(marker) {
             // var icon = new google.maps.MarkerImage({ url:"http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=1|ffffff|c41200"});
             marker.setAnimation(google.maps.Animation.BOUNCE);
         }
     disableMarker(marker) {
             marker.setAnimation(null);
-    }    
+        }   
     //=====================================================================//
 
 
@@ -420,6 +438,8 @@ class MusicConcert {
                     click:function() {
                         let currentId = this.id;
                         console.log(currentId);
+                        firstConcert.clearMarkers();
+                        firstConcert.showCurrentConcert(firstConcert.marker[currentId])
                         firstConcert.changeMarker(firstConcert.marker[currentId])
                         firstConcert.currentMarker = firstConcert.marker[currentId];
                         console.log('inside onmouseover function')
