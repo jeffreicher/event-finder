@@ -81,10 +81,12 @@ class MusicConcert {
      */
     //================CLICK HANDLERS================================//
     addClickHandlersAndStylesToElements() {
+        $('.left-col').addClass('hidden');
         $('.secondScreen').addClass('hidden');
         $('.search-events').on('click', function(){
             $('.firstScreen').addClass('hidden');
-            $('.right-col').removeClass('hidden')
+            $('.right-col').removeClass('hidden');
+            $('.left-col').removeClass('hidden');
             // firstConcert.latLong();
             // firstConcert.initMap();
             // $('#genre').val('');
