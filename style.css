@@ -337,18 +337,18 @@ thead > tr > th{
     font-size: 28pt;
 }
 
-#genre, #zipCode {
+#genre, #zipCode, #stateSelector {
     border: 1px gray solid;
     height: 72%;
+    font-size: 13pt;
 }
 #genre {
     width: 50%;
-    font-size: 13pt
 }
 
 #stateSelector {
     height:72%;
-    width: 6%;
+    width: 8%;
 }
 
 #zipCode {
