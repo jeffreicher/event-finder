@@ -10,64 +10,126 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
     <script src="main.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCofJL1NFILbNaO6ZkVgHvZdTQi2fJF5bg&callback=initMap"
+    type="text/javascript"></script>
     <title>Music Festival</title>    
 </head>
 <body>
    <header>
-    <div class="logo">Music Concerts</div>
+    <div class="logo">Music Concert</div>
    </header>
    <div id="search">
        <div class="drop-down">
-           <select name="genre" id="genre">
-               <option value="electronic">Electronic</option>
+               <input type="text" id="genre" placeholder="Enter Artist or Event">
+               <select id="stateSelector">
+                <option value="Al">AL</option>
+                <option value="Ak">AK</option>
+                <option value="Az">AZ</option>
+                <option value="Ar">AR</option>
+                <option value="Ca">CA</option>
+                <option value="Co">CO</option>
+                <option value="Ct">CT</option>
+                <option value="De">DE</option>
+                <option value="Dc">DC</option>
+                <option value="Fl">FL</option>
+                <option value="Ga">GA</option>
+                <option value="Hi">HI</option>
+                <option value="Id">ID</option>
+                <option value="Il">IL</option>
+                <option value="In">IN</option>
+                <option value="Ia">IA</option>
+                <option value="Ks">KS</option>
+                <option value="Ky">KY</option>
+                <option value="La">LA</option>
+                <option value="Me">ME</option>
+                <option value="Md">MD</option>
+                <option value="Ma">MA</option>
+                <option value="Mi">MI</option>
+                <option value="Mn">MN</option>
+                <option value="Ms">MS</option>
+                <option value="Mo">MO</option>
+                <option value="Mt">MT</option>
+                <option value="Ne">NE</option>
+                <option value="Nv">NV</option>
+                <option value="Nh">NH</option>
+                <option value="Nj">NJ</option>
+                <option value="Nm">NM</option>
+                <option value="Ny">NY</option>
+                <option value="Nc">NC</option>
+                <option value="Nd">ND</option>
+                <option value="Oh">OH</option>
+                <option value="Ok">OK</option>
+                <option value="Or">OR</option>
+                <option value="Pa">PA</option>
+                <option value="Ri">RI</option>
+                <option value="Sc">SC</option>
+                <option value="Sd">SD</option>
+                <option value="Tn">TN</option>
+                <option value="Tx">TX</option>
+                <option value="Ut">UT</option>
+                <option value="Vt">VT</option>
+                <option value="Va">VA</option>
+                <option value="Wa">WA</option>
+                <option value="Wv">WV</option>
+                <option value="Wi">WI</option>
+                <option value="Wy">WY</option>
+            </select>
+            <input id="zipCode" type="text" placeholder="City" />
+               <!-- <option value="electronic">Electronic</option>
                <option value="rock">Rock</option>
-               <option value="country">Country Music</option>
-           </select>
+               <option value="country">Country Music</option> -->
            <button class="search-events">Search</button>
        </div>
     </div>
    <div id="container">
-    <div class="left-col">
-
-
         <div class="firstScreen">
             <div class="news-1">
-            <h1>Latest Concert</h1>
-            <p>
-                As one of the most beloved electronic dance music artists today, Steve Aoki has worked alongside the likes Kid Cudi, Travis Barker, Chiddy Bang, Lil Jon, 
-                and many more to create hits like “No Beef,” “Boneless,” and “Beat Down.” Secure a spot at one of his dazzling shows by purchasing Steve Aoki tickets from the 
-                marketplace. 
-            </p>
-            <p>Find out more about <a href="http://www.steveaoki.com/news/" target="_blank">Steve Aoki</a>.</p>            
-                <img src="images/steveaoki-concert.jpg" alt="Steve Oaki">
+                <h1>Latest Concert</h1>
+                <p>
+                    As one of the most beloved electronic dance music artists today, Steve Aoki has worked alongside the likes Kid Cudi, Travis Barker, Chiddy Bang, Lil Jon, 
+                    and many more to create hits like “No Beef,” “Boneless,” and “Beat Down.” Secure a spot at one of his dazzling shows by purchasing Steve Aoki tickets from the 
+                    marketplace. 
+                </p>
+                <p>Find out more about <a href="http://www.steveaoki.com/news/" target="_blank">Steve Aoki</a>.</p>            
+                    <img src="images/steveaoki-concert.jpg" alt="Steve Oaki">
             </div>
         </div>
-
+    <div class="left-col">
         <div class="secondScreen">
             <div class="secondHeader">
                 <span class='backButton'><i class="far fa-caret-square-left"></i></span>
                 <h1></h1>
             </div>
-            <div class="secondScreenTopContainer">POSTER</div>
-            <div class="bottomContainer">
-                <div class="secondScreenBottomContainer" id="img-1"></div>
+            <div class="leftSide">
+                <div id="artistImageContainer">
+                    <div id="innerArtistImageContainer"></div>
+                </div>
+                <div class="event-info">
+                    <div class="event-info-header">Concert Information</div>
+                    <div class="artists-container" data-text="Artist"><b>Artist: </b><span class="artists"></span></div>
+                    <div class="venue-container" data-text="Location"><b>Location: </b><span class="venue"></span></div>
+                    <div class="date-container" data-text="Date"><b>Date: </b><span class="date"></span></div>
+                    <div class="tickets-container" data-text="See Tickets"><b>Tickets: </b> <a href="" target="_blank">Purchase on ticketmaster</a></div>
+                </div>
+            </div>
+            <!-- <div class="rightSide"></div>
+            <div class="secondScreenTopContainer">
+            </div><div class="rightSide"></div>
+            <div class="secondScreenTopContainer">
+            </div>
+            <div class="bottomContainer"> -->
+                <!-- <div class="bottom"></div> -->
+                <!-- <div class="secondScreenBottomContainer" id="img-1"></div>
                 <div class="secondScreenBottomContainer" id="img-2"></div>
                 <div class="secondScreenBottomContainer" id="img-3"></div>
-                <div class="secondScreenBottomContainer" id="img-4"></div>
+                <div class="secondScreenBottomContainer" id="img-4"></div> -->
             </div>            
         </div>
-        
-    </div>
-    <div class="right-col">
-        <div class="event-info">
-            <div class="event-info-header">Concert Information</div>
-            <div class="artists" contentEditable=true data-text="Artist"></div>
-            <div class="venue" contentEditable=true data-text="Location"></div>
-            <div class="date" contentEditable=true data-text="Date"></div>
-            <div class="time" contentEditable=true data-text="Time"></div>
-            <div class="tickets" contentEditable=true data-text="See Tickets"></div>
+        <div class="right-col">
+            <div id="map"></div>
+            <div id="player"></div>
+        </div>            
         </div>
-        <div id="player"></div>
     </div>
    </div>
 </body>
