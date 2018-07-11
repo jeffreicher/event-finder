@@ -81,10 +81,10 @@ select#genre {
     border-right: solid 1px #07526e;
     -webkit-border-top-right-radius: 5px;
     -webkit-border-bottom-right-radius: 5px;
-    padding: 11px 25px;
+    padding: 16px 25px;
     border: none;
     font-size: inherit;
-    background-position: 97% center;    
+    /* background-position: 97% center;     */
 }
 
 button.search-events:hover, .row:hover, .backButton:hover {
@@ -337,18 +337,21 @@ thead > tr > th{
     font-size: 28pt;
 }
 
+#genre, #zipCode, #stateSelector {
+    border: 1px gray solid;
+    height: 72%;
+    font-size: 13pt;
+}
 #genre {
-    height: 50%;
     width: 50%;
-    font-size: 13pt
 }
 
 #stateSelector {
-    height:50%;
+    height:72%;
+    width: 8%;
 }
 
 #zipCode {
-    height: 50%;
     width: 10%;
 }
 
