@@ -42,6 +42,7 @@ header .logo{
     width: 100%;
     height: 14%;
     text-align: center;
+    margin-top: 2vh;
 }
 .drop-down {
     position: absolute;
@@ -49,7 +50,7 @@ header .logo{
     left: 50%;
     transform: translate(-50%, -50%);
     width: 30%;
-    padding: 10px;
+    /* padding: 10px; */
     height: 59%;
     border-radius: 4px;
 }
@@ -113,13 +114,13 @@ button.search-events:hover, .row:hover, .backButton:hover {
 }
 .firstScreen{
     width: 100%;
-    padding: 30px;
+    /* padding: 30px; */
 }
 .news-1 {
     position: relative;
     /* box-sizing: border-box; */
     background: #fff;
-    padding: 20px;
+    /* padding: 20px; */
     width: 100%;
 }
 .news-1 p{
@@ -341,7 +342,7 @@ thead > tr > th{
 
 #genre, #zipCode, #stateSelector {
     border: 1px gray solid;
-    height: 72%;
+    height: 56%;
     font-size: 13pt;
 }
 #genre {
@@ -349,7 +350,6 @@ thead > tr > th{
 }
 
 #stateSelector {
-    height:72%;
     width: 8%;
 }
 
@@ -390,6 +390,9 @@ thead > tr > th{
     .secondHeader h1 {
         font-size: 22pt;
     }
+    #genre, #zipCode, #stateSelector {
+        height: 72%;
+    }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -418,7 +421,7 @@ thead > tr > th{
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
     .drop-down {        
-        width: 50%;
+        width: 70%;
         height: 67%;
     }
     select#genre {
