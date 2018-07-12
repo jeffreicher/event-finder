@@ -25,11 +25,12 @@ header{
     
 }
 header .logo{
-    position: absolute;
+    /* position: absolute;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 6em;
+    left: 50%; */
+    margin: auto;
+    /* transform: translate(-50%, -50%); */
+    font-size: 10vh;
     color: #fff;
     /* font-family: 'Lobster', cursive; */
     font-weight: 700;
@@ -41,6 +42,7 @@ header .logo{
     width: 100%;
     height: 14%;
     text-align: center;
+    margin-top: 4vh;
 }
 .drop-down {
     position: absolute;
@@ -48,7 +50,7 @@ header .logo{
     left: 50%;
     transform: translate(-50%, -50%);
     width: 30%;
-    padding: 10px;
+    /* padding: 10px; */
     height: 59%;
     border-radius: 4px;
 }
@@ -81,10 +83,10 @@ select#genre {
     border-right: solid 1px #07526e;
     -webkit-border-top-right-radius: 5px;
     -webkit-border-bottom-right-radius: 5px;
-    padding: 11px 25px;
+    padding: 16px 25px;
     border: none;
     font-size: inherit;
-    background-position: 97% center;    
+    /* background-position: 97% center;     */
 }
 
 button.search-events:hover, .row:hover, .backButton:hover {
@@ -112,13 +114,13 @@ button.search-events:hover, .row:hover, .backButton:hover {
 }
 .firstScreen{
     width: 100%;
-    padding: 30px;
+    /* padding: 30px; */
 }
 .news-1 {
     position: relative;
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
     background: #fff;
-    padding: 20px;
+    /* padding: 20px; */
     width: 100%;
 }
 .news-1 p{
@@ -126,12 +128,13 @@ button.search-events:hover, .row:hover, .backButton:hover {
     line-height: 1.6em;
 }
 .news-1 h1{
+    text-align: center;
     margin-bottom: 10px;
     color: #13547a;
 }
 .news-1 img{
     width: 100%;
-    margin-top: 20px;
+    margin: 2vh 0;
 }
 .secondScreen{
     top: 0;
@@ -337,18 +340,21 @@ thead > tr > th{
     font-size: 28pt;
 }
 
+#genre, #zipCode, #stateSelector {
+    border: 1px gray solid;
+    height: 56%;
+    font-size: 13pt;
+}
+
 #genre {
-    height: 50%;
     width: 50%;
-    font-size: 13pt
 }
 
 #stateSelector {
-    height:50%;
+    width: 8%;
 }
 
 #zipCode {
-    height: 50%;
     width: 10%;
 }
 
@@ -385,6 +391,15 @@ thead > tr > th{
     .secondHeader h1 {
         font-size: 22pt;
     }
+    #genre, #zipCode, #stateSelector {
+        height: 72%;
+    }
+    #stateSelector {
+        width: 14%;
+    }
+    #genre {
+        width: 45%;
+    }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -413,7 +428,7 @@ thead > tr > th{
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
     .drop-down {        
-        width: 50%;
+        width: 70%;
         height: 67%;
     }
     select#genre {
