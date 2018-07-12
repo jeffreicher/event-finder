@@ -394,6 +394,12 @@ thead > tr > th{
     #genre, #zipCode, #stateSelector {
         height: 72%;
     }
+    #stateSelector {
+        width: 14%;
+    }
+    #genre {
+        width: 45%;
+    }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
