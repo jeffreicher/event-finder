@@ -42,7 +42,7 @@ header .logo{
     width: 100%;
     height: 14%;
     text-align: center;
-    margin-top: 2vh;
+    margin-top: 4vh;
 }
 .drop-down {
     position: absolute;
@@ -99,7 +99,7 @@ button.search-events:hover, .row:hover, .backButton:hover {
     width: 100%;
     padding: 0% 4%;
     margin-bottom: 2%;
-    height: 75%;
+    /* height: 75%; */
     background: #fff;
 }
 
@@ -345,6 +345,7 @@ thead > tr > th{
     height: 56%;
     font-size: 13pt;
 }
+
 #genre {
     width: 50%;
 }
