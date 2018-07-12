@@ -134,7 +134,7 @@ button.search-events:hover, .row:hover, .backButton:hover {
 }
 .news-1 img{
     width: 100%;
-    margin-top: 20px;
+    margin: 2vh 0;
 }
 .secondScreen{
     top: 0;
