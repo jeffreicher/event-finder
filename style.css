@@ -361,6 +361,7 @@ thead > tr > th{
 .eventAndPlayerContainer {
     display: flex;
     flex-direction: row;
+    height: 100%;
 }
 
 /* Extra small devices (phones, 600px and down) */
@@ -449,6 +450,9 @@ thead > tr > th{
     .secondScreen {
         width: 91.5%;
     }
+    .event-info {
+        height: 42%;
+    }
 } 
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
@@ -458,7 +462,7 @@ thead > tr > th{
 
 /*=================GOOGLE MAPS==============================*/
 #map {
-    height: 300px;
+    height: 40%;
     width: 100%;
     margin-bottom: 5%;
 }
