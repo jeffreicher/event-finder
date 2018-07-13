@@ -359,8 +359,8 @@ thead > tr > th{
 }
 
 .eventAndPlayerContainer {
-    display: flex;
-    flex-direction: row;
+    /* display: flex; */
+    /* flex-direction: row; */
     height: 100%;
 }
 
@@ -452,6 +452,9 @@ thead > tr > th{
     }
     .event-info {
         height: 42%;
+    }
+    .eventAndPlayerContainer {
+        display: flex;
     }
 } 
 
