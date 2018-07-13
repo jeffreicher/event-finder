@@ -353,7 +353,7 @@ class MusicConcert {
             var venue = firstConcert.events_array1[i]._embedded.venues[0].name;
             firstConcert.concertVenues.push(venue);
         }
-        firstConcert.getArtistImages();
+            firstConcert.getArtistImages();
     }  
 
     getDataFromTicketMaster() {

@@ -106,7 +106,7 @@ button.search-events:hover, .row:hover, .backButton:hover {
 .left-col{
     overflow: scroll;
     display: inline-block;
-    width: 70%;
+    width: 100%;
     height: 100%;
     margin: 0 5px;
     background: #ebebeb;
@@ -358,6 +358,11 @@ thead > tr > th{
     width: 10%;
 }
 
+.eventAndPlayerContainer {
+    display: flex;
+    flex-direction: row;
+}
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
     #container {
@@ -366,7 +371,7 @@ thead > tr > th{
     #artistImageContainer {
         width: 75%
     }
-    .left-col, .right-col {
+    .right-col {
         width: 100%;
     }
     .secondScreen {
@@ -437,6 +442,13 @@ thead > tr > th{
     select#genre {
         width: 50%; 
     }
+    .right-col {
+        width: 40%;
+        margin: 1.2vh 0 0 2vw;
+    }
+    .secondScreen {
+        width: 91.5%;
+    }
 } 
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
@@ -446,7 +458,7 @@ thead > tr > th{
 
 /*=================GOOGLE MAPS==============================*/
 #map {
-    height: 45%;
+    height: 300px;
     width: 100%;
     margin-bottom: 5%;
 }
