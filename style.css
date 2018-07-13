@@ -432,6 +432,23 @@ thead > tr > th{
     select#genre {
         width: 60%; 
     }
+    .secondScreen {
+        top: 0;
+        position: absolute;
+        width: 90.6%;
+        height: 105%;
+        display: hidden;
+    }
+    .right-col {
+        display: none;
+        display: inline-block;
+        width: 90%;
+        height: 100%;
+        /* margin: 0 5px; */
+        margin-left: 5%;
+        background: #fff;
+        box-sizing: border-box;
+    }
 } 
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -451,11 +468,12 @@ thead > tr > th{
         width: 91.5%;
     }
     .event-info {
-        height: 42%;
+        /* height: 42%; */
     }
     .eventAndPlayerContainer {
         display: flex;
     }
+    
 } 
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
