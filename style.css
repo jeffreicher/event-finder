@@ -373,13 +373,13 @@ thead > tr > th{
         width: 89.5%;
     }
     .right-col {
-        margin-top: 7vh;
+        margin-top: 14vh;
     }
     .event-info {
         width: 90%;
         height: 61%;
     }
-    .drop-down {        
+    .drop-down {
         width: 100%;
     }
     select#genre {
@@ -389,26 +389,29 @@ thead > tr > th{
         padding: 11px 16px;
     }
     .secondHeader h1 {
-        font-size: 22pt;
+        font-size: 19pt;
     }
     #genre, #zipCode, #stateSelector {
         height: 72%;
     }
     #stateSelector {
-        width: 14%;
+        width: 12%;
     }
     #genre {
-        width: 45%;
+        width: 40%;
+    }
+    #zipCode {
+        width: 17%;
     }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
-    .drop-down {        
+    .drop-down {
         width: 60%;
     }
     select#genre {
-        width: 60%; 
+        width: 60%;
     }
     .leftSide {
         height: 88%;
@@ -417,7 +420,7 @@ thead > tr > th{
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-    .drop-down {        
+    .drop-down {
         width: 60%;
     }
     select#genre {
@@ -427,7 +430,7 @@ thead > tr > th{
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
-    .drop-down {        
+    .drop-down {
         width: 70%;
         height: 67%;
     }
