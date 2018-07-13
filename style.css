@@ -228,7 +228,7 @@ button.search-events:hover, .row:hover, .backButton:hover {
     display: inline-block;
     width: 30%;
     height: 100%;
-    margin: 0 5px;
+    /* margin: 0 5px; */
     background: #fff;
     box-sizing: border-box; 
 }
