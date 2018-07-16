@@ -5,7 +5,7 @@ $(document).ready(initializeApp);
 
 function initializeApp() {
     firstConcert = new MusicConcert();
-    $('.right-col').addClass('hidden');
+    $('.right-col').addClass('hidden');    
 };
 
 /***********************
@@ -469,6 +469,15 @@ class MusicConcert {
         }        
         table.append(thead, tbody);
         $('.left-col').prepend(table);
+        // $('table').floatThead({
+        //     position: 'absolute',
+        //     scrollContainer: true
+        // });
+        table.floatThead({
+            scrollContainer: (table) => {
+                return table.closest('.left-col');
+            }
+        });
     }
 
     updateSidebar() {

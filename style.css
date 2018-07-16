@@ -236,8 +236,20 @@ button.search-events:hover, .row:hover, .backButton:hover {
 .events-lists {
     width: 100%;
     border-collapse: collapse;
-
 }
+
+.events-lists > thead {
+    background-color: lightgray;
+}
+
+.floatThead-container {
+    width: 99% !important;
+}
+
+.floatThead-wrapper {
+    overflow: scroll;
+}
+
 .table-content > tr {
     text-align: center;
     background: #fff;
