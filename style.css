@@ -246,10 +246,6 @@ button.search-events:hover, .row:hover, .backButton:hover {
     width: 99% !important;
 }
 
-.floatThead-wrapper {
-    overflow: scroll;
-}
-
 .table-content > tr {
     text-align: center;
     background: #fff;
@@ -424,6 +420,9 @@ thead > tr > th{
     }
     .event-info-header {
         font-size: 1.3em;
+    }    
+    .floatThead-wrapper {
+    overflow: scroll;
     }
 }
 
