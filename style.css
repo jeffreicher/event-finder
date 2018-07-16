@@ -317,7 +317,7 @@ thead > tr > th{
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 .artistImages {
