@@ -473,11 +473,11 @@ class MusicConcert {
         //     position: 'absolute',
         //     scrollContainer: true
         // });
-        // table.floatThead({
-        //     scrollContainer: (table) => {
-        //         return table.closest('.left-col');
-        //     }
-        // });
+        table.floatThead({
+            scrollContainer: (table) => {
+                return table.closest('.left-col');
+            }
+        });
     }
 
     updateSidebar() {
