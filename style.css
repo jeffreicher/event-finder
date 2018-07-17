@@ -34,7 +34,7 @@ header .logo{
     color: #fff;
     /* font-family: 'Lobster', cursive; */
     font-weight: 700;
-    text-shadow: 2px 2px #093a5f;   
+    text-shadow: 2px 2px #000000;   
 }
 
 #search{
@@ -98,8 +98,8 @@ button.search-events:hover, .row:hover, .backButton:hover {
     position: relative;
     width: 100%;
     padding: 0% 4%;
-    margin-bottom: 2%;
-    height: 75%;
+    margin-bottom: 1%;
+    height: 80%;
     background: #fff;
 }
 
@@ -108,7 +108,7 @@ button.search-events:hover, .row:hover, .backButton:hover {
     display: inline-block;
     width: 100%;
     height: 100%;
-    margin: 0 5px;
+    /* margin: 0 5px; */
     background: #ebebeb;
     box-sizing: border-box; 
 }
@@ -132,6 +132,9 @@ button.search-events:hover, .row:hover, .backButton:hover {
     margin-bottom: 10px;
     color: #13547a;
 }
+.news-1 h1, .secondHeader h1, .event-info-header {
+    text-shadow: 1px 1px #c4c4c4;
+}
 .news-1 img{
     width: 100%;
     margin: 2vh 0;
@@ -140,8 +143,10 @@ button.search-events:hover, .row:hover, .backButton:hover {
     top: 0;
     position: absolute;
     width: 63.6%;
-    height: 105%;
+    height: 100%;
     display: hidden;
+    background-color: lightgray;
+    padding: 1vw;
 }
 .secondHeader {
     display: flex;
@@ -205,7 +210,7 @@ button.search-events:hover, .row:hover, .backButton:hover {
 }
 
 #artistImageContainer {
-    height: 50%;
+    height: 47%;
     width: 40%;
     margin: auto;
     background-color: #ebebeb;
@@ -227,9 +232,9 @@ button.search-events:hover, .row:hover, .backButton:hover {
     display: none;
     display: inline-block;
     width: 30%;
-    height: 100%;
+    height: 98%;
     /* margin: 0 5px; */
-    background: #fff;
+    /* background: #fff; */
     box-sizing: border-box; 
 }
 
@@ -370,7 +375,7 @@ thead > tr > th{
 .eventAndPlayerContainer {
     /* display: flex; */
     /* flex-direction: row; */
-    height: 100%;
+    height: 94%;
 }
 
 /* Extra small devices (phones, 600px and down) */
@@ -435,7 +440,7 @@ thead > tr > th{
         width: 60%;
     }
     .leftSide {
-        height: 88%;
+        height: 94%;
     }
 }
 
@@ -460,13 +465,13 @@ thead > tr > th{
     }
     .right-col {
         width: 40%;
-        margin: 1.2vh 0 0 2vw;
+        margin: 2vh 0 0 1vw;
     }
     .secondScreen {
         width: 91.5%;
     }
     .event-info {
-        height: 42%;
+        height: 46%;
     }
     .eventAndPlayerContainer {
         display: flex;
