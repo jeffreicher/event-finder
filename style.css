@@ -99,7 +99,7 @@ button.search-events:hover, .row:hover, .backButton:hover {
     width: 100%;
     padding: 0% 4%;
     margin-bottom: 2%;
-    height: 75%;
+    height: 80%;
     background: #fff;
 }
 
@@ -231,7 +231,7 @@ button.search-events:hover, .row:hover, .backButton:hover {
     width: 30%;
     height: 100%;
     /* margin: 0 5px; */
-    background: #fff;
+    /* background: #fff; */
     box-sizing: border-box; 
 }
 
@@ -437,7 +437,7 @@ thead > tr > th{
         width: 60%;
     }
     .leftSide {
-        height: 91%;
+        height: 89%;
     }
 }
 
@@ -462,7 +462,7 @@ thead > tr > th{
     }
     .right-col {
         width: 40%;
-        margin: 1.2vh 0 0 2vw;
+        margin: 2vh 0 0 1vw;
     }
     .secondScreen {
         width: 91.5%;
