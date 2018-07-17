@@ -422,10 +422,10 @@ class MusicConcert {
             var id = i;
             var get_img = events_array[i].img;
             var img_tag = $('<img>').attr('src', get_img).css('width', '100px');
-            var img = $('<td>');
+            var img = $('<td>').addClass('mobile'); 
             var name = $('<td>').text(this.events_array[i].name);
             var location = $('<td>').text(this.events_array[i].location);
-            var date = $('<td>').text(this.events_array[i].date);  
+            var date = $('<td>').text(this.events_array[i].date) 
             var tr =  $('<tr>', {
                 // on: {
                 //     mouseover:function(){
@@ -457,8 +457,8 @@ class MusicConcert {
             img.append(img_tag);   
             tr.append(img, name, location, date);
 
-            var th_empty =  $('<th>');  
-            var th_event =  $('<th>').text('Event'); 
+            var th_empty =  $('<th>').addClass('mobile');  
+            var th_event =  $('<th>').text('Event').addClass('mobileTh'); 
             var th_location =  $('<th>').text('Location');  
             var th_date =  $('<th>').text('Date');     
             var tr_th = $('<tr>');
@@ -473,11 +473,11 @@ class MusicConcert {
         //     position: 'absolute',
         //     scrollContainer: true
         // });
-        table.floatThead({
-            scrollContainer: (table) => {
-                return table.closest('.left-col');
-            }
-        });
+        // table.floatThead({
+        //     scrollContainer: (table) => {
+        //         return table.closest('.left-col');
+        //     }
+        // });
     }
 
     updateSidebar() {
