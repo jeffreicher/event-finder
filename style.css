@@ -398,9 +398,11 @@ thead > tr > th{
     .event-info {
         width: 90%;
         height: 61%;
+        font-size: 10pt;
     }
     .drop-down {
         width: 100%;
+        height: 50%;
     }
     select#genre {
         width: 50%; 
@@ -427,7 +429,24 @@ thead > tr > th{
         font-size: 1.3em;
     }    
     .floatThead-wrapper {
-    overflow: scroll;
+        overflow: scroll;
+    }
+	#search{
+        position: relative;
+        width: 100%;
+        height: 10%;
+        text-align: center;
+        margin-top: 0vh;
+    }
+    .mobile{
+        display: none;
+    };
+    .mobileTh{
+        width: 120px;
+    }
+    thead > tr > th{
+        padding:10px 0;
+        width:  120px;
     }
 }
 
