@@ -372,7 +372,7 @@ thead > tr > th{
 .eventAndPlayerContainer {
     /* display: flex; */
     /* flex-direction: row; */
-    height: 100%;
+    height: 94%;
 }
 
 /* Extra small devices (phones, 600px and down) */
@@ -437,7 +437,7 @@ thead > tr > th{
         width: 60%;
     }
     .leftSide {
-        height: 89%;
+        height: 92%;
     }
 }
 
