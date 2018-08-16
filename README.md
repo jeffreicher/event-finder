@@ -11,3 +11,4 @@ Find all events in your area! Simple application usage just start typing in an e
 View this project live [HERE](https://jeffreicher.com)
 
 
+## Created By
